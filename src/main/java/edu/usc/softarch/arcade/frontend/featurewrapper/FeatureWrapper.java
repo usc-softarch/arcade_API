@@ -1,12 +1,12 @@
-package edu.usc.softarch.arcade.frontend.featureadapter;
+package edu.usc.softarch.arcade.frontend.featurewrapper;
 
 /**
- * The FeatureAdapter interface specifies the necessary operations for executing
+ * The FeatureWrapper interface specifies the necessary operations for executing
  * an ARCADE feature. It streamlines the execution of a feature component.
  *
  * @author Marcelo Schmitt Laser
  */
-public interface FeatureAdapter
+public interface FeatureWrapper
 {
   /**
    * Returns the feature component's name. The result may not match the class

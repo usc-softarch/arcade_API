@@ -4,5 +4,5 @@
  *
  * @author Marcelo Schmitt Laser
  */
-package edu.usc.softarch.arcade.frontend.featureadapter;
+package edu.usc.softarch.arcade.frontend.featurewrapper;
 // NO TEXT BELOW

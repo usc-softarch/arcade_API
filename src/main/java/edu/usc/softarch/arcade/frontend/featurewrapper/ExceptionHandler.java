@@ -9,5 +9,5 @@ package edu.usc.softarch.arcade.frontend.featurewrapper;
  */
 public interface ExceptionHandler
 {
-  
+
 }

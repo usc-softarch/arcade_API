@@ -21,6 +21,7 @@ public interface FeatureWrapper
    * than one primary functionality, it is advised that the component be
    * refactored.
    *
+   * @param args All arguments necessary for execution of the feature.
    * @return The result of the execution, which must be recast for further use.
    */
   public Object[] execute(Object[] args);
@@ -28,12 +29,18 @@ public interface FeatureWrapper
   /**
    * Checks whether the arguments available are appropriate for usage with
    * this feature component.
+   *
+   * @param args Arguments to check.
+   * @return False if arguments are invalid or insufficient.
    */
   public boolean checkArguments(String[] args);
 
   /**
    * Checks whether the arguments available are appropriate for usage with
    * this feature component.
+   *
+   * @param args Arguments to check.
+   * @return False if arguments are invalid or insufficient.
    */
   public boolean checkArguments(Object[] args);
 }

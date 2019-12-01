@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.featurewrapper;
+package edu.usc.softarch.arcade.frontend.features.wrappers;
 
 /**
  * The FeatureWrapper interface specifies the necessary operations for executing
@@ -23,8 +23,10 @@ public interface FeatureWrapper
    *
    * @param args All arguments necessary for execution of the feature.
    * @return The result of the execution, which must be recast for further use.
+   * @throws Exception Any exception appropriate to the wrapped feature.
    */
-  public Object[] execute(Object[] args);
+  public Object[] execute(Object[] args)
+    throws Exception;
 
   /**
    * Checks whether the arguments available are appropriate for usage with
@@ -32,8 +34,10 @@ public interface FeatureWrapper
    *
    * @param args Arguments to check.
    * @return False if arguments are invalid or insufficient.
+   * @throws Exception Any exception appropriate to the wrapped feature.
    */
-  public boolean checkArguments(String[] args);
+  public boolean checkArguments(String[] args)
+    throws Exception;
 
   /**
    * Checks whether the arguments available are appropriate for usage with
@@ -41,6 +45,8 @@ public interface FeatureWrapper
    *
    * @param args Arguments to check.
    * @return False if arguments are invalid or insufficient.
+   * @throws Exception Any exception appropriate to the wrapped feature.
    */
-  public boolean checkArguments(Object[] args);
+  public boolean checkArguments(Object[] args)
+    throws Exception;
 }

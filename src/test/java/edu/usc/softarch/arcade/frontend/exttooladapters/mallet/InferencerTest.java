@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.malletadapter;
+package edu.usc.softarch.arcade.frontend.exttooladapters.mallet;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,22 +9,22 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.Arrays;
 import java.lang.reflect.InvocationTargetException;
-import edu.usc.softarch.arcade.frontend.exttooladapter.ExtToolAdapter;
+import edu.usc.softarch.arcade.frontend.exttooladapters.util.ExtToolAdapter;
 
 @RunWith(Parameterized.class)
-public class TopicModelGeneratorTest
+public class InferencerTest
 {
   //#region ATTRIBUTES
   String inputArgument;
-  String outputArgument;
+  String inferencerFilename;
   //#endregion
 
   //#region CONSTRUCTOR
-  public TopicModelGeneratorTest(String inputArgument, String outputArgument)
+  public InferencerTest(String inputArgument, String inferencerFilename)
   {
     super();
     this.inputArgument = inputArgument;
-    this.outputArgument = outputArgument;
+    this.inferencerFilename = inferencerFilename;
   }
   //#endregion
 
@@ -37,9 +37,10 @@ public class TopicModelGeneratorTest
     {
       {
         "--input src" + fs + "test" + fs + "resources" + fs + "subject_systems"
-          + fs + "httpd" + fs + "src" + fs,
-        "--output target" + fs + "test-results" + fs
-          + "TopicModelGenerator-httpd"
+          + fs + "httpd" + fs + "arc" + fs + "base" + fs + "topicmodel.data",
+        "--inferencer-filename src" + fs + "test" + fs + "resources" + fs
+          + "subject_systems" + fs + "httpd" + fs + "arc" + fs + "base" + fs
+          + "infer.mallet"
       }
     });
   }
@@ -47,12 +48,12 @@ public class TopicModelGeneratorTest
 
   //#region TESTS
   @Test
-  public void testTMG()
+  public void testInferencer()
   {
-    ExtToolAdapter tmgAdapter = initialize();
-    tmgAdapter.addArguments(inputArgument);
-    tmgAdapter.addArguments(outputArgument);
-    try { tmgAdapter.execute(); }
+    ExtToolAdapter inferencerAdapter = initialize();
+    inferencerAdapter.addArguments(inputArgument);
+    inferencerAdapter.addArguments(inferencerFilename);
+    try { inferencerAdapter.execute(); }
     catch(InvocationTargetException e)
     {
       //TODO properly handle this
@@ -76,11 +77,11 @@ public class TopicModelGeneratorTest
     Map<String,String> environment = new HashMap<String,String>();
     environment.put("MALLET_HOME", malletHome);
 
-    // Setting up TopicModelGenerator
-    ExtToolAdapter tmgAdapter = new TopicModelGenerator();
-    assert tmgAdapter.setToolPath(commandPath);
-    tmgAdapter.setEnvironment(environment);
-    return tmgAdapter;
+    // Setting up Inferencer
+    ExtToolAdapter inferencerAdapter = new Inferencer();
+    assert inferencerAdapter.setToolPath(commandPath);
+    inferencerAdapter.setEnvironment(environment);
+    return inferencerAdapter;
   }
   //#endregion
 }

@@ -1,25 +1,25 @@
-package edu.usc.softarch.arcade.frontend.malletadapter;
+package edu.usc.softarch.arcade.frontend.exttooladapters.mallet;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.FileNotFoundException;
-import edu.usc.softarch.arcade.frontend.exttooladapter.util.DefaultETAdapter;
+import edu.usc.softarch.arcade.frontend.exttooladapters.util.DefaultETAdapter;
 
 //TODO document this class properly
-public class Inferencer
+public class TopicModelGenerator
   extends DefaultETAdapter
 {
   //#region CONSTRUCTOR
   /**
    * Base constructor. Initializes {@link #path} to empty String.
    *
-   * @see edu.usc.softarch.arcade.frontend.exttooladapter.ExtToolAdapter
+   * @see edu.usc.softarch.arcade.frontend.exttooladapters.util.ExtToolAdapter
    */
-  public Inferencer()
+  public TopicModelGenerator()
   {
     super
     (
-      "train-topics|--num-top-words 50|--num-topics 100|--num-threads 3|--num-iterations 100|--doc-topics-threshold 0.1",
-      "--input|--inferencer-filename"
+      "import-dir|--remove-stopwords TRUE|--keep-sequence TRUE",
+      "--input|--output"
     );
   }
 
@@ -30,23 +30,23 @@ public class Inferencer
    * @param path Path to the external tool's executable.
    * @throws FileNotFoundException If path does not exist. Does NOT check
    *                               whether path is an executable.
-   * @see edu.usc.softarch.arcade.frontend.exttooladapter.ExtToolAdapter
+   * @see edu.usc.softarch.arcade.frontend.exttooladapters.util.ExtToolAdapter
    */
-  public Inferencer(String path)
+  public TopicModelGenerator(String path)
     throws FileNotFoundException
   {
     super
     (
       path,
-      "train-topics|--num-top-words 50|--num-topics 100|--num-threads 3|--num-iterations 100|--doc-topics-threshold 0.1",
-      "--input|--inferencer-filename"
+      "import-dir|--remove-stopwords TRUE|--keep-sequence TRUE",
+      "--input|--output"
     );
   }
   //#endregion
 
   //#region INTERFACE
   @Override
-  public String getName() { return "Inferencer"; }
+  public String getName() { return "TopicModelGenerator"; }
 
   @Override
   protected void exceptionHandling(Process p)

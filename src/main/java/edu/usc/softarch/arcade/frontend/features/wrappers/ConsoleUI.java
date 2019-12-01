@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.featurewrapper;
+package edu.usc.softarch.arcade.frontend.features.wrappers;
 
 /**
  * The ConsoleUI interface specifies the necessary methods for use with the
@@ -28,7 +28,7 @@ public interface ConsoleUI
    * the feature component.
    *
    * @return Array with necessary arguments loaded.
-   * @see edu.usc.softarch.arcade.frontend.featurewrapper.FeatureWrapper#execute(Object[])
+   * @see edu.usc.softarch.arcade.frontend.features.wrappers.FeatureWrapper#execute(Object[])
    */
   public String[] loadArgumentsWizard();
 }

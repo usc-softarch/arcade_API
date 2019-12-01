@@ -1,6 +1,6 @@
 package edu.usc.softarch.arcade.frontend.console;
 
-import edu.usc.softarch.arcade.frontend.featurewrapper.*;
+import edu.usc.softarch.arcade.frontend.features.wrappers.*;
 
 /**
  * This class manages the wizard operations for the ARCADE console interface.

@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.featurewrapper;
+package edu.usc.softarch.arcade.frontend.features.wrappers;
 
 /**
  * Interface for exception handling services. New ExceptionHandler

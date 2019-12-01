@@ -4,5 +4,5 @@
  *
  * @author Marcelo Schmitt Laser
  */
-package edu.usc.softarch.arcade.frontend.malletadapter;
+package edu.usc.softarch.arcade.frontend.exttooladapters.mallet;
 // NO TEXT BELOW

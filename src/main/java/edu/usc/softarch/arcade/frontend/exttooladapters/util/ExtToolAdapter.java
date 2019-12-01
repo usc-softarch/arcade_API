@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.exttooladapter;
+package edu.usc.softarch.arcade.frontend.exttooladapters.util;
 
 import java.io.FileNotFoundException;
 import java.io.File;
@@ -119,7 +119,7 @@ public abstract class ExtToolAdapter
   /**
    * Gets path to the external tool's executable file. This is an auxiliary
    * accessor for peculiar situations. See
-   * {@link edu.usc.softarch.arcade.frontend.malletadapter.TopicModelGenerator#validateArguments(String[] arguments)} 
+   * {@link edu.usc.softarch.arcade.frontend.exttooladapters.mallet.TopicModelGenerator#validateArguments(String[] arguments)}
    * for an example.
    *
    * @return Path to the external tool's executable.
@@ -172,7 +172,7 @@ public abstract class ExtToolAdapter
   /**
    * Executes the external tool. If an exception is encountered, it should be
    * handled by an appropriate
-   * {@link edu.usc.softarch.arcade.frontend.featurewrapper.ExceptionHandler}.
+   * {@link edu.usc.softarch.arcade.frontend.features.wrappers.ExceptionHandler}.
    *
    * @return The result of the external tool's execution, if any.
    * @throws java.lang.reflect.InvocationTargetException If any errors occur

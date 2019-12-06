@@ -6,22 +6,26 @@ package edu.usc.softarch.arcade.frontend.features.wrappers;
  *
  * @author Marcelo Schmitt Laser
  */
-public interface ConsoleUI
-  extends FeatureWrapper
+public abstract class ConsoleUI
 {
+  /**
+   * Instance of the feature managed by this UI.
+   */
+  FeatureWrapper feature;
+
   /**
    * Returns a message to be displayed as a menu option by a console.
    *
    * @return Menu-option String.
    */
-  public String getMessage();
+  public abstract String getMessage();
 
   /**
    * Returns a set of instructions for usage of this feature component.
    *
    * @return Instructions.
    */
-  public String getInstructions();
+  public abstract String getInstructions();
 
   /**
    * Full console interface for loading necessary arguments for execution of
@@ -30,5 +34,5 @@ public interface ConsoleUI
    * @return Array with necessary arguments loaded.
    * @see edu.usc.softarch.arcade.frontend.features.wrappers.FeatureWrapper#execute(Object[])
    */
-  public String[] loadArgumentsWizard();
+  public abstract String[] loadArgumentsWizard();
 }

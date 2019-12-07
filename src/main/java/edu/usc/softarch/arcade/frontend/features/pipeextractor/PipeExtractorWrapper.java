@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.pipeextractor;
 
+import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -15,14 +16,14 @@ public class PipeExtractorWrapper
 
   //#region INTERFACE
   @Override
-  public String getName() { return "PipeExtractor"; }
+  public String getName() { return "pipeextractor"; }
 
   @Override
   public Object[] execute(Object[] args)
     throws FileNotFoundException, IOException, IllegalArgumentException
   {
-    checkArguments(args);
-    PipeExtractor.main((String[])args);
+    PipeExtractor.main(
+      Arrays.copyOf(args, args.length, String[].class));
     return null;
   }
 
@@ -59,7 +60,7 @@ public class PipeExtractorWrapper
           ("One or more arguments not a String.");
     }
 
-    return checkArguments((String[])args);
+    return checkArguments(Arrays.copyOf(args, args.length, String[].class));
   }
   //#endregion
 

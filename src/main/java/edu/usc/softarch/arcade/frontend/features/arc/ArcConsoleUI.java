@@ -27,7 +27,7 @@ public class ArcConsoleUI
     String cr = System.lineSeparator();
     String instructions = "ARC requires the following arguments:" + cr;
     instructions += "Input Directory: This is a directory containing one or ";
-    instructions += "more subdirectories with different version of the ";
+    instructions += "more subdirectories with different versions of the ";
     instructions += "subject system." + cr;
     instructions += "Output Directory: This is the directory where all output ";
     instructions += "files go. It must contain a subdirectory called base ";

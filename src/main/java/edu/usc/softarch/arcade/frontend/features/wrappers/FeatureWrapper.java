@@ -33,7 +33,7 @@ public interface FeatureWrapper
    * this feature component.
    *
    * @param args Arguments to check.
-   * @return False if arguments are invalid or insufficient.
+   * @return True if arguments are valid.
    * @throws Exception Any exception appropriate to the wrapped feature.
    */
   public boolean checkArguments(String[] args)
@@ -44,7 +44,7 @@ public interface FeatureWrapper
    * this feature component.
    *
    * @param args Arguments to check.
-   * @return False if arguments are invalid or insufficient.
+   * @return True if arguments are valid.
    * @throws Exception Any exception appropriate to the wrapped feature.
    */
   public boolean checkArguments(Object[] args)

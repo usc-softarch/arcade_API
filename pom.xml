@@ -16,7 +16,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -24,10 +24,20 @@
       <artifactId>PipeExtractor</artifactId>
       <version>30-11-2019</version>
     </dependency>
+    <dependency>
+      <groupId>edu.usc.softarch.arcade.clustering</groupId>
+      <artifactId>BatchClusteringEngine</artifactId>
+      <version>06-12-2019</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.9</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.1.1</version>
@@ -40,11 +50,11 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <groupId>org.apache.maven.plugin</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
+        <version>3.0.0-M4</version>
         <configuration>
           <enableAssertions>true</enableAssertions>
         </configuration>
@@ -55,7 +65,7 @@
         <version>3.0.0-M1</version>
         <executions>
           <execution>
-            <id>hack-binary</id>
+            <id>hack-binary1</id>
             <phase>clean</phase>
             <configuration>
               <file>${basedir}/lib/edu.usc.softarch.arcade.util.ldasupport.PipeExtractor.jar</file>
@@ -70,7 +80,57 @@
               <goal>install-file</goal>
             </goals>
           </execution>
+          <execution>
+            <id>hack-binary2</id>
+            <phase>clean</phase>
+            <configuration>
+              <file>${basedir}/lib/edu.usc.softarch.arcade.clustering.BatchClusteringEngine.jar</file>
+              <repositoryLayout>default</repositoryLayout>
+              <groupId>edu.usc.softarch.arcade.clustering</groupId>
+              <artifactId>BatchClusteringEngine</artifactId>
+              <version>06-12-2019</version>
+              <packaging>jar</packaging>
+              <generatePom>true</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+          </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <archive>
+          <manifest>
+          <addClasspath>true</addClasspath>
+          <classpathPrefix>lib/</classpathPrefix>
+          <mainClass>edu.usc.softarch.arcade.frontend.console.Console</mainClass>
+          </manifest>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
     <testResources>

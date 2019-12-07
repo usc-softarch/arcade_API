@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.arc;
 
+import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
 import edu.usc.softarch.arcade.clustering.BatchClusteringEngine;
@@ -14,14 +15,14 @@ public class ArcWrapper
 
   //#region INTERFACE
   @Override
-  public String getName() { return "ARC"; }
+  public String getName() { return "arc"; }
 
   @Override
   public Object[] execute(Object[] args)
     throws Exception, IOException, IllegalArgumentException
   {
-    checkArguments(args);
-    BatchClusteringEngine.main((String[])args);
+    BatchClusteringEngine.main(
+      Arrays.copyOf(args, args.length, String[].class));
     return null;
   }
 

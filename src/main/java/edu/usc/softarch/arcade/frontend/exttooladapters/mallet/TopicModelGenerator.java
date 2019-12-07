@@ -2,6 +2,7 @@ package edu.usc.softarch.arcade.frontend.exttooladapters.mallet;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.FileNotFoundException;
+import java.io.File;
 import edu.usc.softarch.arcade.frontend.exttooladapters.util.DefaultETAdapter;
 
 //TODO document this class properly
@@ -46,7 +47,7 @@ public class TopicModelGenerator
 
   //#region INTERFACE
   @Override
-  public String getName() { return "TopicModelGenerator"; }
+  public String getName() { return "topicmodelgenerator"; }
 
   @Override
   protected void exceptionHandling(Process p)
@@ -63,6 +64,22 @@ public class TopicModelGenerator
     //TODO create special purpose exchandler for unexpected arguments due
     // to bad formatting e.g. spaces instead of separate arguments for TRUE
     // (maybe validate beforehand?)
+  }
+
+  @Override
+  protected boolean createOutputDir(String[] args)
+  {
+    for(String s : args)
+    {
+      String[] tokens = s.split(" ");
+      if(tokens[0].equals("--output"))
+      {
+        File outputPath = new File(tokens[1]);
+        return outputPath.getParentFile().mkdirs();
+      }
+    }
+
+    return false;
   }
   //#endregion
 }

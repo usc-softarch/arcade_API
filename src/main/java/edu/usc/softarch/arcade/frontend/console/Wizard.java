@@ -1,6 +1,6 @@
 package edu.usc.softarch.arcade.frontend.console;
 
-import edu.usc.softarch.arcade.frontend.features.wrappers.*;
+import java.util.Map;
 
 /**
  * This class manages the wizard operations for the ARCADE console interface.
@@ -11,15 +11,48 @@ public class Wizard
 {
   /**
    * Driver method for the wizard.
-   *
-   * @return The arguments built by the wizard.
    */
-  public String[] execute()
+  public static void execute(Map<String, ConsoleUI> components)
   {
-    //TODO load services
-    //TODO service = mainMenu()
-    //TODO return service.loadArgumentsWizard()
-    throw new UnsupportedOperationException();
+    ConsoleUI comp = mainMenu(components);
+
+    if(comp.loadRequisites().length > 0)
+      System.out.println("This component has pre-requisites. Please select " +
+        "whether you would like to run them.");
+
+    for(String requisite : comp.loadRequisites())
+    {
+      System.out.println("Do you wish to run "
+        + components.get(requisite).getMessage() + "? (y/n)");
+      String option = Console.in.nextLine();
+      switch(option)
+      {
+        case "y":
+          String[] args = components.get(requisite).loadArgumentsWizard();
+          try
+          {
+            components.get(requisite).execute(args);
+          }
+          catch(Exception e)
+          {
+            e.printStackTrace();
+          }
+          break;
+
+        case "n":
+          break;
+      }
+    }
+
+    String[] args = comp.loadArgumentsWizard();
+    try
+    {
+      comp.execute(args);
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -27,12 +60,26 @@ public class Wizard
    *
    * @return An instance of the selected component's wrapper.
    */
-  private ConsoleUI mainMenu()
+  private static ConsoleUI mainMenu(Map<String, ConsoleUI> components)
   {
-    /*TODO for each service, System.out.println(option# + service.getName() +
-        service.getMessage())*/
-    //TODO get user input
-    //TODO if input valid, return selected service
-    throw new UnsupportedOperationException();
+    while(true)
+    {
+      System.out.println("Main menu:");
+
+      for(ConsoleUI comp : components.values())
+      {
+        System.out.println(comp.getName() + " - " + comp.getMessage());
+      }
+
+      System.out.println("exit - Exit the program.");
+
+      String option = Console.in.nextLine();
+      if(option.equals("exit"))
+        System.exit(0);
+      if(components.containsKey(option))
+        return components.get(option);
+      else
+        System.out.println("Invalid option.");
+    }
   }
 }

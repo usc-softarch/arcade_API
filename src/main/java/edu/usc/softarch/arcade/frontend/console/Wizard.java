@@ -11,6 +11,8 @@ public class Wizard
 {
   /**
    * Driver method for the wizard.
+   *
+   * @param components A map of front-end service providers for the console UI.
    */
   public static void execute(Map<String, ConsoleUI> components)
   {
@@ -28,7 +30,8 @@ public class Wizard
       switch(option)
       {
         case "y":
-          String[] args = components.get(requisite).loadArgumentsWizard();
+          Map<String,String> args
+            = components.get(requisite).loadArgumentsWizard();
           try
           {
             components.get(requisite).execute(args);
@@ -44,7 +47,7 @@ public class Wizard
       }
     }
 
-    String[] args = comp.loadArgumentsWizard();
+    Map<String,String> args = comp.loadArgumentsWizard();
     try
     {
       comp.execute(args);

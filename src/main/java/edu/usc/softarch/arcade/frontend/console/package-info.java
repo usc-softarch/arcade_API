@@ -1,5 +1,5 @@
 /**
- * Console-based front-end for ARCADE.
+ * Console-based front-end services for ARCADE.
  *
  * @author Marcelo Schmitt Laser
  */

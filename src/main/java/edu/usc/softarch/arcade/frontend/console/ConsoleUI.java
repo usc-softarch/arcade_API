@@ -1,7 +1,9 @@
 package edu.usc.softarch.arcade.frontend.console;
 
+import java.util.Map;
+
 /**
- * Represents the Console UI element of a functional component. This may be
+ * Represents the front-end service provider of a component. This may be
  * either an Arcade feature or external tool.
  *
  * @author Marcelo Schmitt Laser
@@ -10,7 +12,7 @@ public interface ConsoleUI
 {
   /**
    * Returns the adapted component's name. The result may not match the class
-   * or package name.
+   * or package name. This name is used as an identifier within Arcade.
    *
    * @return Name of the feature component.
    */
@@ -34,16 +36,17 @@ public interface ConsoleUI
    * Initiates a wizard for loading the arguments required by the adapted
    * functional component.
    *
-   * @return An array with all the necessary arguments.
+   * @return A map with all the necessary arguments.
    */
-  public String[] loadArgumentsWizard();
+  public Map<String,String> loadArgumentsWizard();
 
   /**
-   * Executes the adapted functional component's primary functionality.
+   * Executes the adapted component's primary functionality.
    *
-   * @return The result of execution, if any.
+   * @param args A map with all the necessary arguments.
+   * @throws Exception Any exception appropriate to the adapted component.
    */
-  public Object[] execute(String[] args)
+  public void execute(Map<String,String> args)
     throws Exception;
 
   /**

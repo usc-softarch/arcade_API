@@ -1,6 +1,8 @@
 package edu.usc.softarch.arcade.frontend.console;
 
-import java.util.Arrays;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.ServiceLoader;
@@ -15,8 +17,11 @@ public class Console
 {
   public static Scanner in = new Scanner(System.in);
 
+  public static Map<String,String> arguments;
+
   public static void main(String[] args)
   {
+    arguments = loadConfiguration();
     ServiceLoader<ConsoleUI> componentLoader = ServiceLoader.load(ConsoleUI.class);
     Map<String, ConsoleUI> components = new HashMap<String, ConsoleUI>();
 
@@ -33,7 +38,7 @@ public class Console
     {
       try
       {
-        run(args, components);
+//        run(args, components);
       }
       catch(Exception e)
       {
@@ -65,23 +70,50 @@ public class Console
    * feature component. If the service exists and the arguments are correct,
    * initiates execution of the feature component.
    */
-  private static void run(String[] args, Map<String, ConsoleUI> components)
+  private static void run(Map<String,String> args,
+    Map<String, ConsoleUI> components)
     throws Exception
   {
-    ConsoleUI comp = components.get(args[0]);
+    ConsoleUI comp = components.get(args.get("feature"));
     if(comp == null)
     {
       IllegalArgumentException e = new IllegalArgumentException
-        ("Component " + args[0] + " not found.");
+        ("Component " + args.get("feature") + " not found.");
       throw e;
     }
 
-    comp.execute(Arrays.copyOfRange(args, 1, args.length));
+    comp.execute(args);
   }
 
   private static String installInstructions()
   {
     //TODO install instructions for new services
     throw new UnsupportedOperationException();
+  }
+
+  private static Map<String,String> loadConfiguration()
+  {
+    BufferedReader reader;
+    try
+    {
+      reader = new BufferedReader(new FileReader("config.arcade"));
+      String line = reader.readLine();
+      Map<String,String> result = new HashMap<String,String>();
+      while(line != null)
+      {
+        String[] lineArg = line.split("=");
+        if(lineArg.length == 2)
+        {
+          result.put(lineArg[0], lineArg[1]);
+        }
+        line = reader.readLine();
+      }
+      reader.close();
+      return result;
+    }
+    catch(IOException e)
+    {
+      return new HashMap<String,String>();
+    }
   }
 }

@@ -1,76 +1,80 @@
 package edu.usc.softarch.arcade.frontend.features.arc;
 
-import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import edu.usc.softarch.arcade.clustering.BatchClusteringEngine;
-import edu.usc.softarch.arcade.frontend.features.wrappers.FeatureWrapper;
+import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
+/**
+ * See {@code edu.usc.softarch.arcade.clustering.BatchClusteringEngine}.
+ */
 public class ArcWrapper
   implements FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final int ARGS_SIZE = 3;
-  //#endregion
-
-  //#region INTERFACE
+  //#region CONFIGURATION
   @Override
   public String getName() { return "arc"; }
 
   @Override
-  public Object[] execute(Object[] args)
-    throws Exception, IOException, IllegalArgumentException
+  public String[] getArgumentIds()
   {
-    BatchClusteringEngine.main(
-      Arrays.copyOf(args, args.length, String[].class));
-    return null;
-  }
-
-  @Override
-  public boolean checkArguments(String[] args)
-    throws IllegalArgumentException, IOException
-  {
-    checkArgsSize(args);
-
-    File sourceDirectory = new File(args[0]);
-    if(!sourceDirectory.exists())
-      throw new IllegalArgumentException("Source directory not found.");
-
-    File outputDirectory = new File(args[1]);
-    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-      throw new IOException("Failed to create output directory.");
-
-    return true;
-  }
-
-  @Override
-  public boolean checkArguments(Object[] args)
-    throws IllegalArgumentException, IOException
-  {
-    checkArgsSize(args);
-    // checkArgsSize is run twice for checkArguments(Object[] args): once here,
-    // once when calling checkArguments(String[] args). This is done to ensure
-    // the two methods are decoupled, but also that this overload does not
-    // hang due to excess number of arguments in the following loop.
-    for(Object o : args)
-    {
-      if(!o.getClass().equals(String.class))
-        throw new IllegalArgumentException
-          ("One or more arguments not a String.");
-    }
-
-    return checkArguments((String[])args);
+    return new String[] { "sourceDir", "arcOutput", "binDir", "language" };
   }
   //#endregion
 
-  //#region INTERNAL
-  private void checkArgsSize(Object[] args)
-    throws IllegalArgumentException
+  //#region EXECUTION
+  @Override
+  public void execute(Map<String,String> args)
+    throws Exception, IOException, IllegalArgumentException
   {
-    if(args.length > ARGS_SIZE)
-      throw new IllegalArgumentException("Excess number of arguments.");
-    if(args.length < ARGS_SIZE)
-      throw new IllegalArgumentException("Missing arguments.");
+    String fs = File.separator;
+    String[] parsedArgs = new String[3];
+    if(args.get("language").equals("c"))
+    {
+      parsedArgs = new String[4];
+      parsedArgs[3] = args.get("language");
+    }
+    parsedArgs[0] = args.get("sourceDir");
+    parsedArgs[1] = args.get("arcOutput") + fs + "arc";
+    parsedArgs[2] = args.get("binDir");
+    BatchClusteringEngine.main(parsedArgs);
+  }
+  //#endregion
+
+  //#region VALIDATION
+  @Override
+  public boolean checkArguments(Map<String,String> args)
+    throws IllegalArgumentException, IOException
+  {
+    // Check whether source directory exists
+    File sourceDirectory = new File(args.get("sourceDir"));
+    if(!sourceDirectory.exists())
+      throw new IllegalArgumentException("Source directory not found.");
+
+    // Check whether output directory exists and, if not, create it
+    String fs = File.separator;
+    String outputDirPath = args.get("arcOutput") + fs + "arc";
+    File outputDirectory = new File(outputDirPath);
+    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
+      throw new IOException("Failed to create output directory.");
+
+    // Check language and binDir
+    if(args.get("language").equals("java"))
+    {
+      File[] sourceDirs = sourceDirectory.listFiles();
+      for(File sDir : sourceDirs)
+        // If no files inside the source directory are named binDir
+        if(sDir.list((d, s) ->
+          { return s.equals(args.get("binDir")); }).length != 1)
+        {
+          String errorMessage = "One or more source directories does not ";
+          errorMessage +=  "contain the specified binary directory.";
+          throw new IllegalArgumentException(errorMessage);
+        }
+    }
+
+    return true;
   }
   //#endregion
 }

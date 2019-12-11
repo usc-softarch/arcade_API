@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.console;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,6 +105,7 @@ public class Console
         String[] lineArg = line.split("=");
         if(lineArg.length == 2)
         {
+          lineArg[1] = lineArg[1].replace("\\", File.separator);
           result.put(lineArg[0], lineArg[1]);
         }
         line = reader.readLine();

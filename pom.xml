@@ -66,7 +66,7 @@
         <executions>
           <execution>
             <id>hack-binary1</id>
-            <phase>clean</phase>
+            <phase>compile</phase>
             <configuration>
               <file>${basedir}/lib/edu.usc.softarch.arcade.util.ldasupport.PipeExtractor.jar</file>
               <repositoryLayout>default</repositoryLayout>
@@ -82,7 +82,7 @@
           </execution>
           <execution>
             <id>hack-binary2</id>
-            <phase>clean</phase>
+            <phase>compile</phase>
             <configuration>
               <file>${basedir}/lib/edu.usc.softarch.arcade.clustering.BatchClusteringEngine.jar</file>
               <repositoryLayout>default</repositoryLayout>

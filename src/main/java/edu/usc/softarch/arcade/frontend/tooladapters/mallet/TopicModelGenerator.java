@@ -80,7 +80,11 @@ public class TopicModelGenerator
     // Check whether source directory exists
     File sourceDirectory = new File(getArguments().get("sourceDir"));
     if(!sourceDirectory.exists())
-      throw new IllegalArgumentException("Source directory not found.");
+    {
+      String errorMessage = "Source directory not found: ";
+      errorMessage += getArguments().get("sourceDir");
+      throw new IllegalArgumentException(errorMessage);
+    }
 
     // Check whether output directory exists and, if not, create it
     String fs = File.separator;

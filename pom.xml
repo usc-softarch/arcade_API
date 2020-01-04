@@ -37,7 +37,7 @@
   </dependencies>
   <build>
     <plugins>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.1.1</version>
@@ -50,7 +50,31 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
+      <plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.5</version>
+				<executions>
+					<execution>
+						<id>make-fat-console</id>
+            <configuration>
+    					<descriptorRefs>
+    						<descriptorRef>jar-with-dependencies</descriptorRef>
+    					</descriptorRefs>
+              <finalName>arcade_console_fat</finalName>
+    					<archive>
+    						<manifest>
+    							<mainClass>edu.usc.softarch.arcade.frontend.console.Console</mainClass>
+    						</manifest>
+    					</archive>
+    				</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
       <plugin>
         <groupId>org.apache.maven.plugin</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -66,7 +90,7 @@
         <executions>
           <execution>
             <id>hack-binary1</id>
-            <phase>compile</phase>
+            <phase>clean</phase>
             <configuration>
               <file>${basedir}/lib/edu.usc.softarch.arcade.util.ldasupport.PipeExtractor.jar</file>
               <repositoryLayout>default</repositoryLayout>
@@ -82,7 +106,7 @@
           </execution>
           <execution>
             <id>hack-binary2</id>
-            <phase>compile</phase>
+            <phase>clean</phase>
             <configuration>
               <file>${basedir}/lib/edu.usc.softarch.arcade.clustering.BatchClusteringEngine.jar</file>
               <repositoryLayout>default</repositoryLayout>

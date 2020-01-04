@@ -52,29 +52,29 @@
         </executions>
       </plugin> -->
       <plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.5</version>
-				<executions>
-					<execution>
-						<id>make-fat-console</id>
-            <configuration>
-    					<descriptorRefs>
-    						<descriptorRef>jar-with-dependencies</descriptorRef>
-    					</descriptorRefs>
-              <finalName>arcade_console_fat</finalName>
-    					<archive>
-    						<manifest>
-    							<mainClass>edu.usc.softarch.arcade.frontend.console.Console</mainClass>
-    						</manifest>
-    					</archive>
-    				</configuration>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<version>2.5.5</version>
+		<executions>
+			<execution>
+				<id>make-fat-console</id>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<finalName>arcade_console_fat</finalName>
+					<archive>
+						<manifest>
+							<mainClass>edu.usc.softarch.arcade.frontend.console.Console</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<phase>package</phase>
+				<goals>
+					<goal>single</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
       <plugin>
         <groupId>org.apache.maven.plugin</groupId>
         <artifactId>maven-surefire-plugin</artifactId>

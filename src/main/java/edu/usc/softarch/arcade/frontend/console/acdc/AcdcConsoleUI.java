@@ -21,7 +21,7 @@ public class AcdcConsoleUI
   @Override
   public String getMessage()
   {
-    return "ACDC: Algorithm for Comprehension-Driven Clustering";
+    return arcade.strings.components.acdc.message;
   }
 
   @Override
@@ -29,9 +29,7 @@ public class AcdcConsoleUI
   {
     String cr = System.lineSeparator();
     String instructions = "ACDC requires the following arguments:" + cr;
-    instructions += "Source Directory: This is a directory containing one or ";
-    instructions += "more subdirectories with different versions of the ";
-    instructions += "subject system." + cr;
+    instructions += arcade.strings.args.sourceDir.instruction + cr;
     instructions += "Output Directory: This is the directory where all output ";
     instructions += "files go. It must contain a subdirectory called base ";
     instructions += "that contains the files infer.mallet and output.pipe. ";

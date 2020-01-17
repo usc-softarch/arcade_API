@@ -9,8 +9,9 @@
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <manifold-version>2019.1.32</manifold-version>
   </properties>
   <dependencies>
     <dependency>
@@ -30,29 +31,34 @@
       <version>06-12-2019</version>
     </dependency>
     <dependency>
-      <groupId>manifold</groupId>
-      <artifactId>preprocessor</artifactId>
-      <version>2019.1.32</version>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-preprocessor</artifactId>
+      <version>${manifold-version}</version>
     </dependency>
     <dependency>
-      <groupId>manifold</groupId>
-      <artifactId>exceptions</artifactId>
-      <version>2019.1.32</version>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-exceptions</artifactId>
+      <version>${manifold-version}</version>
     </dependency>
     <dependency>
-      <groupId>manifold</groupId>
-      <artifactId>strings</artifactId>
-      <version>2019.1.32</version>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-strings</artifactId>
+      <version>${manifold-version}</version>
     </dependency>
     <dependency>
-      <groupId>manifold</groupId>
-      <artifactId>ext</artifactId>
-      <version>2019.1.32</version>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-ext</artifactId>
+      <version>${manifold-version}</version>
     </dependency>
     <dependency>
-      <groupId>manifold</groupId>
-      <artifactId>properties</artifactId>
-      <version>2019.1.32</version>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-properties</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold</artifactId>
+      <version>${manifold-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -145,86 +151,6 @@
               <goal>install-file</goal>
             </goals>
           </execution>
-          <execution>
-            <id>hack-binary3</id>
-            <phase>clean</phase>
-            <configuration>
-              <file>${basedir}/lib/manifold-preprocessor-2019.1.32.jar</file>
-              <repositoryLayout>default</repositoryLayout>
-              <groupId>manifold</groupId>
-              <artifactId>preprocessor</artifactId>
-              <version>2019.1.32</version>
-              <packaging>jar</packaging>
-              <generatePom>true</generatePom>
-            </configuration>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>hack-binary4</id>
-            <phase>clean</phase>
-            <configuration>
-              <file>${basedir}/lib/manifold-exceptions-2019.1.32.jar</file>
-              <repositoryLayout>default</repositoryLayout>
-              <groupId>manifold</groupId>
-              <artifactId>exceptions</artifactId>
-              <version>2019.1.32</version>
-              <packaging>jar</packaging>
-              <generatePom>true</generatePom>
-            </configuration>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>hack-binary5</id>
-            <phase>clean</phase>
-            <configuration>
-              <file>${basedir}/lib/manifold-strings-2019.1.32.jar</file>
-              <repositoryLayout>default</repositoryLayout>
-              <groupId>manifold</groupId>
-              <artifactId>strings</artifactId>
-              <version>2019.1.32</version>
-              <packaging>jar</packaging>
-              <generatePom>true</generatePom>
-            </configuration>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>hack-binary6</id>
-            <phase>clean</phase>
-            <configuration>
-              <file>${basedir}/lib/manifold-ext-2019.1.32.jar</file>
-              <repositoryLayout>default</repositoryLayout>
-              <groupId>manifold</groupId>
-              <artifactId>ext</artifactId>
-              <version>2019.1.32</version>
-              <packaging>jar</packaging>
-              <generatePom>true</generatePom>
-            </configuration>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>hack-binary7</id>
-            <phase>clean</phase>
-            <configuration>
-              <file>${basedir}/lib/manifold-properties-2019.1.32.jar</file>
-              <repositoryLayout>default</repositoryLayout>
-              <groupId>manifold</groupId>
-              <artifactId>properties</artifactId>
-              <version>2019.1.32</version>
-              <packaging>jar</packaging>
-              <generatePom>true</generatePom>
-            </configuration>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -259,6 +185,25 @@
           <mainClass>edu.usc.softarch.arcade.frontend.console.Console</mainClass>
           </manifest>
           </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <compilerArgs>
+            <!-- Configure manifold plugin-->
+            <arg>-Xplugin:Manifold</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>systems.manifold</groupId>
+              <artifactId>manifold-all</artifactId>
+              <version>${manifold-version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
     </plugins>

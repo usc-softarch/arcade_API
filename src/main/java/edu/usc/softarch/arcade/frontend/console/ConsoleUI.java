@@ -1,6 +1,7 @@
 package edu.usc.softarch.arcade.frontend.console;
 
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Represents the front-end service provider of a component. This may be
@@ -8,29 +9,31 @@ import java.util.Map;
  *
  * @author Marcelo Schmitt Laser
  */
-public interface ConsoleUI
+public abstract class ConsoleUI
 {
+  protected Map<String,String> argumentBuilder = new HashMap<String,String>();
+
   /**
    * Returns the adapted component's name. The result may not match the class
    * or package name. This name is used as an identifier within Arcade.
    *
    * @return Name of the feature component.
    */
-  public String getName();
+  public abstract String getName();
 
   /**
    * Returns a message to be displayed as a menu option.
    *
    * @return Menu option message.
    */
-  public String getMessage();
+  public abstract String getMessage();
 
   /**
    * Returns usage instructions for the adapted functional component.
    *
    * @return Use instructions.
    */
-  public String getInstructions();
+  public abstract String getInstructions();
 
   /**
    * Initiates a wizard for loading the arguments required by the adapted
@@ -38,7 +41,7 @@ public interface ConsoleUI
    *
    * @return A map with all the necessary arguments.
    */
-  public Map<String,String> loadArgumentsWizard();
+  public abstract Map<String,String> loadArgumentsWizard();
 
   /**
    * Executes the adapted component's primary functionality.
@@ -46,7 +49,7 @@ public interface ConsoleUI
    * @param args A map with all the necessary arguments.
    * @throws Exception Any exception appropriate to the adapted component.
    */
-  public void execute(Map<String,String> args)
+  public abstract void execute(Map<String,String> args)
     throws Exception;
 
   /**
@@ -55,5 +58,29 @@ public interface ConsoleUI
    *
    * @return Pre-requisite component names.
    */
-  public String[] loadRequisites();
+  public abstract String[] loadRequisites();
+
+  protected boolean useConfigArgument(String id)
+  {
+    if(Console.arguments.containsKey(id))
+    {
+      System.out.print("Argument " + id + " found in configuration. ");
+      System.out.println("Use existing configuration? (y/n)");
+      String choice = Console.in.nextLine();
+      if(choice.equals("y"))
+      {
+        argumentBuilder.put(id, Console.arguments.get(id));
+        return true;
+      }
+    }
+    return false;
+  }
+
+  protected void loadArgument(String id, String name)
+  {
+    System.out.println("Please enter " + name + ": ");
+    String newArg = Console.in.nextLine();
+    argumentBuilder.put(id, newArg);
+    Console.arguments.put(id, newArg);
+  }
 }

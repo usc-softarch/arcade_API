@@ -8,9 +8,8 @@ import edu.usc.softarch.arcade.frontend.console.Console;
 import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 import edu.usc.softarch.arcade.frontend.tooladapters.mallet.Inferencer;
 
-
 public class InferencerConsoleUI
-  implements ConsoleUI
+  extends ConsoleUI
 {
   ToolAdapter inferencer = new Inferencer(false);
 

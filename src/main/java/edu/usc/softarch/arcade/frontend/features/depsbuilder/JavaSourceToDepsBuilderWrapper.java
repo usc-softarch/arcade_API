@@ -1,17 +1,19 @@
-package edu.usc.softarch.arcade.frontend.features.acdc;
+package edu.usc.softarch.arcade.frontend.features.depsbuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import edu.usc.softarch.arcade.AcdcWithSmellDetection;
+import edu.usc.softarch.arcade.facts.driver.JavaSourceToDepsBuilder;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
-public class AcdcWrapper
+public class JavaSourceToDepsBuilderWrapper
   implements FeatureWrapper
 {
-  //#region CONFIGURATION
   @Override
-  public String getName() { return arcade.strings.components.acdc.id; }
+  public String getName()
+  {
+    return arcade.strings.components.depsBuilder.java.id;
+  }
 
   @Override
   public String[] getArgumentIds()
@@ -23,23 +25,25 @@ public class AcdcWrapper
       arcade.strings.args.binDir.id
     };
   }
-  //#endregion
 
-  //#region EXECUTION
   @Override
   public void execute(Map<String,String> args)
     throws Exception, IOException, IllegalArgumentException
   {
     String fs = File.separator;
-    String[] parsedArgs = new String[3];
+    String[] parsedArgs = new String[2];
     parsedArgs[0] = args.get(arcade.strings.args.sourceDir.id);
-    parsedArgs[1] = args.get(arcade.strings.args.outputDir.id) + fs + "acdc";
-    parsedArgs[2] = args.get(arcade.strings.args.binDir.id);
-    AcdcWithSmellDetection.main(parsedArgs);
-  }
-  //#endregion
+    parsedArgs[0] += fs + args.get(arcade.strings.args.binDir.id);
 
-  //#region VALIDATION
+    // String[] sourceDirPath = parsedArgs[0].split(fs);
+    // String projectName = sourceDirPath[sourceDirPath.length-1];
+    String projectName = "Struts2";
+
+    parsedArgs[1] = args.get(arcade.strings.args.outputDir.id);
+    parsedArgs[1] += fs + "commonRes" + fs + projectName + "_deps.rsf";
+    JavaSourceToDepsBuilder.main(parsedArgs);
+  }
+
   @Override
   public boolean checkArguments(Map<String,String> args)
     throws IllegalArgumentException, IOException
@@ -56,26 +60,22 @@ public class AcdcWrapper
     // Check whether output directory exists and, if not, create it
     String fs = File.separator;
     String outputDirPath = args.get(arcade.strings.args.outputDir.id);
-    outputDirPath += fs + "acdc";
+    outputDirPath += fs + "commonRes";
     File outputDirectory = new File(outputDirPath);
     if(!outputDirectory.exists() && !outputDirectory.mkdirs())
       throw new IOException("Failed to create output directory.");
 
     // Check binDir
-    File[] sourceDirs = sourceDirectory.listFiles();
-    for(File sDir : sourceDirs)
-      // If no files inside the source directory are named binDir
-      if(sDir.list((d, s) ->
-        {
-          return s.equals(args.get(arcade.strings.args.binDir.id));
-        }).length != 1)
-      {
-        String errorMessage = "One or more source directories does not ";
-        errorMessage +=  "contain the specified binary directory.";
-        throw new IllegalArgumentException(errorMessage);
-      }
+    String binDirPath = args.get(arcade.strings.args.sourceDir.id);
+    binDirPath += fs + args.get(arcade.strings.args.binDir.id);
+    File binDirectory = new File(binDirPath);
+    if(!binDirectory.exists())
+    {
+      String errorMessage = "Classes directory not found: ";
+      errorMessage += args.get(arcade.strings.args.binDir.id);
+      throw new IllegalArgumentException(errorMessage);
+    }
 
     return true;
   }
-  //#endregion
 }

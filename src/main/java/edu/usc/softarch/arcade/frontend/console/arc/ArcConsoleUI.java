@@ -8,7 +8,7 @@ import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.features.arc.ArcWrapper;
 
 public class ArcConsoleUI
-  implements ConsoleUI
+  extends ConsoleUI
 {
   FeatureWrapper arc = new ArcWrapper();
 

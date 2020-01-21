@@ -8,7 +8,7 @@ import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.features.pipeextractor.PipeExtractorWrapper;
 
 public class PipeExtractorConsoleUI
-  implements ConsoleUI
+  extends ConsoleUI
 {
   FeatureWrapper pipeextractor = new PipeExtractorWrapper();
 

@@ -3,3 +3,4 @@ edu.usc.softarch.arcade.frontend.console.pipeextractor.PipeExtractorConsoleUI
 edu.usc.softarch.arcade.frontend.console.mallet.TopicModelGeneratorConsoleUI
 edu.usc.softarch.arcade.frontend.console.mallet.InferencerConsoleUI
 edu.usc.softarch.arcade.frontend.console.acdc.AcdcConsoleUI
+edu.usc.softarch.arcade.frontend.console.depsbuilder.JavaSourceToDepsBuilderConsoleUI

@@ -1,3 +1,9 @@
+# WARNING
+
+This repository's history has been permanently rewritten several times due to issues with binary-ridden commits. This means that probably, no versions in the commit history except the latest one will work. It will soon be rebased to a new, clean-slate repository and kept for historical reasons only until it is deemed unnecessary.
+
+tl;dr only use the latest commit, do not attempt to use earlier versions.
+
 # arcade_console
 
 To use, run arcade_console-1.0-SNAPSHOT.jar from the root directory, as follows:

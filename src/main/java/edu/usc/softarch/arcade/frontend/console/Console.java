@@ -39,7 +39,7 @@ public class Console
     {
       try
       {
-//        run(args, components);
+        // run(args, components);
       }
       catch(Exception e)
       {

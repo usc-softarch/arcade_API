@@ -10,8 +10,7 @@ import edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBui
 public class JavaSourceToDepsBuilderConsoleUI
   extends ConsoleUI
 {
-  JavaSourceToDepsBuilderWrapper javaFactExtractor
-    = new JavaSourceToDepsBuilderWrapper();
+  FeatureWrapper depsBuilder = new JavaSourceToDepsBuilderWrapper();
 
   @Override
   public String getName()
@@ -31,8 +30,7 @@ public class JavaSourceToDepsBuilderConsoleUI
     String cr = System.lineSeparator();
     String instructions = "Java Fact Extractor requires the following arguments:" + cr;
     instructions += arcade.strings.args.sourceDir.instruction + cr;
-    instructions += arcade.strings.args.outputDir.instruction + cr;
-    instructions += arcade.strings.args.binDir.instruction + cr;
+    instructions += arcade.strings.args.depsRsfFile.instruction + cr;
 
     return instructions;
   }
@@ -42,7 +40,7 @@ public class JavaSourceToDepsBuilderConsoleUI
   {
     // Use existing config
     if(Console.arguments.containsKey(arcade.strings.args.sourceDir.id)
-      && Console.arguments.containsKey(arcade.strings.args.outputDir.id))
+      && Console.arguments.containsKey(arcade.strings.args.depsRsfFile.id))
     {
       System.out.print("All arguments found in configuration. ");
       System.out.println("Use existing arguments? (y/n)");
@@ -55,13 +53,9 @@ public class JavaSourceToDepsBuilderConsoleUI
       loadArgument(arcade.strings.args.sourceDir.id,
         arcade.strings.args.sourceDir.name);
 
-    if(!useConfigArgument(arcade.strings.args.outputDir.id))
-      loadArgument(arcade.strings.args.outputDir.id,
-        arcade.strings.args.outputDir.name);
-
-    if(!useConfigArgument(arcade.strings.args.binDir.id))
-      loadArgument(arcade.strings.args.binDir.id,
-        arcade.strings.args.binDir.name);
+    if(!useConfigArgument(arcade.strings.args.depsRsfFile.id))
+      loadArgument(arcade.strings.args.depsRsfFile.id,
+        arcade.strings.args.depsRsfFile.name);
 
     return argumentBuilder;
   }
@@ -70,13 +64,14 @@ public class JavaSourceToDepsBuilderConsoleUI
   public void execute(Map<String,String> args)
     throws Exception
   {
-    javaFactExtractor.checkArguments(args);
-    javaFactExtractor.execute(args);
+    depsBuilder.checkArguments(args);
+    depsBuilder.execute(args);
   }
 
   @Override
   public String[] loadRequisites()
   {
+    //TODO fill in requisites
     return new String[]
       { };
   }

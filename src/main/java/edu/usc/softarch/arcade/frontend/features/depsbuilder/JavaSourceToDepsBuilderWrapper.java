@@ -35,8 +35,7 @@ public class JavaSourceToDepsBuilderWrapper
     parsedArgs[0] = args.get(arcade.strings.args.sourceDir.id);
     parsedArgs[0] += fs + args.get(arcade.strings.args.binDir.id);
 
-    // String[] sourceDirPath = parsedArgs[0].split(fs);
-    // String projectName = sourceDirPath[sourceDirPath.length-1];
+    //TODO Fix this so it's not hardcoded, i.e. infers from path
     String projectName = "Struts2";
 
     parsedArgs[1] = args.get(arcade.strings.args.outputDir.id);

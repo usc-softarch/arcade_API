@@ -29,9 +29,8 @@ public class AcdcConsoleUI
   {
     String cr = System.lineSeparator();
     String instructions = "ACDC requires the following arguments:" + cr;
-    instructions += arcade.strings.args.sourceDir.instruction + cr;
-    instructions += arcade.strings.args.outputDir.instruction + cr;
-    instructions += arcade.strings.args.binDir.instruction + cr;
+    instructions += arcade.strings.args.depsRsfFile.instruction + cr;
+    instructions += arcade.strings.args.clusterFile.instruction + cr;
 
     return instructions;
   }
@@ -40,9 +39,8 @@ public class AcdcConsoleUI
   public Map<String,String> loadArgumentsWizard()
   {
     // Use existing config
-    if(Console.arguments.containsKey(arcade.strings.args.sourceDir.id)
-      && Console.arguments.containsKey(arcade.strings.args.outputDir.id)
-      && Console.arguments.containsKey(arcade.strings.args.binDir.id))
+    if(Console.arguments.containsKey(arcade.strings.args.depsRsfFile.id)
+	      && Console.arguments.containsKey(arcade.strings.args.clusterFile.id))
     {
       System.out.print("All arguments found in configuration. ");
       System.out.println("Use existing arguments? (y/n)");
@@ -51,17 +49,13 @@ public class AcdcConsoleUI
         return Console.arguments;
     }
 
-    if(!useConfigArgument(arcade.strings.args.sourceDir.id))
-      loadArgument(arcade.strings.args.sourceDir.id,
-        arcade.strings.args.sourceDir.name);
+    if(!useConfigArgument(arcade.strings.args.depsRsfFile.id))
+      loadArgument(arcade.strings.args.depsRsfFile.id,
+        arcade.strings.args.depsRsfFile.name);
 
-    if(!useConfigArgument(arcade.strings.args.outputDir.id))
-      loadArgument(arcade.strings.args.outputDir.id,
-        arcade.strings.args.outputDir.name);
-
-    if(!useConfigArgument(arcade.strings.args.binDir.id))
-      loadArgument(arcade.strings.args.binDir.id,
-        arcade.strings.args.binDir.name);
+    if(!useConfigArgument(arcade.strings.args.clusterFile.id))
+      loadArgument(arcade.strings.args.clusterFile.id,
+        arcade.strings.args.clusterFile.name);
 
     return argumentBuilder;
   }
@@ -77,6 +71,7 @@ public class AcdcConsoleUI
   @Override
   public String[] loadRequisites()
   {
+    //TODO Fill in the requisites
     return new String[]
       { };
   }

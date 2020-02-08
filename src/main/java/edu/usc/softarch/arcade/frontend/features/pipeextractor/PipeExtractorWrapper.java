@@ -15,13 +15,16 @@ public class PipeExtractorWrapper
 {
   //#region CONFIGURATION
   @Override
-  public String getName() { return "pipeextractor"; }
+  public String getName() { return arcade.strings.components.pipeExtractor.id; }
 
   @Override
   public String[] getArgumentIds()
   {
-    //TODO fix output to be general
-    return new String[] { "sourceDir", "arcOutput" };
+    return new String[]
+    {
+      arcade.strings.args.sourceDir.id,
+      arcade.strings.args.outputDir.id
+    };
   }
   //#endregion
 
@@ -32,8 +35,9 @@ public class PipeExtractorWrapper
   {
     String fs = File.separator;
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = args.get("sourceDir");
-    parsedArgs[1] = args.get("arcOutput") + fs + "arc" + fs + "base";
+    parsedArgs[0] = args.get(arcade.strings.args.sourceDir.id);
+    parsedArgs[1] = args.get(arcade.strings.args.outputDir.id);
+    parsedArgs[1] += fs + "arc" + fs + "base";
     PipeExtractor.main(parsedArgs);
   }
   //#endregion
@@ -44,17 +48,18 @@ public class PipeExtractorWrapper
     throws IllegalArgumentException, IOException
   {
     // Check whether source directory exists
-    File sourceDirectory = new File(args.get("sourceDir"));
+    File sourceDirectory = new File(args.get(arcade.strings.args.sourceDir.id));
     if(!sourceDirectory.exists())
     {
       String errorMessage = "Source directory not found: ";
-      errorMessage += args.get("sourceDir");
+      errorMessage += args.get(arcade.strings.args.sourceDir.id);
       throw new IllegalArgumentException(errorMessage);
     }
 
     // Check whether output directory exists and, if not, create it
     String fs = File.separator;
-    String outputDirPath = args.get("arcOutput") + fs + "arc" + fs + "base";
+    String outputDirPath = args.get(arcade.strings.args.outputDir.id);
+    outputDirPath += fs + "arc" + fs + "base";
     File outputDirectory = new File(outputDirPath);
     if(!outputDirectory.exists() && !outputDirectory.mkdirs())
       throw new IOException("Failed to create output directory.");

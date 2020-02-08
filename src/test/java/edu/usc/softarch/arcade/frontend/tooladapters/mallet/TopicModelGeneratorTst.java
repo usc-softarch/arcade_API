@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.exttooladapters.mallet;
+package edu.usc.softarch.arcade.frontend.tooladapters.mallet;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.Arrays;
 import java.lang.reflect.InvocationTargetException;
-import edu.usc.softarch.arcade.frontend.exttooladapters.util.ExtToolAdapter;
+import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 @RunWith(Parameterized.class)
 public class TopicModelGeneratorTst
@@ -38,15 +38,15 @@ public class TopicModelGeneratorTst
     return Arrays.asList(new Object[][]
     {
       {
-        "--input src" + fs + "test" + fs + "resources" + fs + "subject_systems"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems"
           + fs + "httpd" + fs + "src" + fs,
-        "--output target" + fs + "test-results" + fs + "Arc"
+        "target" + fs + "test-results" + fs + "Arc"
           + fs + "httpd" + fs + "base" + fs + "topicmodel.data"
       },
       {
-        "--input src" + fs + "test" + fs + "resources" + fs + "subject_systems"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems"
           + fs + "Struts2" + fs + "src" + fs,
-        "--output target" + fs + "test-results" + fs + "Arc"
+        "target" + fs + "test-results" + fs + "Arc"
           + fs + "Struts2" + fs + "base" + fs + "topicmodel.data"
       }
     });
@@ -57,7 +57,7 @@ public class TopicModelGeneratorTst
   @Test
   public void testTMG()
   {
-    ExtToolAdapter tmgAdapter = initialize();
+    ToolAdapter tmgAdapter = initialize();
     tmgAdapter.addArguments(inputArgument);
     tmgAdapter.addArguments(outputArgument);
     try { tmgAdapter.execute(); }
@@ -90,7 +90,7 @@ public class TopicModelGeneratorTst
   //#endregion
 
   //#region INTERNAL
-  private ExtToolAdapter initialize()
+  private ToolAdapter initialize()
   {
     // Setting up auxiliary Strings
     String fs = File.separator;
@@ -113,7 +113,7 @@ public class TopicModelGeneratorTst
       throw new UnsupportedOperationException("OS unknown.");
 
     // Setting up TopicModelGenerator
-    ExtToolAdapter tmgAdapter = new TopicModelGenerator();
+    ToolAdapter tmgAdapter = new TopicModelGenerator(false);
     assert tmgAdapter.setToolPath(commandPath);
     tmgAdapter.setEnvironment(environment);
     return tmgAdapter;

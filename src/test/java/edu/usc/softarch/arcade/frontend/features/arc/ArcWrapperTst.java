@@ -7,7 +7,9 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
-import edu.usc.softarch.arcade.frontend.features.wrappers.FeatureWrapper;
+import java.util.Map;
+import java.util.HashMap;
+import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 @RunWith(Parameterized.class)
 public class ArcWrapperTst
@@ -16,18 +18,19 @@ public class ArcWrapperTst
   String sourceDirectory;
   String outputDirectory;
   String classesDirectory;
-  boolean language;
+  String language;
   //#endregion
 
   //#region CONSTRUCTOR
   public ArcWrapperTst(
     String sourceDirectory, String outputDirectory, String classesDirectory,
-    boolean language)
+    String language)
   {
     super();
     this.sourceDirectory = sourceDirectory;
     this.outputDirectory = outputDirectory;
     this.classesDirectory = classesDirectory;
+    this.language = language;
   }
   //#endregion
 
@@ -41,14 +44,12 @@ public class ArcWrapperTst
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src",
-        "target" + fs + "test-results" + fs + "Arc" + fs + "Struts2",
-        "lib_struts", false
+        "target" + fs + "test-results" + fs + "Struts2", "lib_struts", "java"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "src",
-        "target" + fs + "test-results" + fs + "Arc" + fs + "httpd",
-        "", true
+        "target" + fs + "test-results" + fs + "httpd", "", "c"
       }
     });
   }
@@ -59,13 +60,11 @@ public class ArcWrapperTst
   public void testArcWrapper()
   {
     FeatureWrapper arcWrapper = new ArcWrapper();
-    Object[] args;
-    if(this.language)
-      args = new Object[] { sourceDirectory, outputDirectory, classesDirectory,
-        "c" };
-    else
-      args = new Object[] { sourceDirectory, outputDirectory,
-        classesDirectory };
+    Map<String,String> args = new HashMap<String,String>();
+    args.put(arcade.strings.args.sourceDir.id, sourceDirectory);
+    args.put(arcade.strings.args.outputDir.id, outputDirectory);
+    args.put(arcade.strings.args.binDir.id, classesDirectory);
+    args.put(arcade.strings.args.language.id, language);
 
     try { arcWrapper.execute(args); }
     catch(Exception e)
@@ -97,13 +96,6 @@ public class ArcWrapperTst
     //     }
     //   }
     // }
-  }
-
-  @Test
-  public void testArcRun()
-  {
-    Console.main(new String[] { this.sourceDirectory, this.outputDirectory,
-      this.classesDirectory } );
   }
   //#endregion
 }

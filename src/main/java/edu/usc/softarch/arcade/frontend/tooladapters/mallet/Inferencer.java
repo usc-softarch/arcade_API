@@ -47,13 +47,15 @@ public class Inferencer
 
   //#region INTERFACE
   @Override
-  public String getName() { return "inferencer"; }
+  public String getName()
+  {
+    return arcade.strings.components.inferencer.id;
+  }
 
   @Override
   public String[] getArgumentIds()
   {
-    //TODO fix output to be general
-    return new String[] { "topicModel", "arcOutput" };
+    return new String[] { arcade.strings.args.outputDir.id };
   }
 
   @Override
@@ -77,14 +79,19 @@ public class Inferencer
   protected boolean validateArguments()
     throws IllegalArgumentException, IOException
   {
+    String fs = File.separator;
+
     // Check whether topicmodel.data exists
-    File topicModel = new File(getArguments().get("topicModel"));
+    String topicModelPath =
+      getArguments().get(arcade.strings.args.outputDir.id);
+    topicModelPath += fs + "arc" + fs + "base" + fs + "topicmodel.data";
+    File topicModel = new File(topicModelPath);
     if(!topicModel.exists())
       throw new IllegalArgumentException("topicmodel.data file not found.");
 
     // Check whether output directory exists and, if not, create it
     String fs = File.separator;
-    String outputDirPath = getArguments().get("arcOutput");
+    String outputDirPath = getArguments().get(arcade.strings.args.outputDir.id);
     outputDirPath += fs + "arc" + fs + "base";
     File outputDirectory = new File(outputDirPath);
     if(!outputDirectory.exists() && !outputDirectory.mkdirs())
@@ -98,8 +105,9 @@ public class Inferencer
   {
     List<String> command = new ArrayList<String>();
     String fs = File.separator;
-    String topicModel = getArguments().get("topicModel");
-    String arcOutput = getArguments().get("arcOutput");
+    String topicModel = getArguments().get(arcade.strings.args.outputDir.id);
+    topicModel += fs + "arc" + fs + "base" + fs + "topicmodel.data";
+    String arcOutput = getArguments().get(arcade.strings.args.outputDir.id);
     arcOutput += fs + "arc" + fs + "base" + fs + "infer.mallet";
 
     command.add("train-topics");

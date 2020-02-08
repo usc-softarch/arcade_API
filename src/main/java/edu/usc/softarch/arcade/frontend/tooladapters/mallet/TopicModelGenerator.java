@@ -47,13 +47,19 @@ public class TopicModelGenerator
 
   //#region INTERFACE
   @Override
-  public String getName() { return "topicmodelgenerator"; }
+  public String getName()
+  {
+    return arcade.strings.components.topicModelGenerator.id;
+  }
 
   @Override
   public String[] getArgumentIds()
   {
-    //TODO fix output to be general
-    return new String[] { "sourceDir", "arcOutput" };
+    return new String[]
+    {
+      arcade.strings.args.sourceDir.id,
+      arcade.strings.args.outputDir.id
+    };
   }
 
   @Override
@@ -78,17 +84,18 @@ public class TopicModelGenerator
     throws IllegalArgumentException, IOException
   {
     // Check whether source directory exists
-    File sourceDirectory = new File(getArguments().get("sourceDir"));
+    File sourceDirectory
+      = new File(getArguments().get(arcade.strings.args.sourceDir.id));
     if(!sourceDirectory.exists())
     {
       String errorMessage = "Source directory not found: ";
-      errorMessage += getArguments().get("sourceDir");
+      errorMessage += getArguments().get(arcade.strings.args.sourceDir.id);
       throw new IllegalArgumentException(errorMessage);
     }
 
     // Check whether output directory exists and, if not, create it
     String fs = File.separator;
-    String outputDirPath = getArguments().get("arcOutput");
+    String outputDirPath = getArguments().get(arcade.strings.args.outputDir.id);
     outputDirPath += fs + "arc" + fs + "base";
     File outputDirectory = new File(outputDirPath);
     if(!outputDirectory.exists() && !outputDirectory.mkdirs())
@@ -102,8 +109,8 @@ public class TopicModelGenerator
   {
     List<String> command = new ArrayList<String>();
     String fs = File.separator;
-    String sourceDir = getArguments().get("sourceDir");
-    String arcOutput = getArguments().get("arcOutput");
+    String sourceDir = getArguments().get(arcade.strings.args.sourceDir.id);
+    String arcOutput = getArguments().get(arcade.strings.args.outputDir.id);
     arcOutput += fs + "arc" + fs + "base" + fs + "topicmodel.data";
 
     command.add("import-dir");

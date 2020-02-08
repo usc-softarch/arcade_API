@@ -6,7 +6,9 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
-import edu.usc.softarch.arcade.frontend.features.wrappers.FeatureWrapper;
+import java.util.Map;
+import java.util.HashMap;
+import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 @RunWith(Parameterized.class)
 public class PipeExtractorWrapperTst
@@ -36,14 +38,12 @@ public class PipeExtractorWrapperTst
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "Arc" + fs + "Struts2"
-          + fs + "base" + fs
+        "target" + fs + "test-results" + fs + "Struts2"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "Arc" + fs + "httpd"
-          + fs + "base" + fs
+        "target" + fs + "test-results" + fs + "httpd"
       }
     });
   }
@@ -54,7 +54,9 @@ public class PipeExtractorWrapperTst
   public void testPipeExtractorWrapper()
   {
     FeatureWrapper pipeExtractor = new PipeExtractorWrapper();
-    Object[] args = new Object[] { sourceDirectory, outputDirectory };
+    Map<String,String> args = new HashMap<String,String>();
+    args.put(arcade.strings.args.sourceDir.id, sourceDirectory);
+    args.put(arcade.strings.args.outputDir.id, outputDirectory);
     try
     {
       pipeExtractor.checkArguments(args);

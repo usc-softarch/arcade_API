@@ -4,4 +4,6 @@
 /.settings
 /src/test/resources
 /logs
-/cfg
+/.metadata
+.gitattributes
+res

@@ -12,7 +12,7 @@ import edu.usc.softarch.arcade.frontend.tooladapters.mallet.TopicModelGenerator;
 public class TopicModelGeneratorConsoleUI
   extends ConsoleUI
 {
-  ToolAdapter tpm = new TopicModelGenerator(false);
+  ToolAdapter tpm = new TopicModelGenerator();
 
   @Override
   public String getName()

@@ -11,7 +11,7 @@ import edu.usc.softarch.arcade.frontend.tooladapters.mallet.Inferencer;
 public class InferencerConsoleUI
   extends ConsoleUI
 {
-  ToolAdapter inferencer = new Inferencer(false);
+  ToolAdapter inferencer = new Inferencer();
 
   @Override
   public String getName()
@@ -118,7 +118,7 @@ public class InferencerConsoleUI
       Console.arguments.put("malletHome", malletHome);
     }
 
-    tpm.setEnvironment(environment);
+    inferencer.setEnvironment(environment);
   }
 
   @Override

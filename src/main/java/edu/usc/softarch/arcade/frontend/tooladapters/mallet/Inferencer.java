@@ -20,28 +20,23 @@ public class Inferencer
   /**
    * Base constructor. Initializes {@link #path} to empty String.
    *
-   * @param isJar {@link #isJar}
    * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
    */
-  public Inferencer(boolean isJar)
-  {
-    super(isJar);
-  }
+  public Inferencer() { }
 
   /**
    * Constructor with set path. If path does not exist, will throw exception
    * and terminate.
    *
    * @param path Path to the external tool's executable.
-   * @param isJar {@link #isJar}
    * @throws FileNotFoundException If path does not exist. Does NOT check
    *                               whether path is an executable.
    * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
    */
-  public Inferencer(String path, boolean isJar)
+  public Inferencer(String path)
     throws FileNotFoundException
   {
-    super(path, isJar);
+    super(path);
   }
   //#endregion
 
@@ -90,7 +85,6 @@ public class Inferencer
       throw new IllegalArgumentException("topicmodel.data file not found.");
 
     // Check whether output directory exists and, if not, create it
-    String fs = File.separator;
     String outputDirPath = getArguments().get(arcade.strings.args.outputDir.id);
     outputDirPath += fs + "arc" + fs + "base";
     File outputDirectory = new File(outputDirPath);

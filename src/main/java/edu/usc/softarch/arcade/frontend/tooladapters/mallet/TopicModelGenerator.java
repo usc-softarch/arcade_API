@@ -20,28 +20,23 @@ public class TopicModelGenerator
   /**
    * Base constructor. Initializes {@link #path} to empty String.
    *
-   * @param isJar {@link #isJar}
    * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
    */
-  public TopicModelGenerator(boolean isJar)
-  {
-    super(isJar);
-  }
+  public TopicModelGenerator() { }
 
   /**
    * Constructor with set path. If path does not exist, will throw exception
    * and terminate.
    *
    * @param path Path to the external tool's executable.
-   * @param isJar {@link #isJar}
    * @throws FileNotFoundException If path does not exist. Does NOT check
    *                               whether path is an executable.
    * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
    */
-  public TopicModelGenerator(String path, boolean isJar)
+  public TopicModelGenerator(String path)
     throws FileNotFoundException
   {
-    super(path, isJar);
+    super(path);
   }
   //#endregion
 

@@ -32,36 +32,23 @@ public abstract class ToolAdapter
    * Map of environment variables.
    */
   private Map<String,String> environment = new HashMap<String,String>();
-
-  /**
-   * Represents whether or not the external tool is a .jar file. If true, the
-   * commands "java -jar" will be prepended to the execution command
-   * automatically.
-   */
-  protected final boolean isJar;
   //#endregion
 
   //#region CONSTRUCTOR
   /**
    * Base constructor. Initializes {@link #path} to empty String.
-   *
-   * @param isJar {@link #isJar}
    */
-  protected ToolAdapter(boolean isJar)
-  {
-    this.isJar = isJar;
-  }
+  protected ToolAdapter() { }
 
   /**
    * Constructor with set path. If path does not exist, will throw exception
    * and terminate.
    *
    * @param path Path to the tool's executable.
-   * @param isJar {@link #isJar}
    * @throws FileNotFoundException If path does not exist. Does NOT check
    *                               whether path is an executable.
    */
-  protected ToolAdapter(String path, boolean isJar)
+  protected ToolAdapter(String path)
     throws FileNotFoundException
   {
     if(!setToolPath(path))
@@ -69,7 +56,6 @@ public abstract class ToolAdapter
       String error = "No executable found for " + getName() + " at " + path;
       throw new FileNotFoundException(error);
     }
-    this.isJar = isJar;
   }
   //#endregion
 
@@ -120,16 +106,16 @@ public abstract class ToolAdapter
   protected List<String> buildCommand()
   {
     List<String> command = new ArrayList<String>();
-    if(isJar)
-    {
-      command.add("java");
-      command.add("-jar");
-    }
-
+    command.addAll(buildPrefix());
     command.add(getToolPath());
     command.addAll(buildCommandArguments());
     return command;
   }
+
+  /**
+   * Adds any necessary prefixes to execute the tool.
+   */
+  protected List<String> buildPrefix() { return new ArrayList<String>(); }
 
   /**
    * Adds the arguments to the execution command.

@@ -7,8 +7,24 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
  *
  * @author Marcelo Schmitt Laser
  */
-public interface ArgHandler
+public abstract class ArgHandler
 {
+  //#region ATTRIBUTES
+  private String value;
+  private String name;
+  private String description;
+  private String instruction;
+  //#endregion
+
+  //#region CONSTRUCTORS
+  protected void initialize(String name, String description, String instruction)
+  {
+    this.name = name;
+    this.description = description;
+    this.instruction = instruction;
+  }
+  //#endregion
+
   //#region CONFIGURATION
   /**
    * Returns the argument handler's name. This may not match the class or
@@ -16,7 +32,7 @@ public interface ArgHandler
    *
    * @return Name of the argument handler.
    */
-  public String getName();
+  public String getName() { return name; }
 
   /**
    * Returns the current value of the argument. If argument has not been set,
@@ -24,7 +40,7 @@ public interface ArgHandler
    *
    * @return Current value of the argument.
    */
-  public String getValue();
+  public String getValue() { return value; }
 
   /**
    * Sets a new value for the argument. New value must be valid.
@@ -33,7 +49,18 @@ public interface ArgHandler
    * @throws IllegalArgumentException If new value provided is invalid.
    */
   public String setValue(String value)
-    throws IllegalArgumentException;
+    throws IllegalArgumentException
+  {
+    try { validate(value); }
+    catch(Exception e)
+    {
+      throw new IllegalArgumentException(e);
+    }
+
+    String oldValue = this.value;
+    this.value = value;
+    return oldValue;
+  }
   //#endregion
 
   //#region PRESENTATION
@@ -44,7 +71,7 @@ public interface ArgHandler
    *
    * @return The argument handler's description message.
    */
-  public String getDescription();
+  public String getDescription() { return description; }
 
   /**
    * Gets an usage instruction for this argument. May be used by UI components
@@ -52,7 +79,7 @@ public interface ArgHandler
    *
    * @return The argument's usage instruction.
    */
-  public String getInstruction();
+  public String getInstruction() { return instruction; }
   //#endregion
 
   //#region VALIDATION
@@ -62,7 +89,7 @@ public interface ArgHandler
    * @return True if String is valid.
    * @throws Exception Any exception appropriate to the validation algorithm.
    */
-  public boolean validate(String value)
+  public abstract boolean validate(String value)
     throws Exception;
   //#endregion
 }

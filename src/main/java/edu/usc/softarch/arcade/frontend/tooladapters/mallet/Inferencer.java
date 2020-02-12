@@ -2,11 +2,15 @@ package edu.usc.softarch.arcade.frontend.tooladapters.mallet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.reflect.InvocationTargetException;
-import java.io.FileNotFoundException;
+import java.util.Map;
+import java.util.HashMap;
 import java.io.File;
-import java.io.IOException;
 import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
+
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.MalletPath;
+import edu.usc.softarch.arcade.frontend.arghandlers.MalletHome;
 
 /**
  * Adapter for generating an infer.mallet file through mallet.
@@ -16,93 +20,51 @@ import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 public class Inferencer
   extends ToolAdapter
 {
-  //#region CONSTRUCTOR
-  /**
-   * Base constructor. Initializes {@link #path} to empty String.
-   *
-   * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
-   */
-  public Inferencer() { }
-
-  /**
-   * Constructor with set path. If path does not exist, will throw exception
-   * and terminate.
-   *
-   * @param path Path to the external tool's executable.
-   * @throws FileNotFoundException If path does not exist. Does NOT check
-   *                               whether path is an executable.
-   * @see edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter
-   */
-  public Inferencer(String path)
-    throws FileNotFoundException
-  {
-    super(path);
-  }
+  //#region ATTRIBUTES
+  private static final ArgHandler outputDir = OutputDir.getInstance();
+  private static final ArgHandler malletPath = MalletPath.getInstance();
+  private static final ArgHandler malletHome = MalletHome.getInstance();
   //#endregion
 
-  //#region INTERFACE
+  //#region CONFIGURATION
   @Override
   public String getName()
   {
-    return arcade.strings.components.inferencer.id;
+    return "inferencer";
   }
 
   @Override
   public String[] getArgumentIds()
   {
-    return new String[] { arcade.strings.args.outputDir.id };
+    return new String[]
+    {
+      outputDir.getName(),
+      malletPath.getName(),
+      malletHome.getName()
+    };
   }
+  //#endregion
 
+  //#region INTERNAL METHODS
   @Override
-  protected void exceptionHandling(Process p)
-    throws InvocationTargetException
+  protected List<String> buildToolPath(Map<String,String> args)
   {
-    //TODO Check exit code
-    //TODO If exit with error, initialize general purpose mallet exchandler
-    //TODO general purpose mallet exchandler detects whether error is known
-    // from looking at plain text error log
-    //TODO if error is known, redirect to special purpose mallet exchandler
-    // which builds and throws an InvocationTargetException
-    //TODO create special purpose exchandler for blank space in path on
-    // Windows error due to mallet being a piece of shit
-    //TODO create special purpose exchandler for unexpected arguments due
-    // to bad formatting e.g. spaces instead of separate arguments for TRUE
-    // (maybe validate beforehand?)
+    List<String> toolPath = new ArrayList<String>();
+    String malletPathVal = args.get(malletPath.getName());
+    toolPath.add(malletPathVal);
+
+    return toolPath;
   }
 
   @Override
-  protected boolean validateArguments()
-    throws IllegalArgumentException, IOException
-  {
-    String fs = File.separator;
-
-    // Check whether topicmodel.data exists
-    String topicModelPath =
-      getArguments().get(arcade.strings.args.outputDir.id);
-    topicModelPath += fs + "arc" + fs + "base" + fs + "topicmodel.data";
-    File topicModel = new File(topicModelPath);
-    if(!topicModel.exists())
-      throw new IllegalArgumentException("topicmodel.data file not found.");
-
-    // Check whether output directory exists and, if not, create it
-    String outputDirPath = getArguments().get(arcade.strings.args.outputDir.id);
-    outputDirPath += fs + "arc" + fs + "base";
-    File outputDirectory = new File(outputDirPath);
-    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-      throw new IOException("Failed to create output directory.");
-
-    return true;
-  }
-
-  @Override
-  protected List<String> buildCommandArguments()
+  protected List<String> buildArguments(Map<String,String> args)
   {
     List<String> command = new ArrayList<String>();
     String fs = File.separator;
-    String topicModel = getArguments().get(arcade.strings.args.outputDir.id);
-    topicModel += fs + "arc" + fs + "base" + fs + "topicmodel.data";
-    String arcOutput = getArguments().get(arcade.strings.args.outputDir.id);
-    arcOutput += fs + "arc" + fs + "base" + fs + "infer.mallet";
+    String outputDirVal = args.get(outputDir.getName());
+    outputDirVal += fs + "arc" + fs + "base" + fs;
+    String topicModel = outputDirVal + "topicmodel.data";
+    String arcOutput = outputDirVal + "infer.mallet";
 
     command.add("train-topics");
     command.add("--input");
@@ -121,6 +83,27 @@ public class Inferencer
     command.add("0.1");
 
     return command;
+  }
+
+  @Override
+  protected Map<String,String> buildEnv(Map<String,String> args)
+  {
+    Map<String,String> env = new HashMap<String,String>();
+    env.put("MALLET_HOME", args.get(malletHome.getName()));
+    return env;
+  }
+  //#endregion
+
+  //#region VALIDATION
+  @Override
+  public boolean checkArguments(Map<String,String> args)
+    throws Exception
+  {
+    boolean outputDirValid = outputDir.validate(args);
+    boolean malletPathValid = malletPath.validate(args);
+    boolean malletHomeValid = malletHome.validate(args);
+
+    return (outputDirValid && malletPathValid && malletHomeValid);
   }
   //#endregion
 }

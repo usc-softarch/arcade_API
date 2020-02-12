@@ -6,14 +6,23 @@ import java.util.Map;
 import edu.usc.softarch.arcade.antipattern.detection.SmellDensityAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
+
 public class SmellDensityAnalyzerWrapper
   implements FeatureWrapper
 {
+  //#region ATTRIBUTES
+  private static final ArgHandler smellsDir = SmellsDir.getInstance();
+  private static final ArgHandler clusterDir = ClusterDir.getInstance();
+  //#endregion
+
   //#region CONFIGURATION
   @Override
   public String getName()
   {
-    return arcade.strings.components.smellAnalysis.density.id;
+    return "densitySmellAnalysis";
   }
 
   @Override
@@ -21,8 +30,8 @@ public class SmellDensityAnalyzerWrapper
   {
     return new String[]
     {
-      arcade.strings.args.smellsDir.id,
-      arcade.strings.args.clusterDir.id,
+      smellsDir.getName(),
+      clusterDir.getName()
     };
   }
   //#endregion
@@ -32,10 +41,9 @@ public class SmellDensityAnalyzerWrapper
   public void execute(Map<String,String> args)
     throws Exception, IOException, IllegalArgumentException
   {
-    String fs = File.separator;
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = args.get(arcade.strings.args.smellsDir.id);
-    parsedArgs[1] = args.get(arcade.strings.args.clusterDir.id);
+    parsedArgs[0] = args.get(smellsDir.getName());
+    parsedArgs[1] = args.get(clusterDir.getName());
 
     SmellDensityAnalyzer.main(parsedArgs);
   }
@@ -44,27 +52,12 @@ public class SmellDensityAnalyzerWrapper
   //#region VALIDATION
   @Override
   public boolean checkArguments(Map<String,String> args)
-    throws IllegalArgumentException, IOException
+    throws Exception
   {
-    // Check whether smells directory exists
-    File smellsDir = new File(args.get(arcade.strings.args.smellsDir.id));
-    if(!smellsDir.exists())
-    {
-      String errorMessage = "Smells directory not found: ";
-      errorMessage += args.get(arcade.strings.args.smellsDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
+    boolean clusterDirValid = clusterDir.validate(args);
+    boolean smellsDirValid = smellsDir.validate(args);
 
-    // Check whether cluster directory exists
-    File clusterDir = new File(args.get(arcade.strings.args.clusterDir.id));
-    if(!clusterDir.exists())
-    {
-      String errorMessage = "Cluster directory not found: ";
-      errorMessage += args.get(arcade.strings.args.clusterDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return true;
+    return (clusterDirValid && smellsDirValid);
   }
   //#endregion
 }

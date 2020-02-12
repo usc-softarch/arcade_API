@@ -1,5 +1,7 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.util.Map;
+
 /**
  * ArgHandlers are singletons that specify the required operations for managing
  * the default behavior of an argument type that is shared across features.
@@ -91,5 +93,18 @@ public abstract class ArgHandler
    */
   public abstract boolean validate(String value)
     throws Exception;
+
+  /**
+   * Finds the appropriate argument string in an arguments map and checks
+   * whether it is a valid value for this argument.
+   *
+   * @return True if value is valid.
+   * @throws Exception Any exception appropriate to the validation algorithm.
+   */
+  public boolean validate(Map<String,String> args)
+    throws Exception
+  {
+    return validate(args.get(getName()));
+  }
   //#endregion
 }

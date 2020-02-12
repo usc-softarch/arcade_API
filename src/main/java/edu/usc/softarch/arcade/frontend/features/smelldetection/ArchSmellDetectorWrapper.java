@@ -1,19 +1,29 @@
 package edu.usc.softarch.arcade.frontend.features.smelldetection;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import edu.usc.softarch.arcade.antipattern.detection.ArchSmellDetector;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.SmellsFile;
+
 public class ArchSmellDetectorWrapper
   implements FeatureWrapper
 {
+  //#region ATTRIBUTES
+  private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
+  private static final ArgHandler clusterFile = ClusterFile.getInstance();
+  private static final ArgHandler smellsFile = SmellsFile.getInstance();
+  //#endregion
+
   //#region CONFIGURATION
   @Override
   public String getName()
   {
-    return arcade.strings.components.archSmellDetector.id;
+    return "archSmellDetector";
   }
 
   @Override
@@ -21,9 +31,9 @@ public class ArchSmellDetectorWrapper
   {
     return new String[]
     {
-      arcade.strings.args.depsRsfFile.id,
-      arcade.strings.args.clusterFile.id,
-      arcade.strings.args.smellsFile.id
+      depsRsfFile.getName(),
+      clusterFile.getName(),
+      smellsFile.getName()
     };
   }
   //#endregion
@@ -33,11 +43,10 @@ public class ArchSmellDetectorWrapper
   public void execute(Map<String,String> args)
     throws Exception, IOException, IllegalArgumentException
   {
-    String fs = File.separator;
     String[] parsedArgs = new String[3];
-    parsedArgs[0] = args.get(arcade.strings.args.depsRsfFile.id);
-    parsedArgs[1] = args.get(arcade.strings.args.clusterFile.id);
-    parsedArgs[2] = args.get(arcade.strings.args.smellsFile.id);
+    parsedArgs[0] = args.get(depsRsfFile.getName());
+    parsedArgs[1] = args.get(clusterFile.getName());
+    parsedArgs[2] = args.get(smellsFile.getName());
     ArchSmellDetector.main(parsedArgs);
   }
   //#endregion
@@ -45,27 +54,13 @@ public class ArchSmellDetectorWrapper
   //#region VALIDATION
   @Override
   public boolean checkArguments(Map<String,String> args)
-    throws IllegalArgumentException, IOException
+    throws Exception
   {
-    // Check whether dependency file exists
-    File depsRsfFile = new File(args.get(arcade.strings.args.depsRsfFile.id));
-    if(!depsRsfFile.exists())
-    {
-      String errorMessage = "depsRsfFile not found: ";
-      errorMessage += args.get(arcade.strings.args.depsRsfFile.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
+    boolean depsRsfFileValid = depsRsfFile.validate(args);
+    boolean clusterFileValid = clusterFile.validate(args);
+    boolean smellsFileValid = smellsFile.validate(args);
 
-	   // Check whether cluster file exists
-    File clusterFile = new File(args.get(arcade.strings.args.clusterFile.id));
-    if(!clusterFile.exists())
-    {
-      String errorMessage = "clusterFile not found: ";
-      errorMessage += args.get(arcade.strings.args.clusterFile.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return true;
+    return (depsRsfFileValid && clusterFileValid && smellsFileValid);
   }
   //#endregion
 }

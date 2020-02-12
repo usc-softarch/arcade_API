@@ -1,19 +1,23 @@
 package edu.usc.softarch.arcade.frontend.features.smellanalysis;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 import edu.usc.softarch.arcade.antipattern.detection.SmellEvolutionAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
+
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
 
 public class SmellEvolutionAnalyzerWrapper
   implements FeatureWrapper
 {
+  //#region ATTRIBUTES
+  private static final ArgHandler smellsDir = SmellsDir.getInstance();
+  //#endregion
+
   //#region CONFIGURATION
   @Override
   public String getName()
   {
-    return arcade.strings.components.smellAnalysis.evolution.id;
+    return "evolutionSmellsAnalysis";
   }
 
   @Override
@@ -21,19 +25,18 @@ public class SmellEvolutionAnalyzerWrapper
   {
     return new String[]
     {
-      arcade.strings.args.smellsDir.id
+      smellsDir.getName()
     };
   }
   //#endregion
 
   //#region EXECUTION
   @Override
-  public void execute(Map<String,String> args)
-    throws Exception, IOException, IllegalArgumentException
+  public void execute()
+    throws Exception
   {
-    String fs = File.separator;
     String[] parsedArgs = new String[1];
-    parsedArgs[0] = args.get(arcade.strings.args.smellsDir.id);
+    parsedArgs[0] = smellsDir.getValue();
 
     SmellEvolutionAnalyzer.main(parsedArgs);
   }
@@ -41,19 +44,12 @@ public class SmellEvolutionAnalyzerWrapper
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
-    throws IllegalArgumentException, IOException
+  public boolean checkArguments()
+    throws Exception
   {
-    // Check whether smells directory exists
-    File smellsDir = new File(args.get(arcade.strings.args.smellsDir.id));
-    if(!smellsDir.exists())
-    {
-      String errorMessage = "Smells Directory not found: ";
-      errorMessage += args.get(arcade.strings.args.smellsDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
+    boolean smellsDirValid = smellsDir.validate();
 
-    return true;
+    return smellsDirValid;
   }
   //#endregion
 }

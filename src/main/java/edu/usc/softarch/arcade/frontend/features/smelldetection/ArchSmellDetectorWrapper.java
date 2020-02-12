@@ -1,7 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.smelldetection;
 
 import java.io.IOException;
-import java.util.Map;
 import edu.usc.softarch.arcade.antipattern.detection.ArchSmellDetector;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -40,25 +39,25 @@ public class ArchSmellDetectorWrapper
 
   //#region EXECUTION
   @Override
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception, IOException, IllegalArgumentException
   {
     String[] parsedArgs = new String[3];
-    parsedArgs[0] = args.get(depsRsfFile.getName());
-    parsedArgs[1] = args.get(clusterFile.getName());
-    parsedArgs[2] = args.get(smellsFile.getName());
+    parsedArgs[0] = depsRsfFile.getValue();
+    parsedArgs[1] = clusterFile.getValue();
+    parsedArgs[2] = smellsFile.getValue();
     ArchSmellDetector.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
+  public boolean checkArguments()
     throws Exception
   {
-    boolean depsRsfFileValid = depsRsfFile.validate(args);
-    boolean clusterFileValid = clusterFile.validate(args);
-    boolean smellsFileValid = smellsFile.validate(args);
+    boolean depsRsfFileValid = depsRsfFile.validate();
+    boolean clusterFileValid = clusterFile.validate();
+    boolean smellsFileValid = smellsFile.validate();
 
     return (depsRsfFileValid && clusterFileValid && smellsFileValid);
   }

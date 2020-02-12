@@ -1,7 +1,6 @@
 package edu.usc.softarch.arcade.frontend.tooladapters;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,12 +20,12 @@ public abstract class ToolAdapter
    *
    * @return List of Strings that make up the command.
    */
-  protected List<String> buildCommand(Map<String,String> args)
+  protected List<String> buildCommand()
   {
     List<String> command = new ArrayList<String>();
-    command.addAll(buildPrefix(args));
-    command.addAll(buildToolPath(args));
-    command.addAll(buildArguments(args));
+    command.addAll(buildPrefix());
+    command.addAll(buildToolPath());
+    command.addAll(buildArguments());
     return command;
   }
 
@@ -37,12 +36,12 @@ public abstract class ToolAdapter
    * @return List of prefix commands (e.g. java -jar).
    * @see #buildCommand()
    */
-  protected List<String> buildPrefix(Map<String,String> args)
+  protected List<String> buildPrefix()
   {
     return new ArrayList<String>();
   }
 
-  protected abstract List<String> buildToolPath(Map<String,String> args);
+  protected abstract List<String> buildToolPath();
 
   /**
    * Adds the arguments to the execution command.
@@ -50,23 +49,23 @@ public abstract class ToolAdapter
    * @return List of Strings with arguments to be appended to base command.
    * @see #buildCommand()
    */
-  protected abstract List<String> buildArguments(Map<String,String> args);
+  protected abstract List<String> buildArguments();
 
-  protected abstract Map<String,String> buildEnv(Map<String,String> args);
+  protected abstract Map<String,String> buildEnv();
   //#endregion
 
   //#region INTERFACE
   @Override
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception
   {
-    List<String> command = buildCommand(args);
+    List<String> command = buildCommand();
 
     try
     {
       ProcessBuilder pb = new ProcessBuilder(command);
       System.out.println(pb.command());
-      pb.environment().putAll(buildEnv(args));
+      pb.environment().putAll(buildEnv());
       pb.inheritIO();
       Process p = pb.start();
       p.waitFor();

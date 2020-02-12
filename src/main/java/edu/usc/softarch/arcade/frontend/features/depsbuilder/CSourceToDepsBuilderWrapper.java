@@ -1,18 +1,26 @@
 package edu.usc.softarch.arcade.frontend.features.depsbuilder;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import edu.usc.softarch.arcade.facts.driver.CSourceToDepsBuilder;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
+
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
 
 public class CSourceToDepsBuilderWrapper
   implements FeatureWrapper
 {
+  //#region ATTRIBUTES
+  private static final ArgHandler sourceDir = SourceDir.getInstance();
+  private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
+  //#endregion
+
+  //#region CONFIGURATION
   @Override
   public String getName()
   {
-    return arcade.strings.components.depsBuilder.c.id;
+    return "cDepsBuilder";
   }
 
   @Override
@@ -20,36 +28,34 @@ public class CSourceToDepsBuilderWrapper
   {
     return new String[]
     {
-      arcade.strings.args.sourceDir.id,
-      arcade.strings.args.depsRsfFile.id
+      sourceDir.getName(),
+      depsRsfFile.getName()
     };
   }
+  //#endregion
 
+  //#region EXECUTION
   @Override
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception, IOException, IllegalArgumentException
   {
-    String fs = File.separator;
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = args.get(arcade.strings.args.sourceDir.id);
-    parsedArgs[1] = args.get(arcade.strings.args.depsRsfFile.id);
+    parsedArgs[0] = sourceDir.getValue();
+    parsedArgs[1] = depsRsfFile.getValue();
 
     CSourceToDepsBuilder.main(parsedArgs);
   }
+  //#endregion
 
+  //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
-    throws IllegalArgumentException, IOException
+  public boolean checkArguments()
+    throws Exception
   {
-    // Check whether source directory exists
-    File sourceDirectory = new File(args.get(arcade.strings.args.sourceDir.id));
-    if(!sourceDirectory.exists())
-    {
-      String errorMessage = "Source directory not found: ";
-      errorMessage += args.get(arcade.strings.args.sourceDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
+    boolean sourceDirValid = sourceDir.validate();
+    boolean depsRsfFileValid = depsRsfFile.validate();
 
-    return true;
+    return (sourceDirValid && depsRsfFileValid);
   }
+  //#endregion
 }

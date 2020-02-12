@@ -2,105 +2,98 @@ package edu.usc.softarch.arcade.frontend.features.acdc;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.features.acdc.AcdcWrapper;
 import edu.usc.softarch.arcade.frontend.features.smelldetection.ArchSmellDetectorWrapper;
 import edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBuilderWrapper;
 
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.BinDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.SmellsFile;
+
 public class AcdcDriver
   implements FeatureWrapper
 {
+  //#region ATTRIBUTES
   private FeatureWrapper acdc = new AcdcWrapper();
   private FeatureWrapper archsmelldetector = new ArchSmellDetectorWrapper();
   private FeatureWrapper depsbuilder = new JavaSourceToDepsBuilderWrapper();
 
+  private static final ArgHandler sourceDir = SourceDir.getInstance();
+  private static final ArgHandler outputDir = OutputDir.getInstance();
+  private static final ArgHandler binDir = BinDir.getInstance();
+  private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
+  private static final ArgHandler clusterFile = ClusterFile.getInstance();
+  private static final ArgHandler smellsFile = SmellsFile.getInstance();
+  //#endregion
+
   //#region CONFIGURATION
   @Override
-  public String getName() { return arcade.strings.components.acdcDriver.id; }
+  public String getName() { return "acdcDriver"; }
 
   @Override
   public String[] getArgumentIds()
   {
     return new String[]
     {
-      arcade.strings.args.sourceDir.id,
-      arcade.strings.args.outputDir.id,
-      arcade.strings.args.binDir.id
+      sourceDir.getName(),
+      outputDir.getName(),
+      binDir.getName()
     };
   }
   //#endregion
 
   //#region EXECUTION
   @Override
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception, IOException, IllegalArgumentException
   {
     // Setting up Variables
     String fs = File.separator;
-    // TODO FIX THIS LATER (check ArchSmeelDetetor.java in Arcade to see how Duc Le retrieve version name)
+    // TODO FIX THIS LATER (check ArchSmeelDetetor.java in Arcade to see
+    // TODO how Duc Le retrieve version name)
     String projectName = "Struts2";
 
     // Dependency Builder
-    depsbuilder.checkArguments(args);
-    depsbuilder.execute(args);
+    depsbuilder.checkArguments();
+    depsbuilder.execute();
 
     // Architectural Recovery
-    String outputDir = args.get(arcade.strings.args.outputDir.id);
-    String depsRsfFile =
-      outputDir + fs + "commonRes" + fs + projectName + "_deps.rsf";
-    args.put(arcade.strings.args.depsRsfFile.id, depsRsfFile);
-    String clusterFile =
-      outputDir + fs + "commonRes" + fs + projectName + "_cluster.rsf";
-    args.put(arcade.strings.args.clusterFile.id, clusterFile);
+    String outputDirVal = outputDir.getValue();
+    String depsRsfFileVal =
+      outputDirVal + fs + "commonRes" + fs + projectName + "_deps.rsf";
+    depsRsfFile.setValue(depsRsfFileVal);
+    String clusterFileVal =
+      outputDirVal + fs + "commonRes" + fs + projectName + "_cluster.rsf";
+    clusterFile.setValue(clusterFileVal);
 
-    acdc.checkArguments(args);
-    acdc.execute(args);
+    acdc.checkArguments();
+    acdc.execute();
 
     // Smell Detection
-    String smellsFile =
+    String smellsFileVal =
       outputDir + fs + "commonRes" + fs + projectName + "_smells.ser";
-    args.put(arcade.strings.args.smellsFile.id, smellsFile);
+    smellsFile.setValue(smellsFileVal);
 
-    archsmelldetector.checkArguments(args);
-    archsmelldetector.execute(args);
+    archsmelldetector.checkArguments();
+    archsmelldetector.execute();
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
-    throws IllegalArgumentException, IOException
+  public boolean checkArguments()
+    throws Exception
   {
-    // Check whether source directory exists
-    File sourceDirectory = new File(args.get(arcade.strings.args.sourceDir.id));
-    if(!sourceDirectory.exists())
-    {
-      String errorMessage = "Source directory not found: ";
-      errorMessage += args.get(arcade.strings.args.sourceDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
+    boolean sourceDirValid = sourceDir.validate();
+    boolean outputDirValid = outputDir.validate();
+    boolean binDirValid = binDir.validate();
 
-    // Check whether output directory exists and, if not, create it
-    String fs = File.separator;
-    String outputDirPath = args.get(arcade.strings.args.outputDir.id);
-    outputDirPath += fs + "commonRes";
-    File outputDirectory = new File(outputDirPath);
-    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-      throw new IOException("Failed to create output directory.");
-
-    // Check binDir
-    String binDirPath = args.get(arcade.strings.args.sourceDir.id);
-    binDirPath += fs + args.get(arcade.strings.args.binDir.id);
-    File binDirectory = new File(binDirPath);
-    if(!binDirectory.exists())
-    {
-      String errorMessage = "Classes directory not found: ";
-      errorMessage += args.get(arcade.strings.args.binDir.id);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return true;
+    return (sourceDirValid && outputDirValid && binDirValid);
   }
   //#endregion
 }

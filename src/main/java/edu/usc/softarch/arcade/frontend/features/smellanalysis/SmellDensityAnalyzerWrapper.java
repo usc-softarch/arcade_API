@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.smellanalysis;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import edu.usc.softarch.arcade.antipattern.detection.SmellDensityAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -38,12 +36,12 @@ public class SmellDensityAnalyzerWrapper
 
   //#region EXECUTION
   @Override
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception, IOException, IllegalArgumentException
   {
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = args.get(smellsDir.getName());
-    parsedArgs[1] = args.get(clusterDir.getName());
+    parsedArgs[0] = smellsDir.getValue();
+    parsedArgs[1] = clusterDir.getValue();
 
     SmellDensityAnalyzer.main(parsedArgs);
   }
@@ -51,11 +49,11 @@ public class SmellDensityAnalyzerWrapper
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
+  public boolean checkArguments()
     throws Exception
   {
-    boolean clusterDirValid = clusterDir.validate(args);
-    boolean smellsDirValid = smellsDir.validate(args);
+    boolean clusterDirValid = clusterDir.validate();
+    boolean smellsDirValid = smellsDir.validate();
 
     return (clusterDirValid && smellsDirValid);
   }

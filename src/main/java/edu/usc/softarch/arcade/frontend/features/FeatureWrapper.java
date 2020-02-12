@@ -1,7 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features;
 
-import java.util.Map;
-
 /**
  * The FeatureWrapper interface specifies the necessary operations for
  * configuring and executing an ARCADE feature.
@@ -38,7 +36,7 @@ public interface FeatureWrapper
    * @param args All arguments necessary for execution of the feature.
    * @throws Exception Any exception appropriate to the wrapped feature.
    */
-  public void execute(Map<String,String> args)
+  public void execute()
     throws Exception;
   //#endregion
 
@@ -51,7 +49,7 @@ public interface FeatureWrapper
    * @return True if arguments are valid.
    * @throws Exception Any exception appropriate to the wrapped feature.
    */
-  public boolean checkArguments(Map<String,String> args)
+  public boolean checkArguments()
     throws Exception;
   //#endregion
 }

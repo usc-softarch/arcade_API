@@ -47,21 +47,21 @@ public class Inferencer
 
   //#region INTERNAL METHODS
   @Override
-  protected List<String> buildToolPath(Map<String,String> args)
+  protected List<String> buildToolPath()
   {
     List<String> toolPath = new ArrayList<String>();
-    String malletPathVal = args.get(malletPath.getName());
+    String malletPathVal = malletPath.getValue();
     toolPath.add(malletPathVal);
 
     return toolPath;
   }
 
   @Override
-  protected List<String> buildArguments(Map<String,String> args)
+  protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();
     String fs = File.separator;
-    String outputDirVal = args.get(outputDir.getName());
+    String outputDirVal = outputDir.getValue();
     outputDirVal += fs + "arc" + fs + "base" + fs;
     String topicModel = outputDirVal + "topicmodel.data";
     String arcOutput = outputDirVal + "infer.mallet";
@@ -86,22 +86,22 @@ public class Inferencer
   }
 
   @Override
-  protected Map<String,String> buildEnv(Map<String,String> args)
+  protected Map<String,String> buildEnv()
   {
     Map<String,String> env = new HashMap<String,String>();
-    env.put("MALLET_HOME", args.get(malletHome.getName()));
+    env.put("MALLET_HOME", malletHome.getValue());
     return env;
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments(Map<String,String> args)
+  public boolean checkArguments()
     throws Exception
   {
-    boolean outputDirValid = outputDir.validate(args);
-    boolean malletPathValid = malletPath.validate(args);
-    boolean malletHomeValid = malletHome.validate(args);
+    boolean outputDirValid = outputDir.validate();
+    boolean malletPathValid = malletPath.validate();
+    boolean malletHomeValid = malletHome.validate();
 
     return (outputDirValid && malletPathValid && malletHomeValid);
   }

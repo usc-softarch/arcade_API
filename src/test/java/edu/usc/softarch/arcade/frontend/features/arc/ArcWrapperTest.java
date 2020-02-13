@@ -1,18 +1,19 @@
 package edu.usc.softarch.arcade.frontend.features.arc;
 
-import edu.usc.softarch.arcade.frontend.console.Console;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
+import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.BinDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.SrcLanguage;
 
 @RunWith(Parameterized.class)
-public class ArcWrapperTst
+public class ArcWrapperTest
 {
   //#region ATTRIBUTES
   String sourceDirectory;
@@ -22,7 +23,7 @@ public class ArcWrapperTst
   //#endregion
 
   //#region CONSTRUCTOR
-  public ArcWrapperTst(
+  public ArcWrapperTest(
     String sourceDirectory, String outputDirectory, String classesDirectory,
     String language)
   {
@@ -60,13 +61,12 @@ public class ArcWrapperTst
   public void testArcWrapper()
   {
     FeatureWrapper arcWrapper = new ArcWrapper();
-    Map<String,String> args = new HashMap<String,String>();
-    args.put(arcade.strings.args.sourceDir.id, sourceDirectory);
-    args.put(arcade.strings.args.outputDir.id, outputDirectory);
-    args.put(arcade.strings.args.binDir.id, classesDirectory);
-    args.put(arcade.strings.args.language.id, language);
+    SourceDir.getInstance().setValue(sourceDirectory);
+    OutputDir.getInstance().setValue(outputDirectory);
+    BinDir.getInstance().setValue(classesDirectory);
+    SrcLanguage.getInstance().setValue(language);
 
-    try { arcWrapper.execute(args); }
+    try { arcWrapper.execute(); }
     catch(Exception e)
     {
       e.printStackTrace();

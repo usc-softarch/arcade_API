@@ -6,12 +6,12 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
+import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
 
 @RunWith(Parameterized.class)
-public class PipeExtractorWrapperTst
+public class PipeExtractorWrapperTest
 {
   //#region ATTRIBUTES
   String sourceDirectory;
@@ -19,7 +19,7 @@ public class PipeExtractorWrapperTst
   //#endregion
 
   //#region CONSTRUCTOR
-  public PipeExtractorWrapperTst(
+  public PipeExtractorWrapperTest(
     String sourceDirectory, String outputDirectory)
   {
     super();
@@ -54,13 +54,13 @@ public class PipeExtractorWrapperTst
   public void testPipeExtractorWrapper()
   {
     FeatureWrapper pipeExtractor = new PipeExtractorWrapper();
-    Map<String,String> args = new HashMap<String,String>();
-    args.put(arcade.strings.args.sourceDir.id, sourceDirectory);
-    args.put(arcade.strings.args.outputDir.id, outputDirectory);
+    SourceDir.getInstance().setValue(sourceDirectory);
+    OutputDir.getInstance().setValue(outputDirectory);
+
     try
     {
-      pipeExtractor.checkArguments(args);
-      pipeExtractor.execute(args);
+      pipeExtractor.checkArguments();
+      pipeExtractor.execute();
     }
     catch(Exception e)
     {

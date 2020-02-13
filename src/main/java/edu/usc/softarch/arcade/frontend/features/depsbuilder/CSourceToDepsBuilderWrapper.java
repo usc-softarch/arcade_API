@@ -5,15 +5,15 @@ import edu.usc.softarch.arcade.facts.driver.CSourceToDepsBuilder;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
-import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
 
 public class CSourceToDepsBuilderWrapper
   implements FeatureWrapper
 {
   //#region ATTRIBUTES
-  private static final ArgHandler sourceDir = SourceDir.getInstance();
   private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
+  private static final ArgHandler binDirPath = BinDirPath.getInstance();
   //#endregion
 
   //#region CONFIGURATION
@@ -34,7 +34,7 @@ public class CSourceToDepsBuilderWrapper
   {
     return new String[]
     {
-      sourceDir.getName(),
+      binDirPath.getName(),
       depsRsfFile.getName()
     };
   }
@@ -44,7 +44,7 @@ public class CSourceToDepsBuilderWrapper
   {
     return new ArgHandler[]
     {
-      sourceDir,
+      binDirPath,
       depsRsfFile
     };
   }
@@ -56,7 +56,7 @@ public class CSourceToDepsBuilderWrapper
     throws Exception, IOException, IllegalArgumentException
   {
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = sourceDir.getValue();
+    parsedArgs[0] = binDirPath.getValue();
     parsedArgs[1] = depsRsfFile.getValue();
 
     CSourceToDepsBuilder.main(parsedArgs);
@@ -68,10 +68,10 @@ public class CSourceToDepsBuilderWrapper
   public boolean checkArguments()
     throws Exception
   {
-    boolean sourceDirValid = sourceDir.validate();
+    boolean binDirPathValid = binDirPath.validate();
     boolean depsRsfFileValid = depsRsfFile.validate();
 
-    return (sourceDirValid && depsRsfFileValid);
+    return (binDirPathValid && depsRsfFileValid);
   }
   //#endregion
 }

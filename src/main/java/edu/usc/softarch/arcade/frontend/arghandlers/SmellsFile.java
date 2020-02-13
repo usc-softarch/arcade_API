@@ -1,5 +1,8 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.File;
+import java.io.IOException;
+
 public class SmellsFile
   extends ArgHandler
 {
@@ -30,7 +33,11 @@ public class SmellsFile
   public boolean validate(String value)
     throws Exception
   {
-    //TODO
+    File smellsFile = new File(value);
+    if(!smellsFile.getParentFile().exists()
+      && !smellsFile.getParentFile().mkdirs())
+        throw new IOException("Failed to create output directory.");
+
     return true;
   }
   //#endregion

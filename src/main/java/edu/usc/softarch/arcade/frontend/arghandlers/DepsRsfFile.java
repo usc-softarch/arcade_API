@@ -1,5 +1,8 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.File;
+import java.io.IOException;
+
 public class DepsRsfFile
   extends ArgHandler
 {
@@ -30,7 +33,11 @@ public class DepsRsfFile
   public boolean validate(String value)
     throws Exception
   {
-    //TODO
+    File depsRsfFile = new File(value);
+    if(!depsRsfFile.getParentFile().exists()
+      && !depsRsfFile.getParentFile().mkdirs())
+        throw new IOException("Failed to create output directory.");
+
     return true;
   }
   //#endregion

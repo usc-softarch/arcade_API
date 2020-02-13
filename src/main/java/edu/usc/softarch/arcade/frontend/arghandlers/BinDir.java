@@ -11,10 +11,10 @@ public class BinDir
   private BinDir()
   {
     String name = "binDir";
-    String description = "Classes Directory";
-    String instruction = "Classes Directory: This is the directory in each ";
-    instruction += "subject system that contains the compiled classes of that ";
-    instruction += "system version.";
+    String description = "Classes Directory Name";
+    String instruction = "Classes Directory Name: This is the name of the ";
+    instruction += "directory in each subject system that contains the ";
+    instruction += "compiled classes of that system version.";
 
     initialize(name, description, instruction);
   }

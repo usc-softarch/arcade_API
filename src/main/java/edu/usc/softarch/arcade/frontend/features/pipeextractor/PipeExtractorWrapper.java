@@ -21,7 +21,10 @@ public class PipeExtractorWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName() { return "pipeExtractor"; }
+  public String getId() { return "pipeExtractor"; }
+
+  @Override
+  public String getName() { return "Pipe Extractor"; }
 
   @Override
   public String[] getArgumentIds()
@@ -30,6 +33,16 @@ public class PipeExtractorWrapper
     {
       sourceDir.getName(),
       outputDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      outputDir
     };
   }
   //#endregion

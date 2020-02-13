@@ -1,5 +1,7 @@
 package edu.usc.softarch.arcade.frontend.features;
 
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 /**
  * The FeatureWrapper interface specifies the necessary operations for
  * configuring and executing an ARCADE feature.
@@ -15,6 +17,8 @@ public interface FeatureWrapper
    *
    * @return Name of the component.
    */
+  public String getId();
+
   public String getName();
 
   /**
@@ -25,6 +29,8 @@ public interface FeatureWrapper
    * @return Names of the required arguments.
    */
   public String[] getArgumentIds();
+
+  public ArgHandler[] getArgumentHandlers();
   //#endregion
 
   //#region EXECUTION

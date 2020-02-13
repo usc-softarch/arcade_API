@@ -18,7 +18,10 @@ public class BatchDecayMetricsAnalyzerWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName() { return "decayMetrics"; }
+  public String getId() { return "decayMetrics"; }
+
+  @Override
+  public String getName() { return "Metrics: Decay"; }
 
   @Override
   public String[] getArgumentIds()
@@ -27,6 +30,16 @@ public class BatchDecayMetricsAnalyzerWrapper
     {
       clusterDir.getName(),
       depsDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      clusterDir,
+      depsDir
     };
   }
   //#endregion

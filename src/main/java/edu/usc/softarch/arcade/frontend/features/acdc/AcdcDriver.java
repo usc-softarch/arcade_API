@@ -33,7 +33,10 @@ public class AcdcDriver
 
   //#region CONFIGURATION
   @Override
-  public String getName() { return "acdcDriver"; }
+  public String getId() { return "acdcDriver"; }
+
+  @Override
+  public String getName() { return "ACDC Workflow Driver"; }
 
   @Override
   public String[] getArgumentIds()
@@ -43,6 +46,17 @@ public class AcdcDriver
       sourceDir.getName(),
       outputDir.getName(),
       binDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      outputDir,
+      binDir
     };
   }
   //#endregion

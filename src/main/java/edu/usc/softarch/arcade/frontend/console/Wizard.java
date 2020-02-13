@@ -18,39 +18,39 @@ public class Wizard
   {
     ConsoleUI comp = mainMenu(components);
 
-    if(comp.loadRequisites().length > 0)
-      System.out.println("This component has pre-requisites. Please select " +
-        "whether you would like to run them.");
+    // if(comp.loadRequisites().length > 0)
+    //   System.out.println("This component has pre-requisites. Please select " +
+    //     "whether you would like to run them.");
+    //
+    // for(String requisite : comp.loadRequisites())
+    // {
+    //   System.out.println("Do you wish to run "
+    //     + components.get(requisite).getMessage() + "? (y/n)");
+    //   String option = Console.in.nextLine();
+    //   switch(option)
+    //   {
+    //     case "y":
+    //       Map<String,String> args
+    //         = components.get(requisite).loadArgumentsWizard();
+    //       try
+    //       {
+    //         components.get(requisite).execute(args);
+    //       }
+    //       catch(Exception e)
+    //       {
+    //         e.printStackTrace();
+    //       }
+    //       break;
+    //
+    //     case "n":
+    //       break;
+    //   }
+    // }
 
-    for(String requisite : comp.loadRequisites())
-    {
-      System.out.println("Do you wish to run "
-        + components.get(requisite).getMessage() + "? (y/n)");
-      String option = Console.in.nextLine();
-      switch(option)
-      {
-        case "y":
-          Map<String,String> args
-            = components.get(requisite).loadArgumentsWizard();
-          try
-          {
-            components.get(requisite).execute(args);
-          }
-          catch(Exception e)
-          {
-            e.printStackTrace();
-          }
-          break;
-
-        case "n":
-          break;
-      }
-    }
-
-    Map<String,String> args = comp.loadArgumentsWizard();
+    comp.loadArgumentsWizard();
     try
     {
-      comp.execute(args);
+      comp.execute();
     }
     catch(Exception e)
     {
@@ -71,7 +71,7 @@ public class Wizard
 
       for(ConsoleUI comp : components.values())
       {
-        System.out.println(comp.getName() + " - " + comp.getMessage());
+        System.out.println(comp.getId() + " - " + comp.getName());
       }
 
       System.out.println("exit - Exit the program.");

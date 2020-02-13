@@ -54,6 +54,7 @@ public abstract class ArgHandler
     try { validate(value); }
     catch(Exception e)
     {
+      //TODO change this to a different exception
       throw new IllegalArgumentException(e);
     }
 

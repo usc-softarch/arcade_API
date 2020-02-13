@@ -30,9 +30,15 @@ public class TopicModelGenerator
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "topicModelGenerator";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Mallet: Topic Model Generator";
   }
 
   @Override
@@ -44,6 +50,18 @@ public class TopicModelGenerator
       outputDir.getName(),
       malletPath.getName(),
       malletHome.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      outputDir,
+      malletPath,
+      malletHome
     };
   }
   //#endregion

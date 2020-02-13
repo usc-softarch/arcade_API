@@ -26,7 +26,13 @@ public class ArcWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName() { return "arc"; }
+  public String getId() { return "arc"; }
+
+  @Override
+  public String getName()
+  {
+    return "ARC: Architectural Recovery based on Concerns";
+  }
 
   @Override
   public String[] getArgumentIds()
@@ -37,6 +43,18 @@ public class ArcWrapper
       outputDir.getName(),
       binDir.getName(),
       srcLanguage.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      outputDir,
+      binDir,
+      srcLanguage
     };
   }
   //#endregion

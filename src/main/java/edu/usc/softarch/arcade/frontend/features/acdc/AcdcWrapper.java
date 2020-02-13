@@ -18,7 +18,13 @@ public class AcdcWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName() { return "acdc"; }
+  public String getId() { return "acdc"; }
+
+  @Override
+  public String getName()
+  {
+    return "ACDC: Algorithm for Comprehension-Driven Clustering";
+  }
 
   @Override
   public String[] getArgumentIds()
@@ -27,6 +33,16 @@ public class AcdcWrapper
     {
       depsRsfFile.getName(),
       clusterFile.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      depsRsfFile,
+      clusterFile
     };
   }
   //#endregion

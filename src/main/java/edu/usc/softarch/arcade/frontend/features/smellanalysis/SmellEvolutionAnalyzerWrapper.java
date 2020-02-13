@@ -15,9 +15,15 @@ public class SmellEvolutionAnalyzerWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "evolutionSmellsAnalysis";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Smell Analysis: Evolution";
   }
 
   @Override
@@ -26,6 +32,15 @@ public class SmellEvolutionAnalyzerWrapper
     return new String[]
     {
       smellsDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      smellsDir
     };
   }
   //#endregion

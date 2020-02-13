@@ -20,9 +20,15 @@ public class ArchSmellDetectorWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "archSmellDetector";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Architectural Smell Detector";
   }
 
   @Override
@@ -33,6 +39,17 @@ public class ArchSmellDetectorWrapper
       depsRsfFile.getName(),
       clusterFile.getName(),
       smellsFile.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      depsRsfFile,
+      clusterFile,
+      smellsFile
     };
   }
   //#endregion

@@ -18,9 +18,15 @@ public class CSourceToDepsBuilderWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "cDepsBuilder";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Dependency Builder: C";
   }
 
   @Override
@@ -30,6 +36,16 @@ public class CSourceToDepsBuilderWrapper
     {
       sourceDir.getName(),
       depsRsfFile.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      depsRsfFile
     };
   }
   //#endregion

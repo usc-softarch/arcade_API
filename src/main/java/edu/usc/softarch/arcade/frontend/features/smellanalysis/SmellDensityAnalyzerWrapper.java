@@ -18,9 +18,15 @@ public class SmellDensityAnalyzerWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "densitySmellAnalysis";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Smell Analysis: Density";
   }
 
   @Override
@@ -30,6 +36,16 @@ public class SmellDensityAnalyzerWrapper
     {
       smellsDir.getName(),
       clusterDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      smellsDir,
+      clusterDir
     };
   }
   //#endregion

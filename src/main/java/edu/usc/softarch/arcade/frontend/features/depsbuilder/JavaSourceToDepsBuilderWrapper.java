@@ -21,9 +21,15 @@ public class JavaSourceToDepsBuilderWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "javaDepsBuilder";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Dependency Builder: Java";
   }
 
   @Override
@@ -34,6 +40,17 @@ public class JavaSourceToDepsBuilderWrapper
       sourceDir.getName(),
       outputDir.getName(),
       binDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      sourceDir,
+      outputDir,
+      binDir
     };
   }
   //#endregion

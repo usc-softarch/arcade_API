@@ -28,9 +28,15 @@ public class Inferencer
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "inferencer";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Mallet: Inferencer";
   }
 
   @Override
@@ -41,6 +47,17 @@ public class Inferencer
       outputDir.getName(),
       malletPath.getName(),
       malletHome.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      outputDir,
+      malletPath,
+      malletHome
     };
   }
   //#endregion

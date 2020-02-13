@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.ServiceLoader;
 import java.util.Scanner;
+import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 /**
  * Driver for {@link edu.usc.softarch.arcade.frontend.console}.
@@ -23,12 +24,13 @@ public class Console
   public static void main(String[] args)
   {
     arguments = loadConfiguration();
-    ServiceLoader<ConsoleUI> componentLoader = ServiceLoader.load(ConsoleUI.class);
+    ServiceLoader<FeatureWrapper> componentLoader
+      = ServiceLoader.load(FeatureWrapper.class);
     Map<String, ConsoleUI> components = new HashMap<String, ConsoleUI>();
 
-    for(ConsoleUI comp : componentLoader)
+    for(FeatureWrapper comp : componentLoader)
     {
-      components.put(comp.getName(), comp);
+      components.put(comp.getId(), new ConsoleUI(comp));
     }
 
     // Hand over to Wizard
@@ -71,19 +73,19 @@ public class Console
    * feature component. If the service exists and the arguments are correct,
    * initiates execution of the feature component.
    */
-  private static void run(Map<String,String> args,
-    Map<String, ConsoleUI> components)
+  private static void run(Map<String, ConsoleUI> components)
     throws Exception
   {
-    ConsoleUI comp = components.get(args.get("feature"));
-    if(comp == null)
-    {
-      IllegalArgumentException e = new IllegalArgumentException
-        ("Component " + args.get("feature") + " not found.");
-      throw e;
-    }
-
-    comp.execute(args);
+    throw new UnsupportedOperationException();
+    // ConsoleUI comp = components.get(args.get("feature"));
+    // if(comp == null)
+    // {
+    //   IllegalArgumentException e = new IllegalArgumentException
+    //     ("Component " + args.get("feature") + " not found.");
+    //   throw e;
+    // }
+    //
+    // comp.execute();
   }
 
   private static String installInstructions()

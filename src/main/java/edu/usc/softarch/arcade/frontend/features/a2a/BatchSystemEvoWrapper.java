@@ -18,9 +18,15 @@ public class BatchSystemEvoWrapper
 
   //#region CONFIGURATION
   @Override
-  public String getName()
+  public String getId()
   {
     return "a2a";
+  }
+
+  @Override
+  public String getName()
+  {
+    return "Metrics: A2A";
   }
 
   @Override
@@ -30,6 +36,16 @@ public class BatchSystemEvoWrapper
     {
       distOpt.getName(),
       sourceDir.getName()
+    };
+  }
+
+  @Override
+  public ArgHandler[] getArgumentHandlers()
+  {
+    return new ArgHandler[]
+    {
+      distOpt,
+      sourceDir
     };
   }
   //#endregion

@@ -8,23 +8,23 @@ import java.util.Collection;
 import java.util.Arrays;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArcBaseDir;
 
 @RunWith(Parameterized.class)
 public class PipeExtractorWrapperTest
 {
   //#region ATTRIBUTES
   String sourceDirectory;
-  String outputDirectory;
+  String arcBaseDir;
   //#endregion
 
   //#region CONSTRUCTOR
   public PipeExtractorWrapperTest(
-    String sourceDirectory, String outputDirectory)
+    String sourceDirectory, String arcBaseDir)
   {
     super();
     this.sourceDirectory = sourceDirectory;
-    this.outputDirectory = outputDirectory;
+    this.arcBaseDir = arcBaseDir;
   }
   //#endregion
 
@@ -38,12 +38,14 @@ public class PipeExtractorWrapperTest
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "Struts2"
+        "target" + fs + "test-results" + fs + "Struts2" + fs + "arc"
+          + fs + "base"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "httpd"
+        "target" + fs + "test-results" + fs + "httpd" + fs + "arc"
+          + fs + "base"
       }
     });
   }
@@ -55,7 +57,7 @@ public class PipeExtractorWrapperTest
   {
     FeatureWrapper pipeExtractor = new PipeExtractorWrapper();
     SourceDir.getInstance().setValue(sourceDirectory);
-    OutputDir.getInstance().setValue(outputDirectory);
+    ArcBaseDir.getInstance().setValue(arcBaseDir);
 
     try
     {
@@ -68,25 +70,8 @@ public class PipeExtractorWrapperTest
     }
 
     String fs = File.separator;
-    File output = new File(outputDirectory + fs + "output.pipe");
+    File output = new File(arcBaseDir + fs + "output.pipe");
     assert output.exists();
-
-    // THIS TEST ALWAYS FAILS BECAUSE OF MALLET NON-DETERMINISM
-    // File oracle = new File("src" + fs + "test" + fs + "resources" + fs
-    //   + "subject_systems" + fs + "Struts2" + fs + "arc" + fs + "base" + fs
-    //   + "output.pipe");
-    //
-    // try
-    // {
-    //   byte[] f1 = Files.readAllBytes(output.toPath());
-    //   byte[] f2 = Files.readAllBytes(oracle.toPath());
-    //
-    //   assert Arrays.equals(f1, f2);
-    // }
-    // catch(IOException e)
-    // {
-    //   Assert.fail(e.getMessage());
-    // }
   }
   //#endregion
 }

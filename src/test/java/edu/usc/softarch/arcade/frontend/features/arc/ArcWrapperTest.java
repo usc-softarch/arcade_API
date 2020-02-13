@@ -60,41 +60,21 @@ public class ArcWrapperTest
   @Test
   public void testArcWrapper()
   {
-    FeatureWrapper arcWrapper = new ArcWrapper();
-    SourceDir.getInstance().setValue(sourceDirectory);
-    OutputDir.getInstance().setValue(outputDirectory);
-    BinDir.getInstance().setValue(classesDirectory);
-    SrcLanguage.getInstance().setValue(language);
+    //TODO Test is on standby until ARC gets refactored. It needs to be able
+    //TODO to take input from and produce output into different directories,
+    //TODO whereas BatchClusteringEngine tries to get input from the output
+    //TODO directory.
 
-    try { arcWrapper.execute(); }
-    catch(Exception e)
-    {
-      e.printStackTrace();
-    }
-
-    // String fs = File.separator;
-    // File outputDir = new File(outputDirectory);
-    // File[] outputFiles = outputDir.listFiles();
-    // for(File output : outputFiles)
+    // FeatureWrapper arcWrapper = new ArcWrapper();
+    // SourceDir.getInstance().setValue(sourceDirectory);
+    // OutputDir.getInstance().setValue(outputDirectory);
+    // BinDir.getInstance().setValue(classesDirectory);
+    // SrcLanguage.getInstance().setValue(language);
+    //
+    // try { arcWrapper.execute(); }
+    // catch(Exception e)
     // {
-    //   if(!output.isDirectory())
-    //   {
-    //     File oracle = new File("src" + fs + "test" + fs + "resources" + fs
-    //       + "subject_systems" + fs + "httpd" + fs + "arc" + fs
-    //       + output.getName());
-    //
-    //     try
-    //     {
-    //       byte[] f1 = Files.readAllBytes(output.toPath());
-    //       byte[] f2 = Files.readAllBytes(oracle.toPath());
-    //
-    //       assert Arrays.equals(f1, f2);
-    //     }
-    //     catch(IOException e)
-    //     {
-    //       Assert.fail(e.getMessage());
-    //     }
-    //   }
+    //   e.printStackTrace();
     // }
   }
   //#endregion

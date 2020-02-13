@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.tooladapters.mallet;
 
-import java.io.File;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,7 @@ import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.Topicmodel;
 import edu.usc.softarch.arcade.frontend.arghandlers.MalletPath;
 import edu.usc.softarch.arcade.frontend.arghandlers.MalletHome;
 
@@ -23,7 +22,7 @@ public class TopicModelGenerator
 {
   //#region ATTRIBUTES
   private static final ArgHandler sourceDir = SourceDir.getInstance();
-  private static final ArgHandler outputDir = OutputDir.getInstance();
+  private static final ArgHandler topicmodel = Topicmodel.getInstance();
   private static final ArgHandler malletPath = MalletPath.getInstance();
   private static final ArgHandler malletHome = MalletHome.getInstance();
   //#endregion
@@ -47,7 +46,7 @@ public class TopicModelGenerator
     return new String[]
     {
       sourceDir.getName(),
-      outputDir.getName(),
+      topicmodel.getName(),
       malletPath.getName(),
       malletHome.getName()
     };
@@ -59,7 +58,7 @@ public class TopicModelGenerator
     return new ArgHandler[]
     {
       sourceDir,
-      outputDir,
+      topicmodel,
       malletPath,
       malletHome
     };
@@ -81,10 +80,8 @@ public class TopicModelGenerator
   protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();
-    String fs = File.separator;
     String sourceDirVal = sourceDir.getValue();
-    String outputDirVal = outputDir.getValue();
-    outputDirVal += fs + "arc" + fs + "base" + fs + "topicmodel.data";
+    String topicmodelVal = topicmodel.getValue();
 
     command.add("import-dir");
     command.add("--input");
@@ -94,7 +91,7 @@ public class TopicModelGenerator
     command.add("--keep-sequence");
     command.add("TRUE");
     command.add("--output");
-    command.add(outputDirVal);
+    command.add(topicmodelVal);
 
     return command;
   }
@@ -114,11 +111,11 @@ public class TopicModelGenerator
     throws Exception
   {
     boolean sourceDirValid = sourceDir.validate();
-    boolean outputDirValid = outputDir.validate();
+    boolean topicmodelValid = topicmodel.validate();
     boolean malletPathValid = malletPath.validate();
     boolean malletHomeValid = malletHome.validate();
 
-    return (sourceDirValid && outputDirValid
+    return (sourceDirValid && topicmodelValid
       && malletPathValid && malletHomeValid);
   }
   //#endregion

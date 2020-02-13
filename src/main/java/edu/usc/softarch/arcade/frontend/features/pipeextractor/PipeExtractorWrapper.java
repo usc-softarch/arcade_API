@@ -6,7 +6,7 @@ import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArcBaseDir;
 
 /**
  * See {@code edu.usc.softarch.arcade.util.ldasupport.PipeExtractor}.
@@ -16,7 +16,7 @@ public class PipeExtractorWrapper
 {
   //#region ATTRIBUTES
   private static final ArgHandler sourceDir = SourceDir.getInstance();
-  private static final ArgHandler outputDir = OutputDir.getInstance();
+  private static final ArgHandler arcBaseDir = ArcBaseDir.getInstance();
   //#endregion
 
   //#region CONFIGURATION
@@ -32,7 +32,7 @@ public class PipeExtractorWrapper
     return new String[]
     {
       sourceDir.getName(),
-      outputDir.getName()
+      arcBaseDir.getName()
     };
   }
 
@@ -42,7 +42,7 @@ public class PipeExtractorWrapper
     return new ArgHandler[]
     {
       sourceDir,
-      outputDir
+      arcBaseDir
     };
   }
   //#endregion
@@ -55,7 +55,7 @@ public class PipeExtractorWrapper
     String fs = File.separator;
     String[] parsedArgs = new String[2];
     parsedArgs[0] = sourceDir.getValue();
-    parsedArgs[1] = outputDir.getValue();
+    parsedArgs[1] = arcBaseDir.getValue();
     parsedArgs[1] += fs + "arc" + fs + "base";
     PipeExtractor.main(parsedArgs);
   }
@@ -67,7 +67,7 @@ public class PipeExtractorWrapper
     throws Exception
   {
     boolean sourceDirValid = sourceDir.validate();
-    boolean outputDirValid = outputDir.validate();
+    boolean outputDirValid = arcBaseDir.validate();
 
     return (sourceDirValid && outputDirValid);
   }

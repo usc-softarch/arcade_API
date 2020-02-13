@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.io.File;
 import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
-import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.Topicmodel;
+import edu.usc.softarch.arcade.frontend.arghandlers.InferenceFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.MalletPath;
 import edu.usc.softarch.arcade.frontend.arghandlers.MalletHome;
 
@@ -21,7 +21,8 @@ public class Inferencer
   extends ToolAdapter
 {
   //#region ATTRIBUTES
-  private static final ArgHandler outputDir = OutputDir.getInstance();
+  private static final ArgHandler topicmodel = Topicmodel.getInstance();
+  private static final ArgHandler inferenceFile = InferenceFile.getInstance();
   private static final ArgHandler malletPath = MalletPath.getInstance();
   private static final ArgHandler malletHome = MalletHome.getInstance();
   //#endregion
@@ -44,7 +45,8 @@ public class Inferencer
   {
     return new String[]
     {
-      outputDir.getName(),
+      topicmodel.getName(),
+      inferenceFile.getName(),
       malletPath.getName(),
       malletHome.getName()
     };
@@ -55,7 +57,8 @@ public class Inferencer
   {
     return new ArgHandler[]
     {
-      outputDir,
+      topicmodel,
+      inferenceFile,
       malletPath,
       malletHome
     };
@@ -77,17 +80,12 @@ public class Inferencer
   protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();
-    String fs = File.separator;
-    String outputDirVal = outputDir.getValue();
-    outputDirVal += fs + "arc" + fs + "base" + fs;
-    String topicModel = outputDirVal + "topicmodel.data";
-    String arcOutput = outputDirVal + "infer.mallet";
 
     command.add("train-topics");
     command.add("--input");
-    command.add(topicModel);
+    command.add(topicmodel.getValue());
     command.add("--inferencer-filename");
-    command.add(arcOutput);
+    command.add(inferenceFile.getValue());
     command.add("--num-top-words");
     command.add("50");
     command.add("--num-topics");
@@ -116,11 +114,13 @@ public class Inferencer
   public boolean checkArguments()
     throws Exception
   {
-    boolean outputDirValid = outputDir.validate();
+    boolean topicmodelValid = topicmodel.validate();
+    boolean inferenceFileValid = inferenceFile.validate();
     boolean malletPathValid = malletPath.validate();
     boolean malletHomeValid = malletHome.validate();
 
-    return (outputDirValid && malletPathValid && malletHomeValid);
+    return (topicmodelValid && inferenceFileValid
+      && malletPathValid && malletHomeValid);
   }
   //#endregion
 }

@@ -3,6 +3,12 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Argument Handler for the path of a Dependencies RSF file, typically of the
+ * form *_deps.rsf.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class DepsRsfFile
   extends ArgHandler
 {
@@ -30,8 +36,17 @@ public class DepsRsfFile
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
     throws Exception
+  {
+    //TODO
+
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
+    throws IOException
   {
     File depsRsfFile = new File(value);
     if(!depsRsfFile.getParentFile().exists()

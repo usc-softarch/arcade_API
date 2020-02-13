@@ -1,5 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the exact path of a directory with the compiled
+ * binaries of a system. Not to be confused with {@link BinDir}.
+ *
+ * Marcelo Schmitt Laser
+ */
 public class BinDirPath
   extends ArgHandler
 {
@@ -27,7 +33,15 @@ public class BinDirPath
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO

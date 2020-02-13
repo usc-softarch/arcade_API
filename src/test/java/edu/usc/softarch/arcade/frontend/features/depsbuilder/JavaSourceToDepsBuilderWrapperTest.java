@@ -70,8 +70,13 @@ public class JavaSourceToDepsBuilderWrapperTest
   //#endregion
 
   //#region TESTS
+  /**
+   * Basic positive test for Java depsbuilder. Takes the input from five
+   * versions of Struts2 from the arcade repository and generates _deps.rsf
+   * files from it.
+   */
   @Test
-  public void testJavaSourceToDepsBuilderWrapper()
+  public void baseTestJavaDepsBuilder()
   {
     FeatureWrapper javaDepsBuilder = new JavaSourceToDepsBuilderWrapper();
     BinDirPath.getInstance().setValue(binariesDirectory);
@@ -79,7 +84,7 @@ public class JavaSourceToDepsBuilderWrapperTest
 
     try
     {
-      javaDepsBuilder.checkArguments();
+      javaDepsBuilder.checkArguments(false);
       javaDepsBuilder.execute();
     }
     catch(Exception e)
@@ -87,8 +92,29 @@ public class JavaSourceToDepsBuilderWrapperTest
       e.printStackTrace();
     }
 
+    //TODO Automatically validate that the output is correct.
     File output = new File(depsRsfFile);
     assert output.exists();
+  }
+
+  /**
+   * Negative test for Java depsbuilder. Takes in input from languages other
+   * than Java. Expected output unknown.
+   */
+  @Test
+  public void wrongLanguageTestJavaDepsBuilder()
+  {
+    //TODO
+  }
+
+  /**
+   * Negative test for Java depsbuilder. Takes in random input. Expected
+   * output unknown.
+   */
+  @Test
+  public void randomFilesTestJavaDepsBuilder()
+  {
+   //TODO
   }
   //#endregion
 }

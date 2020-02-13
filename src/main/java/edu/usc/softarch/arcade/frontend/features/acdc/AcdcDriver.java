@@ -81,10 +81,10 @@ public class AcdcDriver
     String depsRsfFileVal = outputDir.getValue() + fs + "commonRes" + fs
       + projectName + "_deps.rsf";
     depsRsfFile.setValue(depsRsfFileVal);
-    String clusterFileVal = outputDir.getValue() + fs + "commonRes" + fs
+    String clusterFileVal = outputDir.getValue() + fs + "acdc" + fs
       + projectName + "_cluster.rsf";
     clusterFile.setValue(clusterFileVal);
-    String smellsFileVal = outputDir.getValue() + fs + "commonRes" + fs
+    String smellsFileVal = outputDir.getValue() + fs + "acdc" + fs
       + projectName + "_smells.ser";
     smellsFile.setValue(smellsFileVal);
 

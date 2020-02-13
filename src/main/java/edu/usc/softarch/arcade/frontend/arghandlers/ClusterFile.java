@@ -1,5 +1,8 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.File;
+import java.io.IOException;
+
 public class ClusterFile
   extends ArgHandler
 {
@@ -31,7 +34,11 @@ public class ClusterFile
   public boolean validate(String value)
     throws Exception
   {
-    //TODO
+    File clusterFile = new File(value);
+    if(!clusterFile.getParentFile().exists()
+      && !clusterFile.getParentFile().mkdirs())
+        throw new IOException("Failed to create output directory.");
+
     return true;
   }
   //#endregion

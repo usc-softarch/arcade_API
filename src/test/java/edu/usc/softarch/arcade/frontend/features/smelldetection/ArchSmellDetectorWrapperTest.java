@@ -45,8 +45,8 @@ public class ArchSmellDetectorWrapperTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "cluster" + fs
           + "struts-2.3.30_acdc_clustered.rsf",
-        "target" + fs + "test-results" + fs + "smells" + fs
-          + "struts-2.3.30_smells.ser"
+        "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+          + fs + "struts-2.3.30_smells.ser"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
@@ -55,8 +55,8 @@ public class ArchSmellDetectorWrapperTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "cluster" + fs
           + "struts-2.3.32_acdc_clustered.rsf",
-        "target" + fs + "test-results" + fs + "smells" + fs
-          + "struts-2.3.32_smells.ser"
+        "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+          + fs + "struts-2.3.32_smells.ser"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
@@ -64,8 +64,8 @@ public class ArchSmellDetectorWrapperTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "arc" + fs
           + "struts-2.5.2_284_topics_275_arc_clusters.rsf",
-        "target" + fs + "test-results" + fs + "smells" + fs
-          + "struts-2.5.2_smells.ser"
+        "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+          + fs + "struts-2.5.2_smells.ser"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
@@ -73,14 +73,20 @@ public class ArchSmellDetectorWrapperTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "arc" + fs
           + "struts-2.5.8_287_topics_279_arc_clusters.rsf",
-        "target" + fs + "test-results" + fs + "smells" + fs
-          + "struts-2.5.8_smells.ser"
+        "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+          + fs + "struts-2.5.8_smells.ser"
       }
+      //TODO add httpd tests
     });
   }
   //#endregion
 
   //#region TESTS
+  /**
+   * Basic positive test for ArchSmellDetector. Takes the input from four
+   * versions of Struts2 and four version of httpd, split between acdc and arc,
+   * and generates _smells.ser files from it.
+   */
   @Test
   public void testArchSmellDetectorWrapper()
   {
@@ -91,7 +97,7 @@ public class ArchSmellDetectorWrapperTest
 
     try
     {
-      archSmellDetector.checkArguments();
+      archSmellDetector.checkArguments(false);
       archSmellDetector.execute();
     }
     catch(Exception e)
@@ -99,6 +105,7 @@ public class ArchSmellDetectorWrapperTest
       e.printStackTrace();
     }
 
+    //TODO Automatically validate that the output is correct.
     File output = new File(smellsFile);
     assert output.exists();
   }

@@ -4,7 +4,7 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
  * Argument Handler for the exact path of a directory with the compiled
  * binaries of a system. Not to be confused with {@link BinDir}.
  *
- * Marcelo Schmitt Laser
+ * @author Marcelo Schmitt Laser
  */
 public class BinDirPath
   extends ArgHandler

@@ -1,8 +1,15 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Argument Handler for the path of a Clusters file, typically of the form
+ * *_cluster.rsf.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class ClusterFile
   extends ArgHandler
 {
@@ -31,7 +38,18 @@ public class ClusterFile
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    File clusterFile = new File(value);
+    if(!clusterFile.exists())
+      throw new FileNotFoundException(value + " not found.");
+
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     File clusterFile = new File(value);

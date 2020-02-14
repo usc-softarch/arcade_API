@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.smelldetection;
 
-import java.io.IOException;
 import edu.usc.softarch.arcade.antipattern.detection.ArchSmellDetector;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -10,71 +9,44 @@ import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.SmellsFile;
 
 public class ArchSmellDetectorWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
-  private static final ArgHandler clusterFile = ClusterFile.getInstance();
-  private static final ArgHandler smellsFile = SmellsFile.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTOR
+  public ArchSmellDetectorWrapper()
   {
-    return "archSmellDetector";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Architectural Smell Detector";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "archSmellDetector";
+    String name = "Architectural Smell Detector";
+    ArgHandler[] requiredArguments =
     {
-      depsRsfFile.getName(),
-      clusterFile.getName(),
-      smellsFile.getName()
+      DepsRsfFile.getInstance(),
+      ClusterFile.getInstance(),
+      SmellsFile.getInstance()
     };
-  }
-
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      depsRsfFile,
-      clusterFile,
-      smellsFile
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[3];
-    parsedArgs[0] = depsRsfFile.getValue();
-    parsedArgs[1] = clusterFile.getValue();
-    parsedArgs[2] = smellsFile.getValue();
+    parsedArgs[0] = DepsRsfFile.getInstance().getValue();
+    parsedArgs[1] = ClusterFile.getInstance().getValue();
+    parsedArgs[2] = SmellsFile.getInstance().getValue();
     ArchSmellDetector.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = depsRsfFile.validate();
-    boolean clusterFileValid = clusterFile.validate();
-    boolean smellsFileValid = smellsFile.validate();
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsInput();
+    boolean smellsFileValid = SmellsFile.getInstance().validateAsOutput();
 
     return (depsRsfFileValid && clusterFileValid && smellsFileValid);
   }

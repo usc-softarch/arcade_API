@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.acdc;
 
-import java.io.IOException;
 import acdc.ACDC;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -9,63 +8,41 @@ import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
 
 public class AcdcWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler depsRsfFile = DepsRsfFile.getInstance();
-  private static final ArgHandler clusterFile = ClusterFile.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId() { return "acdc"; }
-
-  @Override
-  public String getName()
+  //#region CONSTRUCTORS
+  public AcdcWrapper()
   {
-    return "ACDC: Algorithm for Comprehension-Driven Clustering";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "acdcWrapper";
+    String name = "ACDC: Algorithm for Comprehension-Driven Clustering";
+    ArgHandler[] requiredArguments =
     {
-      depsRsfFile.getName(),
-      clusterFile.getName()
+      DepsRsfFile.getInstance(),
+      ClusterFile.getInstance()
     };
-  }
-
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      depsRsfFile,
-      clusterFile
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = depsRsfFile.getValue();
-    parsedArgs[1] = clusterFile.getValue();
+    parsedArgs[0] = DepsRsfFile.getInstance().getValue();
+    parsedArgs[1] = ClusterFile.getInstance().getValue();
     ACDC.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = depsRsfFile.validate();
-    boolean clusterFileValid = clusterFile.validate();
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsOutput();
 
     return (depsRsfFileValid && clusterFileValid);
   }

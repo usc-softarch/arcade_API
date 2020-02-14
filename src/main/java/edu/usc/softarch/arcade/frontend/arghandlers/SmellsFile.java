@@ -1,8 +1,15 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Argument Handler for the path of a Smells SER file, typically of the form
+ * *_smells.ser.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class SmellsFile
   extends ArgHandler
 {
@@ -30,7 +37,18 @@ public class SmellsFile
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    File smellsFile = new File(value);
+    if(!smellsFile.exists())
+      throw new FileNotFoundException(value + " not found.");
+
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     File smellsFile = new File(value);

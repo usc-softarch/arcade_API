@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
 
@@ -37,9 +38,11 @@ public class DepsRsfFile
   //#region VALIDATION
   @Override
   public boolean validateAsInput(String value)
-    throws Exception
+    throws FileNotFoundException
   {
-    //TODO
+    File depsRsfFile = new File(value);
+    if(!depsRsfFile.exists())
+      throw new FileNotFoundException(value + " not found.");
 
     return true;
   }

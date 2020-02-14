@@ -38,32 +38,32 @@ public class JavaSourceToDepsBuilderWrapperTest
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.3.30" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "commonRes"
-          + fs + "struts-2.3.30_deps.rsf"
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder"
+          + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.3.30_deps.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.3.32" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "commonRes"
-          + fs + "struts-2.3.32_deps.rsf"
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder"
+          + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.3.32_deps.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.5.2" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "commonRes"
-          + fs + "struts-2.5.2_deps.rsf"
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder"
+          + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.5.2_deps.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.5.8" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "commonRes"
-          + fs + "struts-2.5.8_deps.rsf"
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder"
+          + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.5.8_deps.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.5.10.1" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "commonRes"
-          + fs + "struts-2.5.10.1_deps.rsf"
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder" 
+          + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.5.10.1_deps.rsf"
       },
     });
   }

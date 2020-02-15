@@ -3,6 +3,12 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Argument Handler for the path to Arc's intermediary artifacts. It must
+ * follow the specific _/arc/base format because of hard-coded issues in Arc.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class ArcBaseDir
   extends ArgHandler
 {
@@ -30,7 +36,15 @@ public class ArcBaseDir
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     File arcBaseDir = new File(value);

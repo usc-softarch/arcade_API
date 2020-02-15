@@ -61,7 +61,7 @@ public class PipeExtractorWrapperTest
 
     try
     {
-      pipeExtractor.checkArguments();
+      pipeExtractor.checkArguments(false);
       pipeExtractor.execute();
     }
     catch(Exception e)

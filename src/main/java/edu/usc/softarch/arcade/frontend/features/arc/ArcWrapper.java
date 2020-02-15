@@ -15,47 +15,22 @@ import edu.usc.softarch.arcade.frontend.arghandlers.SrcLanguage;
  * See {@code edu.usc.softarch.arcade.clustering.BatchClusteringEngine}.
  */
 public class ArcWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler sourceDir = SourceDir.getInstance();
-  private static final ArgHandler outputDir = OutputDir.getInstance();
-  private static final ArgHandler binDir = BinDir.getInstance();
-  private static final ArgHandler srcLanguage = SrcLanguage.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId() { return "arc"; }
-
-  @Override
-  public String getName()
+  //#region CONSTRUCTORS
+  public ArcWrapper()
   {
-    return "ARC: Architectural Recovery based on Concerns";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "arc";
+    String name = "ARC: Architectural Recovery based on Concerns";
+    ArgHandler[] requiredArguments =
     {
-      sourceDir.getName(),
-      outputDir.getName(),
-      binDir.getName(),
-      srcLanguage.getName()
+      SourceDir.getInstance(),
+      OutputDir.getInstance(),
+      BinDir.getInstance(),
+      SrcLanguage.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      sourceDir,
-      outputDir,
-      binDir,
-      srcLanguage
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -66,28 +41,27 @@ public class ArcWrapper
   {
     String fs = File.separator;
     String[] parsedArgs = new String[3];
-    if(srcLanguage.getValue().equals("c"))
+    if(SrcLanguage.getInstance().getValue().equals("c"))
     {
       parsedArgs = new String[4];
-      parsedArgs[3] = srcLanguage.getValue();
+      parsedArgs[3] = SrcLanguage.getInstance().getValue();
     }
-    parsedArgs[0] = sourceDir.getValue();
-    parsedArgs[1] = outputDir.getValue() + fs + "arc";
-    parsedArgs[2] = binDir.getValue();
+    parsedArgs[0] = SourceDir.getInstance().getValue();
+    parsedArgs[1] = OutputDir.getInstance().getValue() + fs + "arc";
+    parsedArgs[2] = BinDir.getInstance().getValue();
     BatchClusteringEngine.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = sourceDir.validate();
-    boolean outputDirValid = outputDir.validate();
-    boolean binDirValid = binDir.validate();
-    boolean srcLanguageValid = srcLanguage.validate();
-
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
+    boolean binDirValid = BinDir.getInstance().validateAsInput();
+    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
     return (sourceDirValid && outputDirValid
       && binDirValid && srcLanguageValid);
   }

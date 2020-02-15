@@ -1,5 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the source language of the project being analysed.
+ * Currently supported languages are Java and C. Argument is case-insensitive.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class SrcLanguage
   extends ArgHandler
 {
@@ -27,7 +33,15 @@ public class SrcLanguage
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO

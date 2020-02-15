@@ -1,5 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the path to a directory containing _smells.ser files.
+ * For the path to a specific _smells.ser file, see {@link SmellsFile}.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class SmellsDir
   extends ArgHandler
 {
@@ -27,7 +33,15 @@ public class SmellsDir
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO

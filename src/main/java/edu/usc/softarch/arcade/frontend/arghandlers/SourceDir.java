@@ -2,6 +2,14 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
 
+/**
+ * Argument Handler for the path to a project directory containing multiple
+ * versions of a system. The word "source" refers to the source of inputs,
+ * rather than source code. This argument is primarily to be used in batch
+ * components.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class SourceDir
   extends ArgHandler
 {
@@ -30,7 +38,7 @@ public class SourceDir
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
     throws Exception
   {
     File sourceDirectory = new File(value);
@@ -40,6 +48,14 @@ public class SourceDir
       errorMessage += value;
       throw new IllegalArgumentException(errorMessage);
     }
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
+    throws Exception
+  {
+    //TODO
     return true;
   }
   //#endregion

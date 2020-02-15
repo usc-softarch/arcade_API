@@ -1,5 +1,9 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the path to a directory containing _deps.rsf files.
+ * For the path to a specific _deps.rsf file, see {@link DepsRsfFile}.
+ */
 public class DepsDir
   extends ArgHandler
 {
@@ -27,7 +31,15 @@ public class DepsDir
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO

@@ -1,5 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the path to a mallet executable. This should always be
+ * filled in automatically based on {@link MalletHome}.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class MalletPath
   extends ArgHandler
 {
@@ -27,7 +33,15 @@ public class MalletPath
 
   //#region VALIDATION
   @Override
-  public boolean validate(String value)
+  public boolean validateAsInput(String value)
+    throws Exception
+  {
+    //TODO
+    return true;
+  }
+
+  @Override
+  public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO

@@ -43,7 +43,7 @@ public class ConsoleUI
     String cr = System.lineSeparator();
     String instructions = getName() + " requires ";
     instructions += "the following arguments:" + cr;
-    for(ArgHandler argHandler : wrappedFeature.getArgumentHandlers())
+    for(ArgHandler argHandler : wrappedFeature.getRequiredArgumentHandlers())
       instructions += argHandler.getInstruction() + cr;
 
     return instructions;
@@ -57,7 +57,7 @@ public class ConsoleUI
    */
   public void loadArgumentsWizard()
   {
-    for(ArgHandler argHandler : wrappedFeature.getArgumentHandlers())
+    for(ArgHandler argHandler : wrappedFeature.getRequiredArgumentHandlers())
       loadArgument(argHandler);
   }
 
@@ -70,7 +70,7 @@ public class ConsoleUI
   public void execute()
     throws Exception
   {
-    wrappedFeature.checkArguments();
+    wrappedFeature.checkArguments(false);
 	  wrappedFeature.execute();
   }
 
@@ -78,8 +78,7 @@ public class ConsoleUI
   {
     try
     {
-      argHandler.validate();
-      String toPrint = "Argument " + argHandler.getName() + " found in ";
+      String toPrint = "Argument " + argHandler.getId() + " found in ";
       toPrint += "configuration. Use existing configuration? (y/n)";
       System.out.println(toPrint);
       String choice = Console.in.nextLine();

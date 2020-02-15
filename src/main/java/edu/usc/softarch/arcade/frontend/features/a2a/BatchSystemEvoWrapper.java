@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.a2a;
 
-import java.io.IOException;
 import edu.usc.softarch.arcade.metrics.BatchSystemEvo;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -9,69 +8,43 @@ import edu.usc.softarch.arcade.frontend.arghandlers.DistOpt;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
 
 public class BatchSystemEvoWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler distOpt = DistOpt.getInstance();
-  private static final ArgHandler sourceDir = SourceDir.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTORS
+  public BatchSystemEvoWrapper()
   {
-    return "a2a";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Metrics: A2A";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "a2a";
+    String name = "Architecture to Architecture Pairwise Compute";
+    ArgHandler[] requiredArguments =
     {
-      distOpt.getName(),
-      sourceDir.getName()
+      SourceDir.getInstance(),
+      DistOpt.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      distOpt,
-      sourceDir
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[3];
     parsedArgs[0] = "-distopt";
-    parsedArgs[1] = distOpt.getValue();
-    parsedArgs[2] = sourceDir.getValue();
-
+    parsedArgs[1] = DistOpt.getInstance().getValue();
+    parsedArgs[2] = SourceDir.getInstance().getValue();
     BatchSystemEvo.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean distOptValid = distOpt.validate();
-    boolean sourceDirValid = sourceDir.validate();
-
+    boolean distOptValid = DistOpt.getInstance().validateAsInput();
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
     return (distOptValid && sourceDirValid);
   }
   //#endregion

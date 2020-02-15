@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.smellanalysis;
 
-import java.io.IOException;
 import edu.usc.softarch.arcade.antipattern.detection.SmellDensityAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -9,68 +8,42 @@ import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
 public class SmellDensityAnalyzerWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler smellsDir = SmellsDir.getInstance();
-  private static final ArgHandler clusterDir = ClusterDir.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTORS
+  public SmellDensityAnalyzerWrapper()
   {
-    return "densitySmellAnalysis";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Smell Analysis: Density";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "densitySmellAnalysis";
+    String name = "Smell Analysis: Density";
+    ArgHandler[] requiredArguments =
     {
-      smellsDir.getName(),
-      clusterDir.getName()
+      SmellsDir.getInstance(),
+      ClusterDir.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      smellsDir,
-      clusterDir
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = smellsDir.getValue();
-    parsedArgs[1] = clusterDir.getValue();
-
+    parsedArgs[0] = SmellsDir.getInstance().getValue();
+    parsedArgs[1] = ClusterDir.getInstance().getValue();
     SmellDensityAnalyzer.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = clusterDir.validate();
-    boolean smellsDirValid = smellsDir.validate();
-
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
     return (clusterDirValid && smellsDirValid);
   }
   //#endregion

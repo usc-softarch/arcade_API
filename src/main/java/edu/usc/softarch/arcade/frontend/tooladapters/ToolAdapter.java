@@ -12,7 +12,7 @@ import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
  * @author Marcelo Schmitt Laser
  */
 public abstract class ToolAdapter
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
   //#region INTERNAL METHODS
   /**

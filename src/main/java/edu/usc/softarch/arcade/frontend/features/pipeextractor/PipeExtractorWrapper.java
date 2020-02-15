@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.pipeextractor;
 
-import java.io.File;
 import edu.usc.softarch.arcade.util.ldasupport.PipeExtractor;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -12,38 +11,20 @@ import edu.usc.softarch.arcade.frontend.arghandlers.ArcBaseDir;
  * See {@code edu.usc.softarch.arcade.util.ldasupport.PipeExtractor}.
  */
 public class PipeExtractorWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler sourceDir = SourceDir.getInstance();
-  private static final ArgHandler arcBaseDir = ArcBaseDir.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId() { return "pipeExtractor"; }
-
-  @Override
-  public String getName() { return "Pipe Extractor"; }
-
-  @Override
-  public String[] getArgumentIds()
+  //#region CONSTRUCTORS
+  public PipeExtractorWrapper()
   {
-    return new String[]
+    String id = "pipeExtractor";
+    String name = "Pipe Extractor";
+    ArgHandler[] requiredArguments =
     {
-      sourceDir.getName(),
-      arcBaseDir.getName()
+      SourceDir.getInstance(),
+      ArcBaseDir.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      sourceDir,
-      arcBaseDir
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -52,23 +33,20 @@ public class PipeExtractorWrapper
   public void execute()
     throws Exception
   {
-    String fs = File.separator;
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = sourceDir.getValue();
-    parsedArgs[1] = arcBaseDir.getValue();
-    parsedArgs[1] += fs + "arc" + fs + "base";
+    parsedArgs[0] = SourceDir.getInstance().getValue();
+    parsedArgs[1] = ArcBaseDir.getInstance().getValue();
     PipeExtractor.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = sourceDir.validate();
-    boolean outputDirValid = arcBaseDir.validate();
-
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean outputDirValid = ArcBaseDir.getInstance().validateAsOutput();
     return (sourceDirValid && outputDirValid);
   }
   //#endregion

@@ -7,41 +7,19 @@ import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
 
 public class SmellEvolutionAnalyzerWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler smellsDir = SmellsDir.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTORS
+  public SmellEvolutionAnalyzerWrapper()
   {
-    return "evolutionSmellsAnalysis";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Smell Analysis: Evolution";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "evolutionSmellsAnalysis";
+    String name = "Smell Analysis: Evolution";
+    ArgHandler[] requiredArguments =
     {
-      smellsDir.getName()
+      SmellsDir.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      smellsDir
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -51,19 +29,17 @@ public class SmellEvolutionAnalyzerWrapper
     throws Exception
   {
     String[] parsedArgs = new String[1];
-    parsedArgs[0] = smellsDir.getValue();
-
+    parsedArgs[0] = SmellsDir.getInstance().getValue();
     SmellEvolutionAnalyzer.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean smellsDirValid = smellsDir.validate();
-
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
     return smellsDirValid;
   }
   //#endregion

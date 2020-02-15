@@ -20,48 +20,20 @@ import edu.usc.softarch.arcade.frontend.arghandlers.MalletHome;
 public class Inferencer
   extends ToolAdapter
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler topicmodel = Topicmodel.getInstance();
-  private static final ArgHandler inferenceFile = InferenceFile.getInstance();
-  private static final ArgHandler malletPath = MalletPath.getInstance();
-  private static final ArgHandler malletHome = MalletHome.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTORS
+  public Inferencer()
   {
-    return "inferencer";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Mallet: Inferencer";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "inferencer";
+    String name = "Mallet: Inferencer";
+    ArgHandler[] requiredArguments =
     {
-      topicmodel.getName(),
-      inferenceFile.getName(),
-      malletPath.getName(),
-      malletHome.getName()
+      Topicmodel.getInstance(),
+      InferenceFile.getInstance(),
+      MalletPath.getInstance(),
+      MalletHome.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      topicmodel,
-      inferenceFile,
-      malletPath,
-      malletHome
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -70,9 +42,7 @@ public class Inferencer
   protected List<String> buildToolPath()
   {
     List<String> toolPath = new ArrayList<String>();
-    String malletPathVal = malletPath.getValue();
-    toolPath.add(malletPathVal);
-
+    toolPath.add(MalletPath.getInstance().getValue());
     return toolPath;
   }
 
@@ -80,12 +50,11 @@ public class Inferencer
   protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();
-
     command.add("train-topics");
     command.add("--input");
-    command.add(topicmodel.getValue());
+    command.add(Topicmodel.getInstance().getValue());
     command.add("--inferencer-filename");
-    command.add(inferenceFile.getValue());
+    command.add(InferenceFile.getInstance().getValue());
     command.add("--num-top-words");
     command.add("50");
     command.add("--num-topics");
@@ -96,7 +65,6 @@ public class Inferencer
     command.add("100");
     command.add("--doc-topics-threshold");
     command.add("0.1");
-
     return command;
   }
 
@@ -104,21 +72,20 @@ public class Inferencer
   protected Map<String,String> buildEnv()
   {
     Map<String,String> env = new HashMap<String,String>();
-    env.put("MALLET_HOME", malletHome.getValue());
+    env.put("MALLET_HOME", MalletHome.getInstance().getValue());
     return env;
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean topicmodelValid = topicmodel.validate();
-    boolean inferenceFileValid = inferenceFile.validate();
-    boolean malletPathValid = malletPath.validate();
-    boolean malletHomeValid = malletHome.validate();
-
+    boolean topicmodelValid = Topicmodel.getInstance().validateAsInput();
+    boolean inferenceFileValid = InferenceFile.getInstance().validateAsOutput();
+    boolean malletPathValid = MalletPath.getInstance().validateAsInput();
+    boolean malletHomeValid = MalletHome.getInstance().validateAsInput();
     return (topicmodelValid && inferenceFileValid
       && malletPathValid && malletHomeValid);
   }

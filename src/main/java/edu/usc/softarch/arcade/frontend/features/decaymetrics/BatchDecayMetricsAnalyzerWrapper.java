@@ -9,38 +9,20 @@ import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsDir;
 
 public class BatchDecayMetricsAnalyzerWrapper
-  implements FeatureWrapper
+  extends FeatureWrapper
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler clusterDir = ClusterDir.getInstance();
-  private static final ArgHandler depsDir = DepsDir.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId() { return "decayMetrics"; }
-
-  @Override
-  public String getName() { return "Metrics: Decay"; }
-
-  @Override
-  public String[] getArgumentIds()
+  //#region CONSTRUCTORS
+  public BatchDecayMetricsAnalyzerWrapper()
   {
-    return new String[]
+    String id = "decayMetrics";
+    String name = "Metrics: Decay";
+    ArgHandler[] requiredArguments =
     {
-      clusterDir.getName(),
-      depsDir.getName()
+      ClusterDir.getInstance(),
+      DepsDir.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      clusterDir,
-      depsDir
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -50,21 +32,19 @@ public class BatchDecayMetricsAnalyzerWrapper
     throws Exception, IOException, IllegalArgumentException
   {
     String[] parsedArgs = new String[2];
-    parsedArgs[0] = clusterDir.getValue();
-    parsedArgs[1] = depsDir.getValue();
-
+    parsedArgs[0] = ClusterDir.getInstance().getValue();
+    parsedArgs[1] = DepsDir.getInstance().getValue();
     BatchDecayMetricsAnalyzer.main(parsedArgs);
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = clusterDir.validate();
-    boolean depsDirValid = depsDir.validate();
-
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
+    boolean depsDirValid = DepsDir.getInstance().validateAsInput();
     return (clusterDirValid && depsDirValid);
   }
   //#endregion

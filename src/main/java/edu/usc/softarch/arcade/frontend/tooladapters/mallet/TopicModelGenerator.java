@@ -20,48 +20,20 @@ import edu.usc.softarch.arcade.frontend.arghandlers.MalletHome;
 public class TopicModelGenerator
   extends ToolAdapter
 {
-  //#region ATTRIBUTES
-  private static final ArgHandler sourceDir = SourceDir.getInstance();
-  private static final ArgHandler topicmodel = Topicmodel.getInstance();
-  private static final ArgHandler malletPath = MalletPath.getInstance();
-  private static final ArgHandler malletHome = MalletHome.getInstance();
-  //#endregion
-
-  //#region CONFIGURATION
-  @Override
-  public String getId()
+  //#region CONSTRUCTORS
+  public TopicModelGenerator()
   {
-    return "topicModelGenerator";
-  }
-
-  @Override
-  public String getName()
-  {
-    return "Mallet: Topic Model Generator";
-  }
-
-  @Override
-  public String[] getArgumentIds()
-  {
-    return new String[]
+    String id = "topicModelGenerator";
+    String name = "Mallet: Topic Model Generator";
+    ArgHandler[] requiredArguments =
     {
-      sourceDir.getName(),
-      topicmodel.getName(),
-      malletPath.getName(),
-      malletHome.getName()
+      SourceDir.getInstance(),
+      Topicmodel.getInstance(),
+      MalletPath.getInstance(),
+      MalletHome.getInstance()
     };
-  }
 
-  @Override
-  public ArgHandler[] getArgumentHandlers()
-  {
-    return new ArgHandler[]
-    {
-      sourceDir,
-      topicmodel,
-      malletPath,
-      malletHome
-    };
+    initialize(id, name, requiredArguments);
   }
   //#endregion
 
@@ -70,9 +42,7 @@ public class TopicModelGenerator
   protected List<String> buildToolPath()
   {
     List<String> toolPath = new ArrayList<String>();
-    String malletPathVal = malletPath.getValue();
-    toolPath.add(malletPathVal);
-
+    toolPath.add(MalletPath.getInstance().getValue());
     return toolPath;
   }
 
@@ -80,19 +50,15 @@ public class TopicModelGenerator
   protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();
-    String sourceDirVal = sourceDir.getValue();
-    String topicmodelVal = topicmodel.getValue();
-
     command.add("import-dir");
     command.add("--input");
-    command.add(sourceDirVal);
+    command.add(SourceDir.getInstance().getValue());
     command.add("--remove-stopwords");
     command.add("TRUE");
     command.add("--keep-sequence");
     command.add("TRUE");
     command.add("--output");
-    command.add(topicmodelVal);
-
+    command.add(Topicmodel.getInstance().getValue());
     return command;
   }
 
@@ -100,21 +66,20 @@ public class TopicModelGenerator
   protected Map<String,String> buildEnv()
   {
     Map<String,String> env = new HashMap<String,String>();
-    env.put("MALLET_HOME", malletHome.getValue());
+    env.put("MALLET_HOME", MalletHome.getInstance().getValue());
     return env;
   }
   //#endregion
 
   //#region VALIDATION
   @Override
-  public boolean checkArguments()
+  public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = sourceDir.validate();
-    boolean topicmodelValid = topicmodel.validate();
-    boolean malletPathValid = malletPath.validate();
-    boolean malletHomeValid = malletHome.validate();
-
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean topicmodelValid = Topicmodel.getInstance().validateAsOutput();
+    boolean malletPathValid = MalletPath.getInstance().validateAsInput();
+    boolean malletHomeValid = MalletHome.getInstance().validateAsInput();
     return (sourceDirValid && topicmodelValid
       && malletPathValid && malletHomeValid);
   }

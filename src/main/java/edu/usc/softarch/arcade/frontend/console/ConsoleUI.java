@@ -52,8 +52,6 @@ public class ConsoleUI
   /**
    * Initiates a wizard for loading the arguments required by the adapted
    * functional component.
-   *
-   * @return A map with all the necessary arguments.
    */
   public void loadArgumentsWizard()
   {
@@ -64,7 +62,6 @@ public class ConsoleUI
   /**
    * Executes the adapted component's primary functionality.
    *
-   * @param args A map with all the necessary arguments.
    * @throws Exception Any exception appropriate to the adapted component.
    */
   public void execute()

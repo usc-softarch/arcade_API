@@ -3,6 +3,8 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.String;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**
  * Argument Handler for the path of a Clusters file, typically of the form
@@ -44,6 +46,11 @@ public class ClusterFile
     File clusterFile = new File(value);
     if(!clusterFile.exists())
       throw new FileNotFoundException(value + " not found.");
+    else if ((value.length() < 4) 
+			|| !(value.substring(value.length()-4).equals(".rsf"))) 
+			{		      
+		      throw new IllegalArgumentException(value + "Invalid file type (must be .rsf file)" );
+		    }	   
 
     return true;
   }
@@ -53,10 +60,19 @@ public class ClusterFile
     throws Exception
   {
     File clusterFile = new File(value);
-    if(!clusterFile.getParentFile().exists()
+    if (!clusterFile.getParentFile().exists()
       && !clusterFile.getParentFile().mkdirs())
         throw new IOException("Failed to create output directory.");
 
+    return true;
+  }
+   
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

@@ -2,6 +2,7 @@ package edu.usc.softarch.arcade.frontend.features.arc;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.String;
 import edu.usc.softarch.arcade.clustering.BatchClusteringEngine;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -58,10 +59,10 @@ public class ArcWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
-    boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
-    boolean binDirValid = BinDir.getInstance().validateAsInput();
-    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
+    boolean outputDirValid = OutputDir.getInstance().validateAsOutput(OutputDir.getInstance().getValue());
+    boolean binDirValid = BinDir.getInstance().validateAsInput(BinDir.getInstance().getValue());
+    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput(SrcLanguage.getInstance().getValue());
     return (sourceDirValid && outputDirValid
       && binDirValid && srcLanguageValid);
   }

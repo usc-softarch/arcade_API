@@ -1,11 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the source language of the project being analysed.
- * Currently supported languages are Java and C. Argument is case-insensitive.
- *
- * @author Marcelo Schmitt Laser
- */
+import java.lang.String;
+import java.io.IOException;
+import java.util.*; 
+import java.util.stream.*; 
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class SrcLanguage
   extends ArgHandler
 {
@@ -37,14 +37,29 @@ public class SrcLanguage
     throws Exception
   {
     //TODO
+	  String[] supportedLanguages = {"C","C++","Java","Python"};//feel free to add more
+	  boolean contains = Arrays.stream(supportedLanguages).anyMatch(value::equals);
+	  if (!contains)
+	       throw new IOException(value + "isn't supported");
+	  
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

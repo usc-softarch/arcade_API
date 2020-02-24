@@ -1,5 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 /**
  * Argument Handler for the exact path of a directory with the compiled
  * binaries of a system. Not to be confused with {@link BinDir}.
@@ -37,6 +43,11 @@ public class BinDirPath
     throws Exception
   {
     //TODO
+	  File BinDirectory = new File(value);
+	    if(!BinDirectory.exists())
+	    {     
+	      throw new IllegalArgumentException(value + "Binaries Directory not found");
+	    }
     return true;
   }
 
@@ -45,6 +56,15 @@ public class BinDirPath
     throws Exception
   {
     //TODO
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

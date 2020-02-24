@@ -1,9 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the path to a directory containing _deps.rsf files.
- * For the path to a specific _deps.rsf file, see {@link DepsRsfFile}.
- */
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class DepsDir
   extends ArgHandler
 {
@@ -35,14 +37,46 @@ public class DepsDir
     throws Exception
   {
     //TODO
-    return true;
+	  File depsDirectory = new File(value);
+	    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
+	      throw new IOException("deps directory doesn't exist.");
+	    else
+	    {    	
+	    	File[] files = depsDirectory.listFiles();
+	        int dirLength = depsDirectory.list().length;
+	        boolean depsFileContain = false;
+	        String filename;
+	    	for (int i =0; i<dirLength; i++)
+	    	{
+	    		filename = files[i].getName();
+	    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".rsf")))
+				{
+					depsFileContain = true;
+					break;
+				}
+	    	}
+	    	if(!depsFileContain)
+	    	      throw new IOException("deps directory doesn't have .rsf file.");    		
+	    }	    
+	    
+	  return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

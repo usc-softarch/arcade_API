@@ -1,11 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the path to a mallet executable. This should always be
- * filled in automatically based on {@link MalletHome}.
- *
- * @author Marcelo Schmitt Laser
- */
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class MalletPath
   extends ArgHandler
 {
@@ -37,14 +37,45 @@ public class MalletPath
     throws Exception
   {
     //TODO
+	  File MalletPath = new File(value);
+	    if(!MalletPath.exists() && !MalletPath.mkdirs())
+	      throw new IOException("Mallet Path directory doesn't exist.");
+	    else
+	    {    	
+	    	File[] files = MalletPath.listFiles();
+	        int dirLength = MalletPath.list().length;
+	        boolean malletFileContain = false;
+	        String filename;
+	    	for (int i =0; i<dirLength; i++)
+	    	{
+	    		filename = files[i].getName();
+	    		if (filename.equals("mallet"))
+				{
+					malletFileContain = true;
+					break;
+				}				 
+	    	}
+	    	if(!malletFileContain)
+	    	      throw new IOException("Mallet Path directory missing file mallet.");    		
+	    }	    
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

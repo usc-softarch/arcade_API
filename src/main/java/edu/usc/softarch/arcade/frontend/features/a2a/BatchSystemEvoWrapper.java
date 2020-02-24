@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.a2a;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.metrics.BatchSystemEvo;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -43,8 +44,8 @@ public class BatchSystemEvoWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean distOptValid = DistOpt.getInstance().validateAsInput();
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean distOptValid = DistOpt.getInstance().validateAsInput(DistOpt.getInstance().getValue());
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
     return (distOptValid && sourceDirValid);
   }
   //#endregion

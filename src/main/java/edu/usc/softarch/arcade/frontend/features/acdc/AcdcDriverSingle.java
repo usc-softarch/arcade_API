@@ -1,6 +1,7 @@
 package edu.usc.softarch.arcade.frontend.features.acdc;
 
 import java.io.File;
+import java.lang.String;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.features.acdc.AcdcWrapper;
 import edu.usc.softarch.arcade.frontend.features.smelldetection.ArchSmellDetectorWrapper;
@@ -92,12 +93,12 @@ public class AcdcDriverSingle
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
-    boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
-    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
-    boolean projectNameValid = ProjectName.getInstance().validateAsOutput();
+    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput(BinDirPath.getInstance().getValue());
+    boolean outputDirValid = OutputDir.getInstance().validateAsOutput(OutputDir.getInstance().getValue());
+    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput(SrcLanguage.getInstance().getValue());
+    boolean projectNameValid = ProjectName.getInstance().validateAsOutput(ProjectName.getInstance().getValue());
     boolean projectVersionValid =
-      ProjectVersion.getInstance().validateAsOutput();
+      ProjectVersion.getInstance().validateAsOutput(ProjectVersion.getInstance().getValue());
 
     return (outputDirValid && binDirPathValid && srcLanguageValid
       && projectNameValid && projectVersionValid);

@@ -1,11 +1,9 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the comparison distance to be used with comparison-
- * based metrics, such as A2A.
- *
- * @author Marcelo Schmitt Laser
- */
+import java.lang.String;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class DistOpt
   extends ArgHandler
 {
@@ -38,14 +36,28 @@ public class DistOpt
     throws Exception
   {
     //TODO
+	if (!(value.equals("1")) 
+		&& !(value.equals("2"))
+			&& !(value.equals("3")))
+       throw new IOException("Invalid input, must be 1, 2, or 3.");
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

@@ -1,6 +1,7 @@
 package edu.usc.softarch.arcade.frontend.features;
 
 import java.util.Arrays;
+import java.lang.String;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**
@@ -69,7 +70,7 @@ public abstract class FeatureWrapper
   public String[] getRequiredArgumentIds()
   {
     return Arrays.stream(requiredArguments)
-      .map(handler -> handler.getId()).toArray(String[]::new);
+      .map(handler -> handler.getName()).toArray(String[]::new);
   }
 
   /**
@@ -78,7 +79,7 @@ public abstract class FeatureWrapper
   public String[] getOptionalArgumentIds()
   {
     return Arrays.stream(optionalArguments)
-      .map(handler -> handler.getId()).toArray(String[]::new);
+      .map(handler -> handler.getName()).toArray(String[]::new);
   }
 
   /**

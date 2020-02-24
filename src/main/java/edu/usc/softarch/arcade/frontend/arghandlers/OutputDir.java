@@ -2,13 +2,9 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.String;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
-/**
- * Argument Handler for the path to a directory that is to contain the output
- * of an execution. To be used primarily with batch components.
- *
- * @author Marcelo Schmitt Laser
- */
 public class OutputDir
   extends ArgHandler
 {
@@ -37,21 +33,34 @@ public class OutputDir
 
   //#region VALIDATION
   @Override
-  public boolean validateAsInput(String value)
+  public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
+    String fs = File.separator;
+    String outputDirPath = value;
+    outputDirPath += fs + "arc";
+    File outputDirectory = new File(outputDirPath);
+    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
+      throw new IOException("Failed to create output directory.");
+
     return true;
   }
   
   @Override
-  public boolean validateAsOutput(String value)
+  public boolean validateAsInput(String value)
     throws Exception
   {
-    File outputDirectory = new File(value);
-    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-      throw new IOException("Failed to create output directory.");
-
+    //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

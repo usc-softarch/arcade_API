@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.console;
 
+import java.lang.String;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;

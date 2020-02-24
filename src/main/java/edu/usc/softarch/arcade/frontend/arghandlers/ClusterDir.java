@@ -1,9 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the path to a directory containing _cluster.rsf files.
- * For the path to a specific _cluster.rsf file, see {@link ClusterFile}.
- */
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class ClusterDir
   extends ArgHandler
 {
@@ -34,15 +36,47 @@ public class ClusterDir
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
+    //TODO	          
+    File clusterDirectory = new File(value);
+    if(!clusterDirectory.exists() && !clusterDirectory.mkdirs())
+      throw new IOException("cluster directory doesn't exist.");
+    else
+    {    	
+    	File[] files = clusterDirectory.listFiles();
+        int dirLength = clusterDirectory.list().length;
+        boolean clusterFileContain = false;
+        String filename;
+    	for (int i =0; i<dirLength; i++)
+    	{
+    		filename = files[i].getName();
+    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".rsf")))
+			{
+				clusterFileContain = true;
+				break;
+			}				 
+    	}
+    	if(!clusterFileContain)
+    	      throw new IOException("cluster directory doesn't have .rsf file.");    		
+    }	    
+	
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

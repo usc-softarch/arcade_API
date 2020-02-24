@@ -1,6 +1,7 @@
 package edu.usc.softarch.arcade.frontend.features.decaymetrics;
 
 import java.io.IOException;
+import java.lang.String;
 import edu.usc.softarch.arcade.decay.BatchDecayMetricsAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -43,8 +44,8 @@ public class BatchDecayMetricsAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
-    boolean depsDirValid = DepsDir.getInstance().validateAsInput();
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput(ClusterDir.getInstance().getValue());
+    boolean depsDirValid = DepsDir.getInstance().validateAsInput(DepsDir.getInstance().getValue());
     return (clusterDirValid && depsDirValid);
   }
   //#endregion

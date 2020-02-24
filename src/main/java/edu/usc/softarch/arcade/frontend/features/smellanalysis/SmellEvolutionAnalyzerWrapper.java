@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.smellanalysis;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.antipattern.detection.SmellEvolutionAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -39,7 +40,7 @@ public class SmellEvolutionAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput(SmellsDir.getInstance().getValue());
     return smellsDirValid;
   }
   //#endregion

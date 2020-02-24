@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.console;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
@@ -75,7 +76,8 @@ public class ConsoleUI
   {
     try
     {
-      String toPrint = "Argument " + argHandler.getId() + " found in ";
+      //String toPrint = "Argument " + argHandler.getId() + " found in ";
+	  String toPrint = "Argument " + argHandler.getName() + " found in ";
       toPrint += "configuration. Use existing configuration? (y/n)";
       System.out.println(toPrint);
       String choice = Console.in.nextLine();

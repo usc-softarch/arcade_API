@@ -1,5 +1,8 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import java.lang.String;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class ProjectName
   extends ArgHandler
 {
@@ -38,6 +41,15 @@ public class ProjectName
     throws Exception
   {
     //TODO
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

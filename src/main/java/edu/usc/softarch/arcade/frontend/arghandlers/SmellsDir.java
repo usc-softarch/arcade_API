@@ -1,11 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the path to a directory containing _smells.ser files.
- * For the path to a specific _smells.ser file, see {@link SmellsFile}.
- *
- * @author Marcelo Schmitt Laser
- */
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class SmellsDir
   extends ArgHandler
 {
@@ -37,14 +37,45 @@ public class SmellsDir
     throws Exception
   {
     //TODO
+	  File smellDirectory = new File(value);
+	    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
+	      throw new IOException("Smells SER directory doesn't exist.");
+	    else
+	    {    	
+	    	File[] files = smellDirectory.listFiles();
+	        int dirLength = smellDirectory.list().length;
+	        boolean smellFileContain = false;
+	        String filename;
+	    	for (int i =0; i<dirLength; i++)
+	    	{
+	    		filename = files[i].getName();
+	    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".ser")))
+				{
+					smellFileContain = true;
+					break;
+				}				 
+	    	}
+	    	if(!smellFileContain)
+	    	      throw new IOException("smells SER directory doesn't have .ser file.");    		
+	    }
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

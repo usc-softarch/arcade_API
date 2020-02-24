@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.depsbuilder;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.facts.driver.JavaSourceToDepsBuilder;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -41,8 +42,8 @@ public class JavaSourceToDepsBuilderWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsOutput();
+    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput(BinDirPath.getInstance().getValue());
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsOutput(DepsRsfFile.getInstance().getValue());
 
     return (binDirPathValid && depsRsfFileValid);
   }

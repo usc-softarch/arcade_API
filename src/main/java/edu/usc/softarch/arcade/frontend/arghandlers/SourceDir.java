@@ -1,15 +1,9 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
+import java.lang.String;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
-/**
- * Argument Handler for the path to a project directory containing multiple
- * versions of a system. The word "source" refers to the source of inputs,
- * rather than source code. This argument is primarily to be used in batch
- * components.
- *
- * @author Marcelo Schmitt Laser
- */
 public class SourceDir
   extends ArgHandler
 {
@@ -43,19 +37,27 @@ public class SourceDir
   {
     File sourceDirectory = new File(value);
     if(!sourceDirectory.exists())
-    {
-      String errorMessage = "Source directory not found: ";
-      errorMessage += value;
-      throw new IllegalArgumentException(errorMessage);
+    {     
+      throw new IllegalArgumentException(value + "Source directory not found");
     }
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

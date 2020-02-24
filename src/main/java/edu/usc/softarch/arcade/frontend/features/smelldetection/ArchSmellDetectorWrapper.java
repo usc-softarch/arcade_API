@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.smelldetection;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.antipattern.detection.ArchSmellDetector;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -44,9 +45,9 @@ public class ArchSmellDetectorWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
-    boolean clusterFileValid = ClusterFile.getInstance().validateAsInput();
-    boolean smellsFileValid = SmellsFile.getInstance().validateAsOutput();
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput(DepsRsfFile.getInstance().getValue());
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsInput(ClusterFile.getInstance().getValue());
+    boolean smellsFileValid = SmellsFile.getInstance().validateAsOutput(SmellsFile.getInstance().getValue());
 
     return (depsRsfFileValid && clusterFileValid && smellsFileValid);
   }

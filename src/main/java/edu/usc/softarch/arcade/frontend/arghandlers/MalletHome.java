@@ -1,11 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-/**
- * Argument Handler for the path to mallet's installation directory. Not to be
- * confused with the path to mallet's executable, {@link MalletPath}.
- *
- * @author Marcelo Schmitt Laser
- */
+import java.lang.String;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
 public class MalletHome
   extends ArgHandler
 {
@@ -37,14 +37,27 @@ public class MalletHome
     throws Exception
   {
     //TODO
+	  File MalletHome = new File(value);
+	    if(!MalletHome.exists() && !MalletHome.mkdirs())
+	      throw new IOException("Mallet Home directory doesn't exist."); 
     return true;
   }
-
+  
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
+	
+    return true;
+  }
+  
+  @Override
+  public boolean validate(String value)
+    throws Exception
+  {
+    //TODO
+	
     return true;
   }
   //#endregion

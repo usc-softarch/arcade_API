@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.pipeextractor;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.util.ldasupport.PipeExtractor;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -45,8 +46,8 @@ public class PipeExtractorWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
-    boolean outputDirValid = ArcBaseDir.getInstance().validateAsOutput();
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
+    boolean outputDirValid = ArcBaseDir.getInstance().validateAsOutput(ArcBaseDir.getInstance().getValue());
     return (sourceDirValid && outputDirValid);
   }
   //#endregion

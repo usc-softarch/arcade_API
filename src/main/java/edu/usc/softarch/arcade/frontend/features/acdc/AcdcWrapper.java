@@ -1,6 +1,7 @@
 package edu.usc.softarch.arcade.frontend.features.acdc;
 
 import acdc.ACDC;
+import java.lang.String;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
@@ -41,8 +42,8 @@ public class AcdcWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
-    boolean clusterFileValid = ClusterFile.getInstance().validateAsOutput();
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput(DepsRsfFile.getInstance().getValue());
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsOutput(ClusterFile.getInstance().getValue());
 
     return (depsRsfFileValid && clusterFileValid);
   }

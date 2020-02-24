@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.smellanalysis;
 
+import java.lang.String;
 import edu.usc.softarch.arcade.antipattern.detection.SmellDensityAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -42,8 +43,8 @@ public class SmellDensityAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
-    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput(ClusterDir.getInstance().getValue());
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput(SmellsDir.getInstance().getValue());
     return (clusterDirValid && smellsDirValid);
   }
   //#endregion

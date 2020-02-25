@@ -76,8 +76,7 @@ public class ConsoleUI
   {
     try
     {
-      //String toPrint = "Argument " + argHandler.getId() + " found in ";
-	  String toPrint = "Argument " + argHandler.getName() + " found in ";
+      String toPrint = "Argument " + argHandler.getId() + " found in ";	  
       toPrint += "configuration. Use existing configuration? (y/n)";
       System.out.println(toPrint);
       String choice = Console.in.nextLine();

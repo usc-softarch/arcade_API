@@ -2,7 +2,13 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.lang.String;
 import java.io.IOException;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the comparison distance to be used with comparison-
+ * based metrics, such as A2A.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class DistOpt
   extends ArgHandler
@@ -52,13 +58,5 @@ public class DistOpt
     return true;
   }
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

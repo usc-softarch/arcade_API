@@ -40,7 +40,7 @@ public class SmellEvolutionAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput(SmellsDir.getInstance().getValue());
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
     return smellsDirValid;
   }
   //#endregion

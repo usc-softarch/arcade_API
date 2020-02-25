@@ -46,8 +46,8 @@ public class PipeExtractorWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
-    boolean outputDirValid = ArcBaseDir.getInstance().validateAsOutput(ArcBaseDir.getInstance().getValue());
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean outputDirValid = ArcBaseDir.getInstance().validateAsOutput();
     return (sourceDirValid && outputDirValid);
   }
   //#endregion

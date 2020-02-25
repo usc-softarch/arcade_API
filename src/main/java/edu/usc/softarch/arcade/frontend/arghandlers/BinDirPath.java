@@ -4,7 +4,6 @@ import java.lang.String;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**
  * Argument Handler for the exact path of a directory with the compiled
@@ -58,14 +57,6 @@ public class BinDirPath
     //TODO
     return true;
   }
-  
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
+
   //#endregion
 }

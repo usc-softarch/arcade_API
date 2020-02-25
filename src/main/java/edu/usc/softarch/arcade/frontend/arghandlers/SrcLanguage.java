@@ -4,7 +4,13 @@ import java.lang.String;
 import java.io.IOException;
 import java.util.*; 
 import java.util.stream.*; 
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the source language of the project being analysed.
+ * Currently supported languages are Java and C. Argument is case-insensitive.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class SrcLanguage
   extends ArgHandler
@@ -52,15 +58,7 @@ public class SrcLanguage
     //TODO
 	
     return true;
-  }
+  }  
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

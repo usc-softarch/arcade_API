@@ -93,12 +93,12 @@ public class AcdcDriverSingle
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput(BinDirPath.getInstance().getValue());
-    boolean outputDirValid = OutputDir.getInstance().validateAsOutput(OutputDir.getInstance().getValue());
-    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput(SrcLanguage.getInstance().getValue());
-    boolean projectNameValid = ProjectName.getInstance().validateAsOutput(ProjectName.getInstance().getValue());
+    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
+    boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
+    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
+    boolean projectNameValid = ProjectName.getInstance().validateAsOutput();
     boolean projectVersionValid =
-      ProjectVersion.getInstance().validateAsOutput(ProjectVersion.getInstance().getValue());
+      ProjectVersion.getInstance().validateAsOutput();
 
     return (outputDirValid && binDirPathValid && srcLanguageValid
       && projectNameValid && projectVersionValid);

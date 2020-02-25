@@ -4,7 +4,13 @@ import java.lang.String;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the path of a Dependencies RSF file, typically of the
+ * form *_deps.rsf.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class DepsRsfFile
   extends ArgHandler
@@ -40,12 +46,12 @@ public class DepsRsfFile
 	File depsFile = new File(value);
 	    if(!depsFile.exists())
 	    {	      
-	      throw new FileNotFoundException(value + " not found.");
+	      throw new Exception(value + " not found.");
 	    }
 	    else if ((value.length() <= 4) 
 	    		|| !(value.substring(value.length()-4).equals(".rsf"))) 
 		    	{
-		    	throw new IllegalArgumentException(value + " Invalid file type (must be .rsf file)");
+		    	throw new Exception(value + " Invalid file type (must be .rsf file)");
 			    }	   
 	    
     return true;
@@ -56,17 +62,13 @@ public class DepsRsfFile
     throws Exception
   {
     //TODO
-	
+	  File depsRsfFile = new File(value);
+	    if(!depsRsfFile.getParentFile().exists()
+	      && !depsRsfFile.getParentFile().mkdirs())
+	        throw new IOException("Failed to create output directory.");
+	    
     return true;
   }
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

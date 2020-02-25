@@ -1,7 +1,13 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.lang.String;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the name of a directory containing compiled binaries
+ * from a project. Not to be confused with {@link BinDirPath}.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class BinDir
   extends ArgHandler
@@ -13,11 +19,11 @@ public class BinDir
   //#region CONSTRUCTORS
   private BinDir()
   {
-    String name = "binDir";
-    String description = "Classes Directory";
-    String instruction = "Classes Directory: This is the directory in each ";
-    instruction += "subject system that contains the compiled classes of that ";
-    instruction += "system version.";
+	String name = "binDir";
+    String description = "Classes Directory Name";
+    String instruction = "Classes Directory Name: This is the name of the ";
+    instruction += "directory in each subject system that contains the ";
+    instruction += "compiled classes of that system version.";
 
     initialize(name, description, instruction);
   }
@@ -45,15 +51,7 @@ public class BinDir
     //TODO
 	
     return true;
-  }
+  }  
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

@@ -42,8 +42,8 @@ public class AcdcWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput(DepsRsfFile.getInstance().getValue());
-    boolean clusterFileValid = ClusterFile.getInstance().validateAsOutput(ClusterFile.getInstance().getValue());
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsOutput();
 
     return (depsRsfFileValid && clusterFileValid);
   }

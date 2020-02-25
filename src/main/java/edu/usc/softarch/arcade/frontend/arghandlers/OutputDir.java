@@ -3,7 +3,13 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.File;
 import java.io.IOException;
 import java.lang.String;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the path to a directory that is to contain the output
+ * of an execution. To be used primarily with batch components.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class OutputDir
   extends ArgHandler
@@ -55,13 +61,5 @@ public class OutputDir
     return true;
   }
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

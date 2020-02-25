@@ -44,8 +44,8 @@ public class BatchSystemEvoWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean distOptValid = DistOpt.getInstance().validateAsInput(DistOpt.getInstance().getValue());
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
+    boolean distOptValid = DistOpt.getInstance().validateAsInput();
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
     return (distOptValid && sourceDirValid);
   }
   //#endregion

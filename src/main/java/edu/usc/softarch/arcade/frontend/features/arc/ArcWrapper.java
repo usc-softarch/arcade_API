@@ -59,10 +59,10 @@ public class ArcWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
-    boolean outputDirValid = OutputDir.getInstance().validateAsOutput(OutputDir.getInstance().getValue());
-    boolean binDirValid = BinDir.getInstance().validateAsInput(BinDir.getInstance().getValue());
-    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput(SrcLanguage.getInstance().getValue());
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
+    boolean binDirValid = BinDir.getInstance().validateAsInput();
+    boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
     return (sourceDirValid && outputDirValid
       && binDirValid && srcLanguageValid);
   }

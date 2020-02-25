@@ -45,9 +45,9 @@ public class ArchSmellDetectorWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput(DepsRsfFile.getInstance().getValue());
-    boolean clusterFileValid = ClusterFile.getInstance().validateAsInput(ClusterFile.getInstance().getValue());
-    boolean smellsFileValid = SmellsFile.getInstance().validateAsOutput(SmellsFile.getInstance().getValue());
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsInput();
+    boolean clusterFileValid = ClusterFile.getInstance().validateAsInput();
+    boolean smellsFileValid = SmellsFile.getInstance().validateAsOutput();
 
     return (depsRsfFileValid && clusterFileValid && smellsFileValid);
   }

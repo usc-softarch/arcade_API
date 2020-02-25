@@ -4,7 +4,11 @@ import java.lang.String;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the path to a directory containing _cluster.rsf files.
+ * For the path to a specific _cluster.rsf file, see {@link ClusterFile}.
+ */
 
 public class ClusterDir
   extends ArgHandler
@@ -69,15 +73,7 @@ public class ClusterDir
     //TODO
 	
     return true;
-  }
-  
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
+  }  
+ 
   //#endregion
 }

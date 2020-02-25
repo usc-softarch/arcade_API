@@ -83,10 +83,10 @@ public class Inferencer
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean topicmodelValid = Topicmodel.getInstance().validateAsInput(Topicmodel.getInstance().getValue());
-    boolean inferenceFileValid = InferenceFile.getInstance().validateAsOutput(InferenceFile.getInstance().getValue());
-    boolean malletPathValid = MalletPath.getInstance().validateAsInput(MalletPath.getInstance().getValue());
-    boolean malletHomeValid = MalletHome.getInstance().validateAsInput(MalletHome.getInstance().getValue());
+    boolean topicmodelValid = Topicmodel.getInstance().validateAsInput();
+    boolean inferenceFileValid = InferenceFile.getInstance().validateAsOutput();
+    boolean malletPathValid = MalletPath.getInstance().validateAsInput();
+    boolean malletHomeValid = MalletHome.getInstance().validateAsInput();
     return (topicmodelValid && inferenceFileValid
       && malletPathValid && malletHomeValid);
   }

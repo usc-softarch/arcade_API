@@ -42,8 +42,8 @@ public class JavaSourceToDepsBuilderWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput(BinDirPath.getInstance().getValue());
-    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsOutput(DepsRsfFile.getInstance().getValue());
+    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
+    boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsOutput();
 
     return (binDirPathValid && depsRsfFileValid);
   }

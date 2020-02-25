@@ -4,7 +4,13 @@ import java.lang.String;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+
+/**
+ * Argument Handler for the path to a mallet executable. This should always be
+ * filled in automatically based on {@link MalletHome}.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 
 public class MalletPath
   extends ArgHandler
@@ -70,13 +76,5 @@ public class MalletPath
     return true;
   }
   
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
   //#endregion
 }

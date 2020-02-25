@@ -77,10 +77,10 @@ public class TopicModelGenerator
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput(SourceDir.getInstance().getValue());
-    boolean topicmodelValid = Topicmodel.getInstance().validateAsOutput(Topicmodel.getInstance().getValue());
-    boolean malletPathValid = MalletPath.getInstance().validateAsInput(MalletPath.getInstance().getValue());
-    boolean malletHomeValid = MalletHome.getInstance().validateAsInput(MalletHome.getInstance().getValue());
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
+    boolean topicmodelValid = Topicmodel.getInstance().validateAsOutput();
+    boolean malletPathValid = MalletPath.getInstance().validateAsInput();
+    boolean malletHomeValid = MalletHome.getInstance().validateAsInput();
     return (sourceDirValid && topicmodelValid
       && malletPathValid && malletHomeValid);
   }

@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.String;
-import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**
  * Argument Handler for the path of a Smells SER file, typically of the form
@@ -66,15 +65,7 @@ public class SmellsFile
         throw new IOException("Failed to create output directory.");
 
     return true;
-  }  
- 
-  @Override
-  public boolean validate(String value)
-    throws Exception
-  {
-    //TODO
-	
-    return true;
-  }
+  }   
+  
   //#endregion
 }

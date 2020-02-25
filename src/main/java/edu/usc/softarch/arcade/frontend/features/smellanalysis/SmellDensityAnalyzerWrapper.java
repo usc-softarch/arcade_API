@@ -43,8 +43,8 @@ public class SmellDensityAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput(ClusterDir.getInstance().getValue());
-    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput(SmellsDir.getInstance().getValue());
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
+    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
     return (clusterDirValid && smellsDirValid);
   }
   //#endregion

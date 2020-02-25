@@ -70,7 +70,7 @@ public abstract class FeatureWrapper
   public String[] getRequiredArgumentIds()
   {
     return Arrays.stream(requiredArguments)
-      .map(handler -> handler.getName()).toArray(String[]::new);
+      .map(handler -> handler.getId()).toArray(String[]::new);
   }
 
   /**
@@ -79,7 +79,7 @@ public abstract class FeatureWrapper
   public String[] getOptionalArgumentIds()
   {
     return Arrays.stream(optionalArguments)
-      .map(handler -> handler.getName()).toArray(String[]::new);
+      .map(handler -> handler.getId()).toArray(String[]::new);
   }
 
   /**

@@ -51,7 +51,7 @@ public abstract class ArgHandler
    * @return Previous value of the argument.
    */
   public String setValue(String value)
-  {
+  {	
     String oldValue = this.value;
     this.value = value;
     return oldValue;

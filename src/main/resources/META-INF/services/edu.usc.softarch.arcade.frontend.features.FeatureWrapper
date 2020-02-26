@@ -3,6 +3,7 @@ edu.usc.softarch.arcade.frontend.features.pipeextractor.PipeExtractorWrapper
 edu.usc.softarch.arcade.frontend.tooladapters.mallet.TopicModelGenerator
 edu.usc.softarch.arcade.frontend.tooladapters.mallet.Inferencer
 edu.usc.softarch.arcade.frontend.features.acdc.AcdcWrapper
+edu.usc.softarch.arcade.frontend.features.acdc.AcdcDriverSingle
 edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBuilderWrapper
 edu.usc.softarch.arcade.frontend.features.depsbuilder.CSourceToDepsBuilderWrapper
 edu.usc.softarch.arcade.frontend.features.smelldetection.ArchSmellDetectorWrapper
@@ -10,4 +11,3 @@ edu.usc.softarch.arcade.frontend.features.a2a.BatchSystemEvoWrapper
 edu.usc.softarch.arcade.frontend.features.decaymetrics.BatchDecayMetricsAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellEvolutionAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellDensityAnalyzerWrapper
-

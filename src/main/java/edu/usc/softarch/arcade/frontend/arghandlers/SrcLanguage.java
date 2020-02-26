@@ -43,7 +43,7 @@ public class SrcLanguage
     throws Exception
   {
     //TODO
-	  String[] supportedLanguages = {"C","C++","Java","Python"};//feel free to add more
+	  String[] supportedLanguages = {"C","c","Java","java"};//feel free to add more
 	  boolean contains = Arrays.stream(supportedLanguages).anyMatch(value::equals);
 	  if (!contains)
 	       throw new IOException(value + "isn't supported");

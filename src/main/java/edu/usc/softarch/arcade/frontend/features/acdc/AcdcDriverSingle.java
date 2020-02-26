@@ -9,14 +9,15 @@ import edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBui
 import edu.usc.softarch.arcade.frontend.features.depsbuilder.CSourceToDepsBuilderWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
+import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
+import edu.usc.softarch.arcade.frontend.arghandlers.BinDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.SmellsFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.SrcLanguage;
-import edu.usc.softarch.arcade.frontend.arghandlers.ProjectName;
-import edu.usc.softarch.arcade.frontend.arghandlers.ProjectVersion;
+//import edu.usc.softarch.arcade.frontend.arghandlers.ProjectName;
+//import edu.usc.softarch.arcade.frontend.arghandlers.ProjectVersion;
 
 public class AcdcDriverSingle
   extends FeatureWrapper
@@ -28,11 +29,12 @@ public class AcdcDriverSingle
     String name = "ACDC Workflow Driver: Single Version";
     ArgHandler[] requiredArguments =
     {
-      BinDirPath.getInstance(),
+      BinDir.getInstance(),
+      SourceDir.getInstance(),
       OutputDir.getInstance(),
-      SrcLanguage.getInstance(),
-      ProjectName.getInstance(),
-      ProjectVersion.getInstance()
+      SrcLanguage.getInstance()      
+      //ProjectName.getInstance(),
+      //ProjectVersion.getInstance()
     };
     initialize(id, name, requiredArguments);
   }
@@ -47,8 +49,9 @@ public class AcdcDriverSingle
     String fs = File.separator;
     String outputDirPath = OutputDir.getInstance().getValue() + fs;
     String srcLanguage = SrcLanguage.getInstance().getValue().toLowerCase();
-    String fileName = ProjectName.getInstance().getValue() + "-";
-    fileName += ProjectVersion.getInstance().getValue();
+    String fileName = SourceDir.getInstance().getValue();
+    //String fileName = ProjectName.getInstance().getValue() + "-";
+    //fileName += ProjectVersion.getInstance().getValue();
     FeatureWrapper acdc = new AcdcWrapper();
     FeatureWrapper archsmelldetector = new ArchSmellDetectorWrapper();
     FeatureWrapper depsbuilder;
@@ -66,12 +69,18 @@ public class AcdcDriverSingle
     // Dependency Builder
     switch(srcLanguage)
     {
-      case "java":
+      case "Java":
         depsbuilder = new JavaSourceToDepsBuilderWrapper();
         break;
-      case "c":
+      case "java":
+          depsbuilder = new JavaSourceToDepsBuilderWrapper();
+          break;
+      case "C":
         depsbuilder = new CSourceToDepsBuilderWrapper();
         break;
+      case "c":
+          depsbuilder = new CSourceToDepsBuilderWrapper();
+          break;
       default:
         throw new Exception("Unrecognized source language.");
     }
@@ -93,15 +102,15 @@ public class AcdcDriverSingle
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
+    boolean binDirValid = BinDir.getInstance().validateAsInput();
+    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
     boolean outputDirValid = OutputDir.getInstance().validateAsOutput();
     boolean srcLanguageValid = SrcLanguage.getInstance().validateAsInput();
-    boolean projectNameValid = ProjectName.getInstance().validateAsOutput();
-    boolean projectVersionValid =
-      ProjectVersion.getInstance().validateAsOutput();
+    //boolean projectNameValid = ProjectName.getInstance().validateAsOutput();
+    //boolean projectVersionValid = ProjectVersion.getInstance().validateAsOutput();
 
-    return (outputDirValid && binDirPathValid && srcLanguageValid
-      && projectNameValid && projectVersionValid);
+    return (outputDirValid && sourceDirValid && binDirValid && srcLanguageValid );
+     // && projectNameValid && projectVersionValid);
   }
   //#endregion
 }

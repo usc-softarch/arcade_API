@@ -63,8 +63,8 @@ public class DepsRsfFile
   {
     //TODO
 	  File depsRsfFile = new File(value);
-	    if(!depsRsfFile.getParentFile().exists()
-	      && !depsRsfFile.getParentFile().mkdirs())
+	    if((!depsRsfFile.getParentFile().exists())
+	      && (!depsRsfFile.getParentFile().mkdirs()))
 	        throw new IOException("Failed to create output directory.");
 	    
     return true;

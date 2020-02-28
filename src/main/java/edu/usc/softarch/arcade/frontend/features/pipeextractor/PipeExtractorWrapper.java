@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.pipeextractor;
 
-import java.lang.String;
 import edu.usc.softarch.arcade.util.ldasupport.PipeExtractor;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 

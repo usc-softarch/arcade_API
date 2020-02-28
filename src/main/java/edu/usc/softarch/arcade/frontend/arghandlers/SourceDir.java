@@ -3,7 +3,6 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.String;
 
 /**
  * Argument Handler for the path to a project directory containing multiple

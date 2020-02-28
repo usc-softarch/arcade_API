@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.tooladapters.mallet;
 
-import java.lang.String;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;

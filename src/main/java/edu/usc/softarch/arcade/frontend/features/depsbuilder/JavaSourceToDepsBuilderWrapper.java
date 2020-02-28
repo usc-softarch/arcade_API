@@ -1,13 +1,11 @@
 package edu.usc.softarch.arcade.frontend.features.depsbuilder;
 
-import java.lang.String;
 import edu.usc.softarch.arcade.facts.driver.JavaSourceToDepsBuilder;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
-import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.BinDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
 
 public class JavaSourceToDepsBuilderWrapper
   extends FeatureWrapper
@@ -20,9 +18,7 @@ public class JavaSourceToDepsBuilderWrapper
     ArgHandler[] requiredArguments =
     {
       DepsRsfFile.getInstance(),
-      SourceDir.getInstance(),
-      BinDir.getInstance()
-      
+      BinDirPath.getInstance()
     };
     initialize(id, name, requiredArguments);
   }
@@ -33,10 +29,9 @@ public class JavaSourceToDepsBuilderWrapper
   public void execute()
     throws Exception
   {
-    String[] parsedArgs = new String[3];
-    parsedArgs[0] = SourceDir.getInstance().getValue();
+    String[] parsedArgs = new String[2];
+    parsedArgs[0] = BinDirPath.getInstance().getValue();
     parsedArgs[1] = DepsRsfFile.getInstance().getValue();
-    parsedArgs[2] = BinDir.getInstance().getValue();
     JavaSourceToDepsBuilder.main(parsedArgs);
   }
   //#endregion
@@ -46,11 +41,10 @@ public class JavaSourceToDepsBuilderWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean binDirValid = BinDir.getInstance().validateAsInput();
+    boolean binDirPathValid = BinDirPath.getInstance().validateAsInput();
     boolean depsRsfFileValid = DepsRsfFile.getInstance().validateAsOutput();
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
 
-    return (binDirValid && depsRsfFileValid && sourceDirValid);
+    return (binDirPathValid && depsRsfFileValid);
   }
   //#endregion
 }

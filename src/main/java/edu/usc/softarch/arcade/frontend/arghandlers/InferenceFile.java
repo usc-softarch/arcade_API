@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import java.lang.String;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;

@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.smelldetection;
 
-import java.lang.String;
 import edu.usc.softarch.arcade.antipattern.detection.ArchSmellDetector;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 

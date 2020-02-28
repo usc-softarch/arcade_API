@@ -1,7 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.acdc;
 
 import acdc.ACDC;
-import java.lang.String;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;

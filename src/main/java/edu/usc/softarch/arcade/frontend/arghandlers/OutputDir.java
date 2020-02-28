@@ -2,7 +2,6 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.String;
 
 /**
  * Argument Handler for the path to a directory that is to contain the output

@@ -3,7 +3,6 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
-import java.lang.String;
 
 /**
  * Argument Handler for the path of a Smells SER file, typically of the form

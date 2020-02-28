@@ -1,7 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features;
 
 import java.util.Arrays;
-import java.lang.String;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**

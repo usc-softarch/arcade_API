@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import java.lang.String;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 /**

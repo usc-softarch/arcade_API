@@ -2,7 +2,6 @@ package edu.usc.softarch.arcade.frontend.features.arc;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.String;
 import edu.usc.softarch.arcade.clustering.BatchClusteringEngine;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 

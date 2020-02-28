@@ -1,7 +1,5 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import java.lang.String;
-
 public class ProjectVersion
   extends ArgHandler
 {

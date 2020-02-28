@@ -1,7 +1,5 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import java.lang.String;
-
 /**
  * Argument Handler for the name of a directory containing compiled binaries
  * from a project. Not to be confused with {@link BinDirPath}.

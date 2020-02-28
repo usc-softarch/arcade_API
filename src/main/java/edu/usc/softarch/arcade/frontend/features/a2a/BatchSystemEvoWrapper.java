@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.a2a;
 
-import java.lang.String;
 import edu.usc.softarch.arcade.metrics.BatchSystemEvo;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 

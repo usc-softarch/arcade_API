@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.tooladapters.mallet;
 
-import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

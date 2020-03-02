@@ -43,8 +43,8 @@ public class SmellsDir
   {
     //TODO
 	  File smellDirectory = new File(value);
-	    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
-	      throw new IOException("Smells SER directory doesn't exist.");
+	    if (!smellDirectory.exists())
+	      throw new Exception("Smells SER directory doesn't exist.");
 	    else
 	    {    	
 	    	File[] files = smellDirectory.listFiles();
@@ -71,7 +71,9 @@ public class SmellsDir
     throws Exception
   {
     //TODO
-	
+	  File smellDirectory = new File(value);
+	    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
+	      throw new Exception("Smells SER directory doesn't exist.");
     return true;
   }
   

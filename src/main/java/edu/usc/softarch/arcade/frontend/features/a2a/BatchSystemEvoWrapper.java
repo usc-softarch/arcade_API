@@ -1,11 +1,11 @@
-package edu.usc.softarch.arcade.frontend.features.a2a;
+  package edu.usc.softarch.arcade.frontend.features.a2a;
 
 import edu.usc.softarch.arcade.metrics.BatchSystemEvo;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.DistOpt;
-import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
 public class BatchSystemEvoWrapper
   extends FeatureWrapper
@@ -17,7 +17,7 @@ public class BatchSystemEvoWrapper
     String name = "Architecture to Architecture Pairwise Compute";
     ArgHandler[] requiredArguments =
     {
-      SourceDir.getInstance(),
+      ClusterDir.getInstance(),
       DistOpt.getInstance()
     };
 
@@ -31,9 +31,9 @@ public class BatchSystemEvoWrapper
     throws Exception
   {
     String[] parsedArgs = new String[3];
-    parsedArgs[0] = "-distopt";
-    parsedArgs[1] = DistOpt.getInstance().getValue();
-    parsedArgs[2] = SourceDir.getInstance().getValue();
+    parsedArgs[1] = "-distopt";
+    parsedArgs[2] = DistOpt.getInstance().getValue();
+    parsedArgs[0] = ClusterDir.getInstance().getValue();        
     BatchSystemEvo.main(parsedArgs);
   }
   //#endregion
@@ -44,8 +44,8 @@ public class BatchSystemEvoWrapper
     throws Exception
   {
     boolean distOptValid = DistOpt.getInstance().validateAsInput();
-    boolean sourceDirValid = SourceDir.getInstance().validateAsInput();
-    return (distOptValid && sourceDirValid);
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
+    return (distOptValid && clusterDirValid);
   }
   //#endregion
 }

@@ -68,8 +68,43 @@ public class AcdcWrapperTest
           + "struts-2.5.10.1_deps.rsf",
         "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
           + "struts-2.5.10.1_acdc_clustered.rsf"
-      }
-      //TODO add httpd tests
+      },
+      
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "httpd" + fs + "acdc" + fs + "dep" + fs
+            + "httpd-2.3.8_deps.rsf",
+          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+            + "httpd-2.3.8_acdc_clustered.rsf"
+      },
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "httpd" + fs + "acdc" + fs + "dep" + fs
+            + "httpd-2.4.7_deps.rsf",
+          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+            + "httpd-2.4.7_acdc_clustered.rsf"
+      },
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "httpd" + fs + "acdc" + fs + "dep" + fs
+            + "httpd-2.4.10_deps.rsf",
+          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+            + "httpd-2.4.10_acdc_clustered.rsf"
+      },
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "httpd" + fs + "acdc" + fs + "dep" + fs
+            + "httpd-2.4.16_deps.rsf",
+          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+            + "httpd-2.4.16_acdc_clustered.rsf"
+      },
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "httpd" + fs + "acdc" + fs + "dep" + fs
+            + "httpd-2.4.26_deps.rsf",
+          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+            + "httpd-2.4.26_acdc_clustered.rsf"
+      }      
     });
   }
   //#endregion

@@ -75,8 +75,86 @@ public class ArchSmellDetectorWrapperTest
           + "struts-2.5.8_287_topics_279_arc_clusters.rsf",
         "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
           + fs + "struts-2.5.8_smells.ser"
-      }
-      //TODO add httpd tests
+      },
+      {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "Struts2" + fs + "acdc" + fs + "dep" + fs
+            + "struts-2.3.30_deps.rsf",
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "Struts2" + fs + "pkg" + fs + "cluster" + fs
+            + "struts-2.3.30_deps_pkgs.rsf",
+          "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+            + fs + "struts-2.3.30_smells.ser"
+        },
+        {
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "Struts2" + fs + "acdc" + fs + "dep" + fs
+            + "struts-2.3.32_deps.rsf",
+          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+            + "Struts2" + fs + "pkg" + fs + "cluster" + fs
+            + "struts-2.3.32_deps_pkgs.rsf",
+          "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+            + fs + "struts-2.3.32_smells.ser"
+        }, 
+        
+        {
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "acdc" + fs + "dep" + fs
+              + "httpd-2.3.8_deps.rsf",
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "acdc" + fs + "cluster" + fs
+              + "httpd-2.3.8_acdc_clustered.rsf",
+            "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+              + fs + "httpd-2.3.8_acdc_smells.ser"
+        },
+        {
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "acdc" + fs + "dep" + fs
+              + "httpd-2.4.7_deps.rsf",
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "acdc" + fs + "cluster" + fs
+              + "httpd-2.4.7_acdc_clustered.rsf",
+            "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+              + fs + "httpd-2.4.7_acdc_smells.ser"
+        },
+        {
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "arc" + fs + "httpd-2.4.10_deps.rsf",
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "arc" + fs
+              + "httpd-2.4.10_46_topics_71_arc_clusters.rsf",
+            "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+              + fs + "httpd-2.4.10_smells.ser"
+        },
+        {
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "arc" + fs + "httpd-2.4.16_deps.rsf",
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+              + "httpd" + fs + "arc" + fs
+              + "httpd-2.4.16_46_topics_71_arc_clusters.rsf",
+            "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+              + fs + "httpd-2.4.16_smells.ser"
+        },
+        {
+              "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+                + "httpd" + fs + "acdc" + fs + "dep" + fs
+                + "httpd-2.4.26_deps.rsf",
+              "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+                + "httpd" + fs + "pkg" + fs + "cluster" + fs
+                + "httpd-2.4.26_deps_pkgs.rsf",
+              "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+                + fs + "httpd-2.4.26_deps_pkg_smells.ser"
+        },
+        {
+            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+                + "httpd" + fs + "acdc" + fs + "dep" + fs
+                + "httpd-2.3.8_deps.rsf",
+              "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+                + "httpd" + fs + "pkg" + fs + "cluster" + fs
+                + "httpd-2.3.8_deps_pkgs.rsf",
+              "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
+                + fs + "httpd-2.3.8_deps_pkg_smells.ser"
+        }
     });
   }
   //#endregion

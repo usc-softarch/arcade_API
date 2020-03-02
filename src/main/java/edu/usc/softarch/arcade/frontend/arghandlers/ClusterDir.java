@@ -41,8 +41,8 @@ public class ClusterDir
   {
     //TODO	          
     File clusterDirectory = new File(value);
-    if(!clusterDirectory.exists() && !clusterDirectory.mkdirs())
-      throw new IOException("cluster directory doesn't exist.");
+    if(!clusterDirectory.exists())
+      throw new IOException("cluster directory doesn't exist." + value);
     else
     {    	
     	File[] files = clusterDirectory.listFiles();
@@ -70,7 +70,9 @@ public class ClusterDir
     throws Exception
   {
     //TODO
-	
+	  File clusterDirectory = new File(value);
+	    if(!clusterDirectory.exists() && !clusterDirectory.mkdirs())
+	      throw new Exception("cluster directory doesn't exist.");
     return true;
   }  
  

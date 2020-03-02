@@ -41,7 +41,7 @@ public class DepsDir
   {
     //TODO
 	  File depsDirectory = new File(value);
-	    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
+	    if(!depsDirectory.exists())
 	      throw new IOException("deps directory doesn't exist.");
 	    else
 	    {    	
@@ -70,7 +70,9 @@ public class DepsDir
     throws Exception
   {
     //TODO
-	
+	  File depsDirectory = new File(value);
+	    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
+	      throw new IOException("deps directory doesn't exist.");
     return true;
   }
   

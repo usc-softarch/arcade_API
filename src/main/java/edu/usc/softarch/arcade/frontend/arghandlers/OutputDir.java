@@ -41,12 +41,9 @@ public class OutputDir
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    String fs = File.separator;
-    String outputDirPath = value;
-    outputDirPath += fs + "arc";
-    File outputDirectory = new File(outputDirPath);
-    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-      throw new IOException("Failed to create output directory.");
+	  File outputDirectory = new File(value);
+	    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
+	      throw new IOException("Failed to create output directory.");
 
     return true;
   }

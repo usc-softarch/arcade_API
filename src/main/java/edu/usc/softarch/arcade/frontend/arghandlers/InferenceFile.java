@@ -47,7 +47,8 @@ public class InferenceFile
 	    {
 	      throw new FileNotFoundException(value + " not found.");
 	    }
-	    else if (!value.equals("infer.mallet"))
+	    else if ((value.length() <= 12) 
+	    		|| !(value.substring(value.length()-12).equals("infer.mallet"))) 	    
 				{		      
 			      throw new IllegalArgumentException(value + "Invalid file type, input must be an infer.mallet file");
 			    }

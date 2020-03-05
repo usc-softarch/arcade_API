@@ -47,7 +47,8 @@ public class Topicmodel
 	    {
 	      throw new FileNotFoundException(value + " not found.");
 	    }
-	    else if (!value.equals("topicmodel.data"))
+	    else if ((value.length() <= 15) 
+	    		|| !(value.substring(value.length()-15).equals("topicmodel.data"))) 	    
 				{		      
 			      throw new IllegalArgumentException(value + "Invalid file type, input must be a topicmodel.data file");
 			    }

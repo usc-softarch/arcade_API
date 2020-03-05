@@ -43,25 +43,12 @@ public class MalletPath
   {
     //TODO
 	  File MalletPath = new File(value);
-	    if(!MalletPath.exists() && !MalletPath.mkdirs())
+	    if(!MalletPath.exists())
 	      throw new IOException("Mallet Path directory doesn't exist.");
 	    else
-	    {    	
-	    	File[] files = MalletPath.listFiles();
-	        int dirLength = MalletPath.list().length;
-	        boolean malletFileContain = false;
-	        String filename;
-	    	for (int i =0; i<dirLength; i++)
-	    	{
-	    		filename = files[i].getName();
-	    		if (filename.equals("mallet"))
-				{
-					malletFileContain = true;
-					break;
-				}				 
-	    	}
-	    	if(!malletFileContain)
-	    	      throw new IOException("Mallet Path directory missing file mallet.");    		
+	    {   
+	    	if (!value.substring(value.length()-10).equals("mallet.bat")) 
+	    	      throw new IOException("Mallet Path directory missing file mallet.bat");    		
 	    }	    
     return true;
   }

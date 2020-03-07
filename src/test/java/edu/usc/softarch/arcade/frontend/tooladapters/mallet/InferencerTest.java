@@ -85,7 +85,11 @@ public class InferencerTest
     MalletHome.getInstance().setValue(malletHomeString);
     MalletPath.getInstance().setValue(malletPathString);
 
-    try { inferencer.execute(); }
+    try 
+    { 
+    	inferencer.checkArguments(false);
+    	inferencer.execute(); 
+    }
     catch(Exception e)
     {
       Assert.fail(e.getStackTrace().toString());

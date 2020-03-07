@@ -51,9 +51,9 @@ public class TopicModelGeneratorTest
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems"
-          + fs + "Struts2" + fs + "src" + fs,
+          + fs + "Struts2" + fs + "src" + fs + "struts-2.5.8",
         "target" + fs + "test-results" + fs + "Struts2" + fs + "arc" + fs
-          + "base" + fs + "topicmodel.data",
+          + "base" + fs + "topicmodel.data",          
         System.getProperty("user.dir") + fs + "src" + fs
           + "test" + fs + "resources" + fs + "tools" + fs + "mallet-2.0.7" + fs
       }
@@ -80,12 +80,16 @@ public class TopicModelGeneratorTest
     else
       throw new UnsupportedOperationException("OS unknown.");
 
-    SourceDir.getInstance().setValue(sourceDirectory);
-    Topicmodel.getInstance().setValue(topicmodelFile);
+    SourceDir.getInstance().setValue(sourceDirectory);    
+    Topicmodel.getInstance().setValue(topicmodelFile);    
     MalletHome.getInstance().setValue(malletHomeString);
     MalletPath.getInstance().setValue(malletPathString);
 
-    try { tmgAdapter.execute(); }
+    try 
+    { 
+    	tmgAdapter.checkArguments(false); 
+    	tmgAdapter.execute(); 
+    }
     catch(Exception e)
     {
       Assert.fail(e.getStackTrace().toString());

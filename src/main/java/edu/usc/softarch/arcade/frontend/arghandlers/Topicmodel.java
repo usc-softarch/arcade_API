@@ -60,7 +60,8 @@ public class Topicmodel
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    File arcBaseDir = new File(value);
+	String dir = value.substring(0, value.length()-15);
+    File arcBaseDir = new File(dir);
     if(!arcBaseDir.exists() && !arcBaseDir.mkdirs())
       throw new IOException("Failed to create output directory.");
 

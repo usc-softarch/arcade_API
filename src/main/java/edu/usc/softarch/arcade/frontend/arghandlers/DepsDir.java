@@ -72,7 +72,7 @@ public class DepsDir
     //TODO
 	  File depsDirectory = new File(value);
 	    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
-	      throw new IOException("deps directory doesn't exist.");
+	      throw new IOException("Failed to create output directory.");
     return true;
   }
   

@@ -51,7 +51,7 @@ public class TopicModelGeneratorTest
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems"
-          + fs + "Struts2" + fs + "src" + fs + "struts-2.5.8",
+          + fs + "Struts2" + fs + "src",
         "target" + fs + "test-results" + fs + "Struts2" + fs + "arc" + fs
           + "base" + fs + "topicmodel.data",          
         System.getProperty("user.dir") + fs + "src" + fs

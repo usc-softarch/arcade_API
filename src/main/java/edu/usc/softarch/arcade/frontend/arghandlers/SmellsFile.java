@@ -61,7 +61,7 @@ public class SmellsFile
     File smellsFile = new File(value);
     if(!smellsFile.getParentFile().exists()
       && !smellsFile.getParentFile().mkdirs())
-        throw new IOException("Failed to create output directory.");
+        throw new IOException("Failed to create Smells SER directory.");
 
     return true;
   }   

@@ -73,7 +73,7 @@ public class SmellsDir
     //TODO
 	  File smellDirectory = new File(value);
 	    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
-	      throw new Exception("Smells SER directory doesn't exist.");
+	      throw new Exception("Failed to create Smells SER directory.");
     return true;
   }
   

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 /**
@@ -51,7 +52,11 @@ public abstract class ToolAdapter
    */
   protected abstract List<String> buildArguments();
 
-  protected abstract Map<String,String> buildEnv();
+  //protected abstract Map<String,String> buildEnv();
+  protected Map<String,String> buildEnv()
+  {
+	  return new HashMap <String,String> ();
+  }
   //#endregion
 
   //#region INTERFACE

@@ -1,5 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+import org.apache.commons.lang3.SystemUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -46,9 +47,23 @@ public class MalletPath
 	    if(!MalletPath.exists())
 	      throw new IOException("Mallet Path directory doesn't exist.");
 	    else
-	    {   
-	    	if (!value.substring(value.length()-10).equals("mallet.bat")) 
-	    	      throw new IOException("Mallet Path directory missing file mallet.bat");    		
+	    {       	
+	    	if(SystemUtils.IS_OS_LINUX)
+	        {
+	    		if (!value.substring(value.length()-6).equals("mallet")) 
+	        	{
+		    	      throw new IOException("Mallet Path directory missing file mallet");  
+	        	}
+	        }
+	        else if(SystemUtils.IS_OS_WINDOWS)
+	        {
+	        	if (!value.substring(value.length()-10).equals("mallet.bat")) 
+	        	{
+		    	      throw new IOException("Mallet Path directory missing file mallet.bat");  
+	        	}
+	        }
+	        else
+	          throw new UnsupportedOperationException("can't set mallet Path, unknown OS (only supports Windows and Linux-based.");
 	    }	    
     return true;
   }

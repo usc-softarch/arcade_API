@@ -64,7 +64,7 @@ public class DepsRsfFile
 	  File depsRsfFile = new File(value);
 	    if((!depsRsfFile.getParentFile().exists())
 	      && (!depsRsfFile.getParentFile().mkdirs()))
-	        throw new IOException("Failed to create output directory.");
+	        throw new IOException("Failed to create Deps .ser output directory.");
 	    
     return true;
   }

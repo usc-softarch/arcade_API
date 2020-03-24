@@ -60,7 +60,7 @@ public class ClusterFile
     File clusterFile = new File(value);
     if (!clusterFile.getParentFile().exists()
       && !clusterFile.getParentFile().mkdirs())
-        throw new IOException("Failed to create output directory.");
+        throw new IOException("Failed to create Cluster .ser output directory.");
 
     return true;
   }

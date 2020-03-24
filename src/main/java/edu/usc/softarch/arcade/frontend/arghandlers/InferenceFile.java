@@ -61,7 +61,7 @@ public class InferenceFile
     throws Exception
   {
     File arcBaseDir = new File(value);
-    if(!arcBaseDir.exists() && !arcBaseDir.mkdirs())
+    if(!arcBaseDir.getParentFile().exists() && !arcBaseDir.getParentFile().mkdirs())
       throw new IOException("Failed to create output directory.");
 
     return true;

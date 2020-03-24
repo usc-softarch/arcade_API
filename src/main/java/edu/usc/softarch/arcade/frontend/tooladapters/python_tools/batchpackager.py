@@ -5,7 +5,7 @@ Created on Jul 24, 2014
 '''
 
 import argparse, os
-import packager
+from packages import packager
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

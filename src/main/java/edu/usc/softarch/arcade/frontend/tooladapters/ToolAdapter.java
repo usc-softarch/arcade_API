@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.io.File;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 /**
@@ -25,6 +26,7 @@ public abstract class ToolAdapter
   {
     List<String> command = new ArrayList<String>();
     command.addAll(buildPrefix());
+    command.addAll(buildPythonPackage());
     command.addAll(buildToolPath());
     command.addAll(buildArguments());
     return command;
@@ -42,7 +44,11 @@ public abstract class ToolAdapter
     return new ArrayList<String>();
   }
 
-  protected abstract List<String> buildToolPath();
+  //protected abstract List<String> buildToolPath();
+  protected List<String> buildToolPath()
+  {
+	  return new ArrayList <String> ();
+  }
 
   /**
    * Adds the arguments to the execution command.
@@ -51,7 +57,17 @@ public abstract class ToolAdapter
    * @see #buildCommand()
    */
   protected abstract List<String> buildArguments();
+  
+  protected List<String> buildPythonPackage()
+  {
+	  return new ArrayList<String>();
+  }
 
+  protected String buildWorkingDirectory()
+  {
+	  return new String ();
+  }
+  
   //protected abstract Map<String,String> buildEnv();
   protected Map<String,String> buildEnv()
   {
@@ -65,14 +81,15 @@ public abstract class ToolAdapter
     throws Exception
   {
     List<String> command = buildCommand();
-
+    
     try
     {
       ProcessBuilder pb = new ProcessBuilder(command);
       System.out.println(pb.command());
+      pb.directory(new File(buildWorkingDirectory()));
       pb.environment().putAll(buildEnv());
       pb.inheritIO();
-      Process p = pb.start();
+      Process p = pb.start();      
       p.waitFor();
     }
     catch(SecurityException e)

@@ -38,7 +38,7 @@ public class Inferencer
   //#endregion
 
   //#region INTERNAL METHODS
-  @Override
+  //@Override
   protected List<String> buildToolPath()
   {
     List<String> toolPath = new ArrayList<String>();
@@ -68,7 +68,7 @@ public class Inferencer
     return command;
   }
 
-  @Override
+  //@Override
   protected Map<String,String> buildEnv()
   {
     Map<String,String> env = new HashMap<String,String>();

@@ -52,14 +52,14 @@ public class MalletPath
 	        {
 	    		if (!value.substring(value.length()-6).equals("mallet")) 
 	        	{
-		    	      throw new IOException("Mallet Path directory missing file mallet");  
+		    	      throw new IOException("Mallet Path must end with 'mallet'");  
 	        	}
 	        }
 	        else if(SystemUtils.IS_OS_WINDOWS)
 	        {
 	        	if (!value.substring(value.length()-10).equals("mallet.bat")) 
 	        	{
-		    	      throw new IOException("Mallet Path directory missing file mallet.bat");  
+		    	      throw new IOException("Mallet Path must end with 'mallet.bat'");  
 	        	}
 	        }
 	        else

@@ -46,24 +46,24 @@ public class WorkingDir
 	  File WorkingDir = new File(value);
 	    if(!WorkingDir.exists())
 	      throw new IOException("Python file Path doesn't exist.");
-	    else
-	    { 
-	    	File[] files = WorkingDir.listFiles();
-	        int dirLength = WorkingDir.list().length;
-	        boolean workingDirFileContain = false;
-	        String filename;
-	    	for (int i =0; i<dirLength; i++)
-	    	{
-	    		filename = files[i].getName();
-	    		if (filename.equals("__init__.py")) 
-	    		{
-	    			workingDirFileContain = true;
-					break;
-				}				 
-	    	}
-	    	if(!workingDirFileContain)
-	    	      throw new IOException("Python root package must have __init__.py file");    		
-	    }	    		
+//	    else
+//	    {
+//	    	File[] files = WorkingDir.listFiles();
+//	        int dirLength = WorkingDir.list().length;
+//	        boolean workingDirFileContain = false;
+//	        String filename;
+//	    	for (int i =0; i<dirLength; i++)
+//	    	{
+//	    		filename = files[i].getName();
+//	    		if (filename.equals("__init__.py")) 
+//	    		{
+//	    			workingDirFileContain = true;
+//					break;
+//				}
+//	    	}
+//	    	if(!workingDirFileContain)
+//	    	      throw new IOException("Python root package must have __init__.py file");    		
+//	    }
 	    	    
     return true;
   }

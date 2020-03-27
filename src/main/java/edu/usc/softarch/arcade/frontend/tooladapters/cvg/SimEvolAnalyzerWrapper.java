@@ -1,4 +1,4 @@
-package edu.usc.softarch.arcade.frontend.tooladapters.pkg;
+package edu.usc.softarch.arcade.frontend.tooladapters.cvg;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -9,28 +9,26 @@ import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.PythonPackage;
 import edu.usc.softarch.arcade.frontend.arghandlers.WorkingDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.DepsDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.PkgPrefixes;
+import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
 /**
  * Adapter for generating a pkg clustering files.
  *
  * @author Khoi
  */
-public class BatchPackagerWrapper
+public class SimEvolAnalyzerWrapper
   extends ToolAdapter
 {
   //#region CONSTRUCTORS	
-  public BatchPackagerWrapper()
+  public SimEvolAnalyzerWrapper()
   {
-    String id = "batchpackager";
-    String name = "pkg: Batch Packager Reference";
+    String id = "simevolanalyzer";
+    String name = "cvg: Cluster Coverage";
     ArgHandler[] requiredArguments =
     {
     	WorkingDir.getInstance(),
     	PythonPackage.getInstance(),
-    	DepsDir.getInstance(),
-    	PkgPrefixes.getInstance()
+    	ClusterDir.getInstance()    	
     };
 
     initialize(id, name, requiredArguments);
@@ -65,10 +63,8 @@ public class BatchPackagerWrapper
   protected List<String> buildArguments()
   {
     List<String> command = new ArrayList<String>();    
-    command.add("--startdir");
-    command.add(DepsDir.getInstance().getValue());
-    command.add("--pkgprefixes");    
-    command.add(PkgPrefixes.getInstance().getValue());
+    command.add("--inputdir");
+    command.add(ClusterDir.getInstance().getValue());    
     return command;
   }  
   
@@ -79,10 +75,8 @@ public class BatchPackagerWrapper
   {
 	boolean workingDirValid = WorkingDir.getInstance().validateAsInput();
 	boolean pythonPackageValid = PythonPackage.getInstance().validateAsInput();
-    boolean depsDirValid = DepsDir.getInstance().validateAsInput();
-    boolean pkgPrefixesValid = PkgPrefixes.getInstance().validateAsOutput();    
-    return (depsDirValid && pkgPrefixesValid 
-    		&& workingDirValid && pythonPackageValid);
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();        
+    return (clusterDirValid && workingDirValid && pythonPackageValid);
   }
   //#endregion
 }

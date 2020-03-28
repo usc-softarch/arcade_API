@@ -20,7 +20,7 @@ public class StdOutRedirect
   //#endregion
 
   //#region CONSTRUCTORS
-  private WritingOutputDir()
+  private StdOutRedirect()
   {
     String name = "stdOutRedirect";
     String description = "Standard Output Redirection File";

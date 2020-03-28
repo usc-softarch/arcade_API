@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
 import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
@@ -38,6 +39,7 @@ public class BatchPackagerWrapper
   //#endregion
 
   //#region INTERNAL METHODS
+  @Override
   protected List<String> buildPrefix()
   {
     List<String> prefixes = new ArrayList<String>();
@@ -46,20 +48,13 @@ public class BatchPackagerWrapper
     prefixes.add("-m");    
     return prefixes;
   }
-  
-  protected String buildWorkingDirectory()
+   
+  protected List<String> buildToolPath()
   {
-	String workingDir = new String();
-    workingDir = (WorkingDir.getInstance().getValue());
-    return workingDir;
-  }  
-  
-  protected List<String> buildPythonPackage()
-  {
-	List<String> pythonPackage = new ArrayList<String>();
-	pythonPackage.add(PythonPackage.getInstance().getValue());
+    List<String> pythonPackage = new ArrayList<String>();
+    pythonPackage.add(PythonPackage.getInstance().getValue());
     return pythonPackage;
-  }  
+  }
  
   @Override
   protected List<String> buildArguments()
@@ -71,6 +66,13 @@ public class BatchPackagerWrapper
     command.add(PkgPrefixes.getInstance().getValue());
     return command;
   }  
+  
+  @Override
+  protected void executeAuxiliary(ProcessBuilder pb)
+  {
+    pb.directory(new File(WorkingDir.getInstance().getValue()));
+  }
+  //#endregion
   
   //#region VALIDATION
   @Override

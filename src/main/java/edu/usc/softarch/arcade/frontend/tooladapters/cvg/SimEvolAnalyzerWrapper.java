@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+
 import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;

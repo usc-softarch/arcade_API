@@ -8,6 +8,7 @@ import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.PythonPackage;
+import edu.usc.softarch.arcade.frontend.arghandlers.WritingOutputDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.WorkingDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
@@ -27,6 +28,7 @@ public class SimEvolAnalyzerWrapper
     ArgHandler[] requiredArguments =
     {
     	WorkingDir.getInstance(),
+    	WritingOutputDir.getInstance(),
     	PythonPackage.getInstance(),
     	ClusterDir.getInstance()    	
     };
@@ -50,6 +52,13 @@ public class SimEvolAnalyzerWrapper
 	String workingDir = new String();
     workingDir = (WorkingDir.getInstance().getValue());
     return workingDir;
+  }    
+  
+  protected String buildWritingOutputDir()
+  {
+	String writingOutputDir = new String();
+	writingOutputDir = (WritingOutputDir.getInstance().getValue());
+    return writingOutputDir;
   }  
   
   protected List<String> buildPythonPackage()
@@ -64,7 +73,7 @@ public class SimEvolAnalyzerWrapper
   {
     List<String> command = new ArrayList<String>();    
     command.add("--inputdir");
-    command.add(ClusterDir.getInstance().getValue());    
+    command.add(ClusterDir.getInstance().getValue());  
     return command;
   }  
   

@@ -68,6 +68,11 @@ public abstract class ToolAdapter
 	  return new String ();
   }
   
+  protected String buildWritingOutputDir()
+  {
+	  return new String ();
+  }
+  
   //protected abstract Map<String,String> buildEnv();
   protected Map<String,String> buildEnv()
   {
@@ -86,9 +91,19 @@ public abstract class ToolAdapter
     {
       ProcessBuilder pb = new ProcessBuilder(command);
       System.out.println(pb.command());
-      pb.directory(new File(buildWorkingDirectory()));
+      
+      String processDir = buildWorkingDirectory();
+      pb.directory(new File(processDir));
+      
       pb.environment().putAll(buildEnv());
       pb.inheritIO();
+      //String writeOutputDir = processDir;
+      //String writeOutputDir = "D:/root.log";
+      //writeOutputDir += "/root.log";
+      
+      var fileName = new File(buildWritingOutputDir());      
+      pb.redirectOutput(fileName);
+      
       Process p = pb.start();      
       p.waitFor();
     }

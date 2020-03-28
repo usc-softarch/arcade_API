@@ -26,58 +26,56 @@ public abstract class ToolAdapter
   {
     List<String> command = new ArrayList<String>();
     command.addAll(buildPrefix());
-    command.addAll(buildPythonPackage());
     command.addAll(buildToolPath());
     command.addAll(buildArguments());
     return command;
   }
 
   /**
-   * Adds any necessary prefixes to execute the tool. Must be overriden for
-   * non-executable tools (e.g. jar files).
+   * Constructs a String list with any necessary prefixes to execute the tool.
+   * Must be overriden for non-executable tools (e.g. jar files).
    *
    * @return List of prefix commands (e.g. java -jar).
    * @see #buildCommand()
    */
-  protected List<String> buildPrefix()
-  {
-    return new ArrayList<String>();
-  }
-
-  //protected abstract List<String> buildToolPath();
-  protected List<String> buildToolPath()
-  {
-	  return new ArrayList <String> ();
-  }
+  protected List<String> buildPrefix() { return new ArrayList<String>(); }
 
   /**
-   * Adds the arguments to the execution command.
+   * Constructs a String list with the appropriate path or name of the tool
+   * being executed.
+   *
+   * @return List of tool path, name or other identifiers.
+   * @see #buildCommand()
+   */
+  protected abstract List<String> buildToolPath();
+
+  /**
+   * Constructs a String list with the arguments for the execution command.
    *
    * @return List of Strings with arguments to be appended to base command.
    * @see #buildCommand()
    */
   protected abstract List<String> buildArguments();
-  
-  protected List<String> buildPythonPackage()
-  {
-	  return new ArrayList<String>();
-  }
 
-  protected String buildWorkingDirectory()
-  {
-	  return new String ();
-  }
-  
-  protected String buildWritingOutputDir()
-  {
-	  return new String ();
-  }
-  
-  //protected abstract Map<String,String> buildEnv();
+  /**
+   * Constructs a String list with the environment variables necessary for
+   * executing the tool. Must be overwritten if temporary environment
+   * variables are needed by the tool.
+   *
+   * @return Map of the environment variables to add.
+   * @see #buildCommand()
+   */
   protected Map<String,String> buildEnv()
-  {
-	  return new HashMap <String,String> ();
-  }
+    { return new HashMap<String,String>(); }
+
+  /**
+   * Executes any extra transformations to the ProcessBuilder object that
+   * are required by a particular tool adapter. Default behavior is to do
+   * nothing.
+   *
+   * @param pb The ProcessBuilder object responsible for executing the tool.
+   */
+  protected void executeAuxiliary(ProcessBuilder pb) { }
   //#endregion
 
   //#region INTERFACE
@@ -86,47 +84,18 @@ public abstract class ToolAdapter
     throws Exception
   {
     List<String> command = buildCommand();
-    
+
     try
     {
       ProcessBuilder pb = new ProcessBuilder(command);
       System.out.println(pb.command());
-      
-      String processDir = buildWorkingDirectory();
-      pb.directory(new File(processDir));
-      
       pb.environment().putAll(buildEnv());
       pb.inheritIO();
-      //String writeOutputDir = processDir;
-      //String writeOutputDir = "D:/root.log";
-      //writeOutputDir += "/root.log";
-      
-      var fileName = new File(buildWritingOutputDir());      
-      pb.redirectOutput(fileName);
-      
-      Process p = pb.start();      
+      executeAuxiliary(pb);
+      Process p = pb.start();
       p.waitFor();
     }
-    catch(SecurityException e)
-    {
-      e.printStackTrace();
-      //TODO throw exception from lack of permission
-    }
-    catch(IOException e)
-    {
-      e.printStackTrace();
-      //TODO throw exception due to I/O error
-    }
-    catch(InterruptedException e)
-    {
-      e.printStackTrace();
-      //TODO throw exception due to some crazy threading error
-    }
-    catch(NullPointerException | IllegalArgumentException e)
-    {
-      e.printStackTrace();
-      //TODO throw exception due to herpaderp
-    }
+    catch(Exception e) { e.printStackTrace(); } //TODO
   }
   //#endregion
 }

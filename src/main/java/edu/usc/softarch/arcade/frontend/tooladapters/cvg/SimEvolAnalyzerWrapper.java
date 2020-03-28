@@ -8,29 +8,29 @@ import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.PythonPackage;
-import edu.usc.softarch.arcade.frontend.arghandlers.WritingOutputDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.StdOutRedirect;
 import edu.usc.softarch.arcade.frontend.arghandlers.WorkingDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
 /**
- * Adapter for generating a pkg clustering files.
+ * Adapter for generating a pkg clustering file.
  *
  * @author Khoi
  */
 public class SimEvolAnalyzerWrapper
   extends ToolAdapter
 {
-  //#region CONSTRUCTORS	
+  //#region CONSTRUCTORS
   public SimEvolAnalyzerWrapper()
   {
-    String id = "simevolanalyzer";
-    String name = "cvg: Cluster Coverage";
+    String id = "simEvolAnalyzer";
+    String name = "CVG: Cluster Coverage";
     ArgHandler[] requiredArguments =
     {
     	WorkingDir.getInstance(),
-    	WritingOutputDir.getInstance(),
+    	StdOutRedirect.getInstance(),
     	PythonPackage.getInstance(),
-    	ClusterDir.getInstance()    	
+    	ClusterDir.getInstance()
     };
 
     initialize(id, name, requiredArguments);
@@ -38,54 +38,52 @@ public class SimEvolAnalyzerWrapper
   //#endregion
 
   //#region INTERNAL METHODS
+  @Override
   protected List<String> buildPrefix()
   {
     List<String> prefixes = new ArrayList<String>();
     prefixes.add("py");
     prefixes.add("-2");
-    prefixes.add("-m");    
+    prefixes.add("-m");
     return prefixes;
   }
-  
-  protected String buildWorkingDirectory()
+
+  protected List<String> buildToolPath()
   {
-	String workingDir = new String();
-    workingDir = (WorkingDir.getInstance().getValue());
-    return workingDir;
-  }    
-  
-  protected String buildWritingOutputDir()
-  {
-	String writingOutputDir = new String();
-	writingOutputDir = (WritingOutputDir.getInstance().getValue());
-    return writingOutputDir;
-  }  
-  
-  protected List<String> buildPythonPackage()
-  {
-	List<String> pythonPackage = new ArrayList<String>();
-	pythonPackage.add(PythonPackage.getInstance().getValue());
+    List<String> pythonPackage = new ArrayList<String>();
+    pythonPackage.add(PythonPackage.getInstance().getValue());
     return pythonPackage;
-  }  
- 
+  }
+
   @Override
   protected List<String> buildArguments()
   {
-    List<String> command = new ArrayList<String>();    
+    List<String> command = new ArrayList<String>();
     command.add("--inputdir");
-    command.add(ClusterDir.getInstance().getValue());  
+    command.add(ClusterDir.getInstance().getValue());
     return command;
-  }  
-  
+  }
+
+  @Override
+  protected void executeAuxiliary(ProcessBuilder pb)
+  {
+    pb.directory(new File(WorkingDir.getInstance().getValue()));
+    pb.redirectOutput(new File(StdOutRedirect.getInstance().getValue()));
+  }
+  //#endregion
+
   //#region VALIDATION
   @Override
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-	boolean workingDirValid = WorkingDir.getInstance().validateAsInput();
-	boolean pythonPackageValid = PythonPackage.getInstance().validateAsInput();
-    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();        
-    return (clusterDirValid && workingDirValid && pythonPackageValid);
+    boolean workingDirValid = WorkingDir.getInstance().validateAsInput();
+    boolean pythonPackageValid = PythonPackage.getInstance().validateAsInput();
+    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
+    boolean stdOutRedirectValid =
+      StdOutRedirect.getInstance().validateAsOutput();
+    return (clusterDirValid && workingDirValid
+      && pythonPackageValid && stdOutRedirectValid);
   }
   //#endregion
 }

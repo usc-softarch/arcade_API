@@ -13,6 +13,7 @@ import edu.usc.softarch.arcade.frontend.arghandlers.WorkingDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.PkgPrefixes;
 
+
 /**
  * Adapter for generating a pkg clustering files.
  *
@@ -82,7 +83,7 @@ public class BatchPackagerWrapper
 	boolean workingDirValid = WorkingDir.getInstance().validateAsInput();
 	boolean pythonPackageValid = PythonPackage.getInstance().validateAsInput();
     boolean depsDirValid = DepsDir.getInstance().validateAsInput();
-    boolean pkgPrefixesValid = PkgPrefixes.getInstance().validateAsOutput();    
+    boolean pkgPrefixesValid = PkgPrefixes.getInstance().validateAsOutput();      
     return (depsDirValid && pkgPrefixesValid 
     		&& workingDirValid && pythonPackageValid);
   }

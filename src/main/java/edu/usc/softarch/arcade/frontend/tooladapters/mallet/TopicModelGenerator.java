@@ -38,7 +38,7 @@ public class TopicModelGenerator
   //#endregion
 
   //#region INTERNAL METHODS
-  //@Override
+  @Override
   protected List<String> buildToolPath()
   {
     List<String> toolPath = new ArrayList<String>();
@@ -62,7 +62,7 @@ public class TopicModelGenerator
     return command;
   }
 
-  //@Override
+  @Override
   protected Map<String,String> buildEnv()
   {
     Map<String,String> env = new HashMap<String,String>();

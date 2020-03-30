@@ -44,7 +44,7 @@ public class WorkingDir
   {
     //TODO
 	  File WorkingDir = new File(value);
-	    if(!WorkingDir.exists())
+	    if(!WorkingDir.exists() && !WorkingDir.mkdirs())
 	      throw new IOException("Python file Path doesn't exist.");
 //	    else
 //	    {

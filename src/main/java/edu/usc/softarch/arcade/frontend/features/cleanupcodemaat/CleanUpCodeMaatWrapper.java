@@ -1,24 +1,23 @@
-package edu.usc.softarch.arcade.frontend.features.cvg;
+package edu.usc.softarch.arcade.frontend.features.cleanupcodemaat;
 
 import java.io.IOException;
-import edu.usc.softarch.arcade.util.statistic.C2CAverageAnalyze;
+import logical_coupling.cleanUpCodeMaat;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
-import edu.usc.softarch.arcade.frontend.arghandlers.StdOutRedirect;
+import edu.usc.softarch.arcade.frontend.arghandlers.CodemaatDir;
 
-public class C2CAverageAnalyzeWrapper
+public class CleanUpCodeMaatWrapper
   extends FeatureWrapper
 {
   //#region CONSTRUCTORS
-  public C2CAverageAnalyzeWrapper()
+  public CleanUpCodeMaatWrapper()
   {
-    String id = "c2CAverageAnalyze";
-    String name = "cvg: Cluster Coverage";
+    String id = "cleanUpCodeMaat";
+    String name = "CleanUpCodeMaat: Clean Up for Code-Maat generated csv files (not neccessary in C/C++).";
     ArgHandler[] requiredArguments =
     {
-      //StdOutRedirect will be both input dir and output dir
-      StdOutRedirect.getInstance()     
+    	CodemaatDir.getInstance()     
     };
 
     initialize(id, name, requiredArguments);
@@ -31,8 +30,8 @@ public class C2CAverageAnalyzeWrapper
     throws Exception, IOException, IllegalArgumentException
   {
     String[] parsedArgs = new String[1];
-    parsedArgs[0] = StdOutRedirect.getInstance().getValue();    
-    C2CAverageAnalyze.main(parsedArgs);
+    parsedArgs[0] = CodemaatDir.getInstance().getValue();    
+    cleanUpCodeMaat.main(parsedArgs);
   }
   //#endregion
 
@@ -41,8 +40,8 @@ public class C2CAverageAnalyzeWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean stdOutRedirectValid = StdOutRedirect.getInstance().validateAsInput();    
-    return (stdOutRedirectValid);
+    boolean codemaatDirValid = CodemaatDir.getInstance().validateAsInput();    
+    return (codemaatDirValid);
   }
   //#endregion
 }

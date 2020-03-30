@@ -7,6 +7,7 @@ edu.usc.softarch.arcade.frontend.tooladapters.codemaat.CodemaatWrapper
 edu.usc.softarch.arcade.frontend.tooladapters.cvg.SimEvolAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.acdc.AcdcWrapper
 edu.usc.softarch.arcade.frontend.features.cvg.C2CAverageAnalyzeWrapper
+edu.usc.softarch.arcade.frontend.features.cleanupcodemaat.CleanUpCodeMaatWrapper
 edu.usc.softarch.arcade.frontend.features.acdc.AcdcDriverSingle
 edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBuilderWrapper
 edu.usc.softarch.arcade.frontend.features.depsbuilder.CSourceToDepsBuilderWrapper

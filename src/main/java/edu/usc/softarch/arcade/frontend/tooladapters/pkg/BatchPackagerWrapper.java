@@ -32,6 +32,7 @@ public class BatchPackagerWrapper
     	WorkingDir.getInstance(),
     	PythonPackage.getInstance(),
     	DepsDir.getInstance(),
+    	//set PkgPrefixes to empty string "" in C/C++ 
     	PkgPrefixes.getInstance()
     };
 

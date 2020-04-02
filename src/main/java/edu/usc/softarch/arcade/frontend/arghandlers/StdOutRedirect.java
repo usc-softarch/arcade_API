@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Argument Handler for the file directory for processbuilder to redirect output to. This should always be
- * filled in automatically based on {@link }.
+ * Argument Handler for the path to file that will serve as target for the
+ * StdOut stream.
  *
  * @author Khoi
  */
@@ -54,7 +54,10 @@ public class StdOutRedirect
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
+    File stdOutFile = new File(value);
+	    if(!stdOutFile.getParentFile().exists()
+        && !stdOutFile.getParentFile().mkdirs())
+	       throw new IOException("Failed to create StdOut file.");
 
     return true;
   }

@@ -1,14 +1,12 @@
+edu.usc.softarch.arcade.frontend.features.acdc.AcdcDriverSingle
 edu.usc.softarch.arcade.frontend.features.arc.ArcWrapper
+edu.usc.softarch.arcade.frontend.features.cvg.C2C
 edu.usc.softarch.arcade.frontend.features.pipeextractor.PipeExtractorWrapper
 edu.usc.softarch.arcade.frontend.tooladapters.mallet.TopicModelGenerator
 edu.usc.softarch.arcade.frontend.tooladapters.mallet.Inferencer
 edu.usc.softarch.arcade.frontend.tooladapters.pkg.BatchPackagerWrapper
 edu.usc.softarch.arcade.frontend.tooladapters.codemaat.CodemaatWrapper
-edu.usc.softarch.arcade.frontend.tooladapters.cvg.SimEvolAnalyzerWrapper
-edu.usc.softarch.arcade.frontend.features.acdc.AcdcWrapper
-edu.usc.softarch.arcade.frontend.features.cvg.C2CAverageAnalyzeWrapper
 edu.usc.softarch.arcade.frontend.features.cleanupcodemaat.CleanUpCodeMaatWrapper
-edu.usc.softarch.arcade.frontend.features.acdc.AcdcDriverSingle
 edu.usc.softarch.arcade.frontend.features.depsbuilder.JavaSourceToDepsBuilderWrapper
 edu.usc.softarch.arcade.frontend.features.depsbuilder.CSourceToDepsBuilderWrapper
 edu.usc.softarch.arcade.frontend.features.smelldetection.ArchSmellDetectorWrapper
@@ -16,3 +14,5 @@ edu.usc.softarch.arcade.frontend.features.a2a.BatchSystemEvoWrapper
 edu.usc.softarch.arcade.frontend.features.decaymetrics.BatchDecayMetricsAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellEvolutionAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellDensityAnalyzerWrapper
+edu.usc.softarch.arcade.frontend.features.cvg.C2CAverageAnalyzeWrapper
+edu.usc.softarch.arcade.frontend.tooladapters.cvg.SimEvolAnalyzerWrapper

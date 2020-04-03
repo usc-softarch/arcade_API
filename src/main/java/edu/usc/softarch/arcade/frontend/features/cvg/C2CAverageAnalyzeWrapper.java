@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.features.cvg;
 
-import java.io.IOException;
 import edu.usc.softarch.arcade.util.statistic.C2CAverageAnalyze;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -13,12 +12,12 @@ public class C2CAverageAnalyzeWrapper
   //#region CONSTRUCTORS
   public C2CAverageAnalyzeWrapper()
   {
-    String id = "c2CAverageAnalyze";
-    String name = "cvg: Cluster Coverage";
+    String id = "c2cAverageAnalyze";
+    String name = "CVG: C2C Avarages Analyze";
     ArgHandler[] requiredArguments =
     {
       //StdOutRedirect will be both input dir and output dir
-      StdOutRedirect.getInstance()     
+      StdOutRedirect.getInstance()
     };
 
     initialize(id, name, requiredArguments);
@@ -28,10 +27,10 @@ public class C2CAverageAnalyzeWrapper
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[1];
-    parsedArgs[0] = StdOutRedirect.getInstance().getValue();    
+    parsedArgs[0] = StdOutRedirect.getInstance().getValue();
     C2CAverageAnalyze.main(parsedArgs);
   }
   //#endregion
@@ -41,7 +40,7 @@ public class C2CAverageAnalyzeWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean stdOutRedirectValid = StdOutRedirect.getInstance().validateAsInput();    
+    boolean stdOutRedirectValid = StdOutRedirect.getInstance().validateAsInput();
     return (stdOutRedirectValid);
   }
   //#endregion

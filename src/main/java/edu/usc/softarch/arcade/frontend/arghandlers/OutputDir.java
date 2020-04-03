@@ -5,7 +5,7 @@ import java.io.IOException;
 
 /**
  * Argument Handler for the path to a directory that is to contain the output
- * of an execution. To be used primarily with batch components.
+ * of an execution. To be used primarily with workflow components.
  *
  * @author Marcelo Schmitt Laser
  */
@@ -47,15 +47,15 @@ public class OutputDir
 
     return true;
   }
-  
+
   @Override
   public boolean validateAsInput(String value)
     throws Exception
   {
     //TODO
-	
+
     return true;
   }
-  
+
   //#endregion
 }

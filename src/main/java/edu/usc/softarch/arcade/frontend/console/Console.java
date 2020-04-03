@@ -1,6 +1,8 @@
 package edu.usc.softarch.arcade.frontend.console;
 
 import java.lang.String;
+import java.lang.reflect.Method;
+import java.lang.Class;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.ServiceLoader;
 import java.util.Scanner;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
+import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 
 /**
  * Driver for {@link edu.usc.softarch.arcade.frontend.console}.
@@ -20,11 +23,9 @@ public class Console
 {
   public static Scanner in = new Scanner(System.in);
 
-  public static Map<String,String> arguments;
-
   public static void main(String[] args)
   {
-    arguments = loadConfiguration();
+    loadConfiguration();
     ServiceLoader<FeatureWrapper> componentLoader
       = ServiceLoader.load(FeatureWrapper.class);
     Map<String, ConsoleUI> components = new HashMap<String, ConsoleUI>();
@@ -95,30 +96,32 @@ public class Console
     throw new UnsupportedOperationException();
   }
 
-  private static Map<String,String> loadConfiguration()
+  private static void loadConfiguration()
   {
     BufferedReader reader;
     try
     {
       reader = new BufferedReader(new FileReader("config.arcade"));
       String line = reader.readLine();
-      Map<String,String> result = new HashMap<String,String>();
       while(line != null)
       {
         String[] lineArg = line.split("=");
         if(lineArg.length == 2)
         {
           lineArg[1] = lineArg[1].replace("\\", File.separator);
-          result.put(lineArg[0], lineArg[1]);
+          Class argHandler = Class.forName(
+            "edu.usc.softarch.arcade.frontend.arghandlers." + lineArg[0]);
+          Method singletonCall = argHandler.getMethod("getInstance",null);
+          ArgHandler toAssign = (ArgHandler)singletonCall.invoke(null,null);
+          toAssign.setValue(lineArg[1]);
         }
         line = reader.readLine();
       }
       reader.close();
-      return result;
     }
-    catch(IOException e)
+    catch(Exception e)
     {
-      return new HashMap<String,String>();
+      e.printStackTrace();
     }
   }
 }

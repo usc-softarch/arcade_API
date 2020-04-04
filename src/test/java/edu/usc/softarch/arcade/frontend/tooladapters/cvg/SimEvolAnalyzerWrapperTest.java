@@ -50,11 +50,11 @@ public class SimEvolAnalyzerWrapperTest
     return Arrays.asList(new Object[][]
     {
       {
-    	  "src" + fs + "main" + fs + "resources" + fs + "root.log",     	        
+    	  "src" + fs + "main" + fs + "resources" + fs + "root.log",
 //        "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "Struts2"
 //        + fs + "acdc" + fs + "root.log",
-        "python.cvg.simevolanalyzer",  
-        "src" + fs + "main" + fs + "resources",                
+        "python.cvg.simevolanalyzer",
+        "src" + fs + "main" + fs + "resources",
         "D:\\arcade_console" + fs + "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
         + "Struts2" + fs + "acdc" + fs + "cluster"
       },

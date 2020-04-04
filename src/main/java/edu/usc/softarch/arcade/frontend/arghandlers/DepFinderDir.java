@@ -52,7 +52,27 @@ public class DepFinderDir
     throws Exception
   {
     //TODO
-	
+	  File depFinderDirectory = new File(value);
+	    if(!depFinderDirectory.exists())
+	      throw new IOException("depFinder directory doesn't exist." + value);
+	    else
+	    {    	
+	    	File[] files = depFinderDirectory.listFiles();
+	        int dirLength = depFinderDirectory.list().length;
+	        boolean depFinderFileContain = false;
+	        String filename;
+	    	for (int i =0; i<dirLength; i++)
+	    	{
+	    		filename = files[i].getName();
+	    		if ((filename.length() >= 9) && (filename.substring(filename.length()-9).equals("_deps.xml")))
+				{
+					depFinderFileContain = true;
+					break;
+				}				 
+	    	}
+	    	if(!depFinderFileContain)
+	    	      throw new IOException("depFinder directory doesn't have _deps.xml file.");    
+	    }
     return true;
   }
   

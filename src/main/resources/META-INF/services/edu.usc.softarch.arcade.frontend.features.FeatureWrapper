@@ -15,3 +15,5 @@ edu.usc.softarch.arcade.frontend.features.decaymetrics.BatchDecayMetricsAnalyzer
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellEvolutionAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellDensityAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.interfacecouplingbasedsmelldetection.DepFindRunnerWrapper
+edu.usc.softarch.arcade.frontend.features.interfacecouplingbasedsmelldetection.BatchCloneFinderWrapper
+edu.usc.softarch.arcade.frontend.features.interfacecouplingbasedsmelldetection.DependencyFinderProcessing_ExportJSONWrapper

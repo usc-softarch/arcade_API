@@ -50,41 +50,41 @@ public class SimEvolAnalyzerWrapperTest
     return Arrays.asList(new Object[][]
     {
       {
-        "src" + fs + "main" + fs + "resources",        
+    	  "src" + fs + "main" + fs + "resources" + fs + "root.log",     	        
 //        "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "Struts2"
 //        + fs + "acdc" + fs + "root.log",
-    	  "src" + fs + "main" + fs + "resources" + fs + "root.log", 
-        "python.cvg.simevolanalyzer",        
+        "python.cvg.simevolanalyzer",  
+        "src" + fs + "main" + fs + "resources",                
         "D:\\arcade_console" + fs + "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
         + "Struts2" + fs + "acdc" + fs + "cluster"
       },
       
       {
-          "src" + fs + "main" + fs + "resources",
-          "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "Struts2"
-          + fs + "arc" + fs + "root.log",
-    	    "src" + fs + "main" + fs + "resources" + fs + "root.log", 
-          "python.cvg.simevolanalyzer",        
+    	  "src" + fs + "main" + fs + "resources" + fs + "root.log", 
+    	  "python.cvg.simevolanalyzer",     	  
+//          "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "Struts2"
+//          + fs + "arc" + fs + "root.log",    	  
+          "src" + fs + "main" + fs + "resources",                 
           "D:\\arcade_console" + fs + "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "arc" + fs + "cluster"
       },
       
       {
-          "src" + fs + "main" + fs + "resources", 
+    	  "src" + fs + "main" + fs + "resources" + fs + "root.log",           
 //          "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "httpd"
-//          + fs + "acdc" + fs + "root.log",
-    	    "src" + fs + "main" + fs + "resources" + fs + "root.log", 
-          "python.cvg.simevolanalyzer",        
+//          + fs + "acdc" + fs + "root.log",    	    
+          "python.cvg.simevolanalyzer",       
+          "src" + fs + "main" + fs + "resources", 
           "D:\\arcade_console" + fs + "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "acdc" + fs + "cluster"
       },
       
       {
-    	  "src" + fs + "main" + fs + "resources", 
+    	  "src" + fs + "main" + fs + "resources" + fs + "root.log",     	  
 //    	  "D:\\arcade_console" + fs + "target" + fs + "test-results" + fs + "SimEvolAnalyzerWrapper" + fs + "httpd"
-//    	  + fs + "arc" + fs + "root.log",
-    	  "src" + fs + "main" + fs + "resources" + fs + "root.log", 
+//    	  + fs + "arc" + fs + "root.log",    	  
           "python.cvg.simevolanalyzer",        
+          "src" + fs + "main" + fs + "resources", 
           "D:\\arcade_console" + fs + "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "arc" + fs + "cluster"
       }

@@ -32,8 +32,8 @@ public class BatchPackagerWrapperTest
   //#endregion
 
   //#region CONSTRUCTOR
-  public BatchPackagerWrapperTest(String depsDir, String pythonPackage,
-    String workingDir, String pkgPrefixes)
+  public BatchPackagerWrapperTest(String workingDir, String pythonPackage,
+		  String depsDir, String pkgPrefixes)
   {
     super();
     this.depsDir = depsDir;

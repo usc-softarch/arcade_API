@@ -44,11 +44,11 @@ public class ProjectLogFile
     File projectLogFile = new File(value);
     if(!projectLogFile.exists())
       throw new FileNotFoundException(value + " not found.");
-//    else if ((value.length() < 4) 
-//			|| !(value.substring(value.length()-4).equals(".rsf"))) 
-//			{		      
-//		      throw new IllegalArgumentException(value + "Invalid file type (must be .rsf file)" );
-//		    }	   
+    else if ((value.length() < 4) 
+			|| !(value.substring(value.length()-4).equals(".log"))) 
+			{		      
+		      throw new IllegalArgumentException(value + "Invalid file type (must be .log file)" );
+		    }	   
 
     return true;
   }

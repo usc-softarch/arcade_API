@@ -12,6 +12,8 @@ import edu.usc.softarch.arcade.frontend.arghandlers.CleanUpCodeMaatFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.PkgPrefixes;
 import edu.usc.softarch.arcade.frontend.arghandlers.InterfaceSmellFile;
 
+// only works with Java source code, because DepFinderDir only available in Java
+
 public class DependencyFinderProcessing_ExportJSONWrapper
   extends FeatureWrapper
 {

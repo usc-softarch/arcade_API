@@ -118,14 +118,14 @@ public class AcdcWrapperTest
   @Test
   public void testAcdcWrapper()
   {
-    FeatureWrapper archSmellDetector = new AcdcWrapper();
+    FeatureWrapper testAcdc = new AcdcWrapper();
     DepsRsfFile.getInstance().setValue(depsRsfFile);
     ClusterFile.getInstance().setValue(clusterFile);
 
     try
     {
-      archSmellDetector.checkArguments(false);
-      archSmellDetector.execute();
+      testAcdc.checkArguments(false);
+      testAcdc.execute();
     }
     catch(Exception e)
     {

@@ -30,7 +30,7 @@
     <dependency>
       <groupId>edu.usc.softarch.arcade</groupId>
       <artifactId>core</artifactId>
-      <version>khoi</version>
+      <version>khoi2</version>
     </dependency>
     <!-- If anything goes wrong, remember to add access token to settings -->
     <dependency>
@@ -41,7 +41,7 @@
   </dependencies>
   <build>
     <plugins>
-       <plugin>
+       <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.1.1</version>
@@ -54,7 +54,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.5.5</version>

@@ -2,12 +2,9 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import org.apache.commons.lang3.SystemUtils;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
- * Argument Handler for the path to a mallet executable. This should always be
- * filled in automatically based on {@link MalletHome}.
+ * Argument Handler for the path to a mallet executable.
  *
  * @author Marcelo Schmitt Laser
  */
@@ -42,40 +39,18 @@ public class MalletPath
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
-	  File MalletPath = new File(value);
-	    if(!MalletPath.exists())
-	      throw new IOException("Mallet Path directory doesn't exist.");
-	    else
-	    {       	
-	    	if(SystemUtils.IS_OS_LINUX)
-	        {
-	    		if (!value.substring(value.length()-6).equals("mallet")) 
-	        	{
-		    	      throw new IOException("Mallet Path must end with 'mallet'");  
-	        	}
-	        }
-	        else if(SystemUtils.IS_OS_WINDOWS)
-	        {
-	        	if (!value.substring(value.length()-10).equals("mallet.bat")) 
-	        	{
-		    	      throw new IOException("Mallet Path must end with 'mallet.bat'");  
-	        	}
-	        }
-	        else
-	          throw new UnsupportedOperationException("can't set mallet Path, unknown OS (only supports Windows and Linux-based.");
-	    }	    
+	  File malletPathVar = new File(value);
+	  if(!malletPathVar.exists())
+	    throw new Exception("Mallet executable not found at path: " + value);
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
   }
-  
   //#endregion
 }

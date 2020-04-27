@@ -1,14 +1,12 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
- * Argument Handler for the path to a directory containing _deps.rsf files.
- * For the path to a specific _deps.rsf file, see {@link DepsRsfFile}.
+ * Argument Handler for the path to a dependencies data directory.
+ *
+ * @author Marcelo Schmitt Laser
  */
-
 public class DepsDir
   extends ArgHandler
 {
@@ -20,9 +18,10 @@ public class DepsDir
   private DepsDir()
   {
     String name = "depsDir";
-    String description = "Dependencies RSF Directory";
-    String instruction = "Dependencies RSF Directory: This is a directory ";
-    instruction += "containing one or more files of the form *_deps.rsf.";
+    String description = "Dependencies Directory";
+    String instruction = "Dependencies Directory: This is a directory ";
+    instruction += "containing one or more files with dependency data from ";
+    instruction += "the subject system."
 
     initialize(name, description, instruction);
   }
@@ -39,42 +38,24 @@ public class DepsDir
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
 	  File depsDirectory = new File(value);
-	    if(!depsDirectory.exists())
-	      throw new IOException("deps directory doesn't exist.");
-	    else
-	    {    	
-	    	File[] files = depsDirectory.listFiles();
-	        int dirLength = depsDirectory.list().length;
-	        boolean depsFileContain = false;
-	        String filename;
-	    	for (int i =0; i<dirLength; i++)
-	    	{
-	    		filename = files[i].getName();
-	    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".rsf")))
-				{
-					depsFileContain = true;
-					break;
-				}
-	    	}
-	    	if(!depsFileContain)
-	    	      throw new IOException("deps directory doesn't have .rsf file.");    		
-	    }	    
-	    
+    if(!depsDirectory.exists())
+    {
+      String errorMessage = "Dependencies directory not found at given path: ";
+      errorMessage += value;
+      throw new Exception(errorMessage);
+    }
 	  return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
 	  File depsDirectory = new File(value);
-	    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
-	      throw new IOException("Failed to create output directory.");
+    if(!depsDirectory.exists() && !depsDirectory.mkdirs())
+      throw new IOException("Failed to create dependencies directory.");
     return true;
   }
-  
   //#endregion
 }

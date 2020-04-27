@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Argument Handler for the exact path of a directory with the compiled
@@ -22,8 +20,8 @@ public class BinDirPath
   {
     String name = "binDirPath";
     String description = "Binaries Directory Path";
-    String instruction = "This is the path to a specific directory containing ";
-    instruction += "the compiled binaries of the subject system.";
+    String instruction = "This is the path to the directory containing ";
+    instruction += "the compiled binaries for a subject system.";
 
     initialize(name, description, instruction);
   }
@@ -40,12 +38,13 @@ public class BinDirPath
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
-	  File BinDirectory = new File(value);
-	    if(!BinDirectory.exists())
-	    {     
-	      throw new IllegalArgumentException(value + "Binaries Directory not found");
-	    }
+	  File binDirectory = new File(value);
+    if(!binDirectory.exists())
+    {
+      String errorMessage = "Binaries Directory not found at given path: ";
+      errorMessage += value;
+      throw new Exception(errorMessage);
+    }
     return true;
   }
 
@@ -56,6 +55,5 @@ public class BinDirPath
     //TODO
     return true;
   }
-
   //#endregion
 }

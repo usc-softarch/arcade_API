@@ -6,7 +6,6 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
  *
  * @author Marcelo Schmitt Laser
  */
-
 public class BinDir
   extends ArgHandler
 {
@@ -17,11 +16,10 @@ public class BinDir
   //#region CONSTRUCTORS
   private BinDir()
   {
-	String name = "binDir";
-    String description = "Classes Directory Name";
-    String instruction = "Classes Directory Name: This is the name of the ";
-    instruction += "directory in each subject system that contains the ";
-    instruction += "compiled classes of that system version.";
+	  String name = "binDir";
+    String description = "Binaries Directory Name";
+    String instruction = "This is the name of the directory containing the ";
+    instruction += "compiled binaries for a subject system.";
 
     initialize(name, description, instruction);
   }
@@ -41,15 +39,13 @@ public class BinDir
     //TODO
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
-  }  
-  
+  }
   //#endregion
 }

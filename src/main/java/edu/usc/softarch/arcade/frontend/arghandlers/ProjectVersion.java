@@ -1,5 +1,10 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
+/**
+ * Argument Handler for the version of the project being analyzed.
+ *
+ * @author Marcelo Schmitt Laser
+ */
 public class ProjectVersion
   extends ArgHandler
 {
@@ -12,7 +17,7 @@ public class ProjectVersion
   {
     String name = "projectVersion";
     String description = "Project Version";
-    String instruction = "This is the version of the project being analyzed.";
+    String instruction = "This is the version of the project to be analyzed.";
 
     initialize(name, description, instruction);
   }
@@ -39,7 +44,6 @@ public class ProjectVersion
   {
     //TODO
     return true;
-  } 
-  
+  }
   //#endregion
 }

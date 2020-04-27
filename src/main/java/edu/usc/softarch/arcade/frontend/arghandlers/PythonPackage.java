@@ -2,16 +2,13 @@ package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import org.apache.commons.lang3.SystemUtils;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
- * Argument Handler for the path to a python working directory. This should always be
- * filled in automatically based on {@link }.
+ * Argument Handler for a python package. To be used by tool adapters that
+ * target python tools.
  *
  * @author Khoi
  */
-
 public class PythonPackage
   extends ArgHandler
 {
@@ -24,8 +21,7 @@ public class PythonPackage
   {
     String name = "pythonPackage";
     String description = "Python Package";
-    String instruction = "Python Package: This is the path to python module,";
-    instruction += "(something like root.parentDir.pythonFile)";
+    String instruction = "This is the python package that is to be executed.";
 
     initialize(name, description, instruction);
   }
@@ -41,21 +37,17 @@ public class PythonPackage
   @Override
   public boolean validateAsInput(String value)
     throws Exception
-  {    
-	  if (value.substring(value.length()-3).equals(".py"))
-		throw new IOException("python executable package shouldn't have .py extension at the end, please remove '.py'");    		
-
+  {
+	  //TODO
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
   }
-  
   //#endregion
 }

@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 /**
  * Argument Handler for the path to an infer.mallet file. This file is
@@ -11,7 +9,6 @@ import java.io.FileNotFoundException;
  * @author Marcelo Schmitt Laser
  * @see edu.usc.softarch.arcade.frontend.tooladapters.mallet.Inferencer
  */
-
 public class InferenceFile
   extends ArgHandler
 {
@@ -43,29 +40,24 @@ public class InferenceFile
     throws Exception
   {
 	  File inferFile = new File(value);
-	    if(!inferFile.exists())
-	    {
-	      throw new FileNotFoundException(value + " not found.");
-	    }
-	    else if ((value.length() <= 12) 
-	    		|| !(value.substring(value.length()-12).equals("infer.mallet"))) 	    
-				{		      
-			      throw new IllegalArgumentException(value + "Invalid file type, input must be an infer.mallet file");
-			    }
-	    
+	  if(!inferFile.exists())
+	  {
+      String errorMessage = "Inference file not found at path: ";
+      errorMessage += value;
+	    throw new Exception(errorMessage);
+	  }
 	  return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    File arcBaseDir = new File(value);
-    if(!arcBaseDir.getParentFile().exists() && !arcBaseDir.getParentFile().mkdirs())
-      throw new IOException("Failed to create output directory.");
-
+    File inferFile = new File(value);
+    if(!inferFile.getParentFile().exists()
+      && !inferFile.getParentFile().mkdirs())
+        throw new Exception("Failed to create output directory.");
     return true;
-  }  
- 
+  }
   //#endregion
 }

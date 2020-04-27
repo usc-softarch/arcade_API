@@ -1,11 +1,10 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Argument Handler for the path to a directory that is to contain the output
- * of an execution. To be used primarily with workflow components.
+ * of an execution. To be used mainly with workflow components.
  *
  * @author Marcelo Schmitt Laser
  */
@@ -22,9 +21,9 @@ public class OutputDir
   {
     String name = "outputDir";
     String description = "Output Directory";
-    String instruction = "Output Directory: This is the directory where all ";
-    instruction += "output files go. Necessary subdirectories will be created ";
-    instruction += "if not present.";
+    String instruction = "This is the directory where all output files will ";
+    instruction += "go. Necessary subdirectories will be created if not ";
+    instruction += "present.";
 
     initialize(name, description, instruction);
   }
@@ -38,24 +37,21 @@ public class OutputDir
 
   //#region VALIDATION
   @Override
-  public boolean validateAsOutput(String value)
-    throws Exception
-  {
-	  File outputDirectory = new File(value);
-	    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
-	      throw new IOException("Failed to create output directory.");
-
-    return true;
-  }
-
-  @Override
   public boolean validateAsInput(String value)
     throws Exception
   {
     //TODO
-
     return true;
   }
 
+  @Override
+  public boolean validateAsOutput(String value)
+    throws Exception
+  {
+	  File outputDirectory = new File(value);
+    if(!outputDirectory.exists() && !outputDirectory.mkdirs())
+      throw new Exception("Failed to create output directory.");
+    return true;
+  }
   //#endregion
 }

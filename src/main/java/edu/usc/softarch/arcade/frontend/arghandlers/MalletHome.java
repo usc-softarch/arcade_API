@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Argument Handler for the path to mallet's installation directory. Not to be
@@ -41,21 +39,22 @@ public class MalletHome
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
 	  File MalletHome = new File(value);
-	    if(!MalletHome.exists() && !MalletHome.mkdirs())
-	      throw new IOException("Mallet Home directory doesn't exist."); 
+    if(!MalletHome.exists() && !MalletHome.mkdirs())
+    {
+      String errorMessage = "Mallet Home directory not found at path: ";
+      errorMessage += value;
+      throw new Exception(errorMessage);
+    }
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
   }
- 
   //#endregion
 }

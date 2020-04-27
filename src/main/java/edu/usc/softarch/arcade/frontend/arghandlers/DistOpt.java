@@ -1,14 +1,11 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import java.io.IOException;
-
 /**
  * Argument Handler for the comparison distance to be used with comparison-
  * based metrics, such as A2A.
  *
  * @author Marcelo Schmitt Laser
  */
-
 public class DistOpt
   extends ArgHandler
 {
@@ -21,8 +18,8 @@ public class DistOpt
   {
     String name = "distOpt";
     String description = "Comparison Distance";
-    String instruction = "Comparison Distance: This is the version distance ";
-    instruction += "between compared versions. Default value is 1, possible ";
+    String instruction = "This is the maximum version distance between ";
+    instruction += "compared versions. Default value is 1, possible ";
     instruction += "values are 1, 2 or 3.";
 
     initialize(name, description, instruction);
@@ -40,22 +37,18 @@ public class DistOpt
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
-	if (!(value.equals("1")) 
-		&& !(value.equals("2"))
-			&& !(value.equals("3")))
-       throw new IOException("Invalid input, must be 1, 2, or 3.");
+    Integer intValue = Integer.parseInt(value);
+  	if (intValue < 1 || intValue > 3)
+      throw new IOException("Invalid comparison distance, must be 1, 2, or 3.");
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
   }
-  
   //#endregion
 }

@@ -1,15 +1,13 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Argument Handler for the path to Arc's intermediary artifacts. It must
- * follow the specific _/arc/base format because of hard-coded issues in Arc.
+ * follow the _/arc/base format because of hard-coded issues in Arc.
  *
  * @author Marcelo Schmitt Laser
  */
-
 public class ArcBaseDir
   extends ArgHandler
 {
@@ -22,8 +20,8 @@ public class ArcBaseDir
   {
     String name = "arcBaseDir";
     String description = "ARC Output Base Directory";
-    String instruction = "This is the directory where the inputs for ARC will ";
-    instruction += "be placed.";
+    String instruction = "This is the directory where the outputs from ARC ";
+    instruction += "will be placed.";
 
     initialize(name, description, instruction);
   }
@@ -40,21 +38,18 @@ public class ArcBaseDir
   public boolean validateAsInput(String value)
     throws Exception
   {
-	//TODO
-
+	  //TODO
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
-	  File arcBaseDir = new File(value);
-	    if(!arcBaseDir.exists() && !arcBaseDir.mkdirs())
-	      throw new IOException("Failed to create output directory.");
+	  File arcBaseDirFile = new File(value);
+    if(!arcBaseDirFile.exists() && !arcBaseDirFile.mkdirs())
+      throw new Exception("Failed to create output directory.");
     return true;
-  }  
-  
+  }
   //#endregion
 }

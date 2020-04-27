@@ -1,14 +1,14 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
- * Argument Handler for the path to a directory containing _cluster.rsf files.
- * For the path to a specific _cluster.rsf file, see {@link ClusterFile}.
+ * Argument Handler for the path to a Cluster Directory, which contains cluster
+ * data obtained by an architectural recovery technique. Not to be confused with
+ * {@link ClusterFile}.
+ *
+ * @author Khoi
  */
-
 public class ClusterDir
   extends ArgHandler
 {
@@ -20,9 +20,9 @@ public class ClusterDir
   private ClusterDir()
   {
     String name = "clusterDir";
-    String description = "Cluster RSF Directory";
-    String instruction = "Cluster RSF Directory: This is a directory ";
-    instruction += "containing one or more files of the form *_cluster.rsf.";
+    String description = "Cluster Directory";
+    String instruction = "This is the path to a directory containing cluster ";
+    instruction += "data obtained by an architectural recovery technique.";
 
     initialize(name, description, instruction);
   }
@@ -39,42 +39,24 @@ public class ClusterDir
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO	          
     File clusterDirectory = new File(value);
     if(!clusterDirectory.exists())
-      throw new IOException("cluster directory doesn't exist." + value);
-    else
-    {    	
-    	File[] files = clusterDirectory.listFiles();
-        int dirLength = clusterDirectory.list().length;
-        boolean clusterFileContain = false;
-        String filename;
-    	for (int i =0; i<dirLength; i++)
-    	{
-    		filename = files[i].getName();
-    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".rsf")))
-			{
-				clusterFileContain = true;
-				break;
-			}				 
-    	}
-    	if(!clusterFileContain)
-    	      throw new IOException("cluster directory doesn't have .rsf file.");    		
-    }	    
-	
+    {
+      String errorMessage = "Cluster Directory not found at given path: ";
+      errorMessage += value;
+      throw new Exception(errorMessage);
+    }
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
 	  File clusterDirectory = new File(value);
-	    if(!clusterDirectory.exists() && !clusterDirectory.mkdirs())
-	      throw new Exception("cluster directory doesn't exist.");
+    if(!clusterDirectory.exists() && !clusterDirectory.mkdirs())
+      throw new Exception("Failed to create cluster directory.");
     return true;
-  }  
- 
+  }
   //#endregion
 }

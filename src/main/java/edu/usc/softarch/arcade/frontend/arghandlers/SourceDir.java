@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Argument Handler for the path to a project directory containing multiple
@@ -12,7 +10,6 @@ import java.io.IOException;
  *
  * @author Marcelo Schmitt Laser
  */
-
 public class SourceDir
   extends ArgHandler
 {
@@ -25,9 +22,9 @@ public class SourceDir
   {
     String name = "sourceDir";
     String description = "Source Directory";
-    String instruction = "Source Directory: This is a directory containing one";
-    instruction += " or more subdirectories with different versions of the ";
-    instruction += "subject system.";
+    String instruction = "This is a directory containing one or more ";
+    instruction += "subdirectories with different versions of the subject ";
+    instruction += "system.";
 
     initialize(name, description, instruction);
   }
@@ -46,20 +43,16 @@ public class SourceDir
   {
     File sourceDirectory = new File(value);
     if(!sourceDirectory.exists())
-    {     
-      throw new IllegalArgumentException(value + "Source directory not found");
-    }
+      throw new Exception(value + ": Source directory not found.");
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
   }
-  
   //#endregion
 }

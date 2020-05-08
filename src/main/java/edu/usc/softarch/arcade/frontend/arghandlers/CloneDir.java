@@ -20,7 +20,7 @@ public class CloneDir
   {
     String name = "cloneDir";
     String description = "Clones Directory";
-    String instruction = "This is the path to a directory containing ");
+    String instruction = "This is the path to a directory containing ";
     instruction += "clone-related data.";
 
     initialize(name, description, instruction);

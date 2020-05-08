@@ -21,7 +21,7 @@ public class DepsDir
     String description = "Dependencies Directory";
     String instruction = "Dependencies Directory: This is a directory ";
     instruction += "containing one or more files with dependency data from ";
-    instruction += "the subject system."
+    instruction += "the subject system.";
 
     initialize(name, description, instruction);
   }
@@ -54,7 +54,7 @@ public class DepsDir
   {
 	  File depsDirectory = new File(value);
     if(!depsDirectory.exists() && !depsDirectory.mkdirs())
-      throw new IOException("Failed to create dependencies directory.");
+      throw new Exception("Failed to create dependencies directory.");
     return true;
   }
   //#endregion

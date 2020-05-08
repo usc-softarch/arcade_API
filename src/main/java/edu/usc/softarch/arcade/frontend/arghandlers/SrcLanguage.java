@@ -1,8 +1,7 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import java.io.IOException;
-import java.util.*; 
-import java.util.stream.*; 
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Argument Handler for the source language of the project being analysed.
@@ -10,7 +9,6 @@ import java.util.stream.*;
  *
  * @author Marcelo Schmitt Laser
  */
-
 public class SrcLanguage
   extends ArgHandler
 {
@@ -23,8 +21,8 @@ public class SrcLanguage
   {
     String name = "srcLanguage";
     String description = "Source Language";
-    String instruction = "Source Language: This is the language of the source ";
-    instruction += "code being analyzed.";
+    String instruction = "This is the language of the source code being ";
+    instruction += "analyzed.";
 
     initialize(name, description, instruction);
   }
@@ -41,23 +39,18 @@ public class SrcLanguage
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
-	  String[] supportedLanguages = {"C","c","Java","java"};//feel free to add more
-	  boolean contains = Arrays.stream(supportedLanguages).anyMatch(value::equals);
-	  if (!contains)
-	       throw new IOException(value + "isn't supported");
-	  
+    List<String> supportedLanguages = Arrays.asList("c","java");
+	  if(supportedLanguages.contains(value.toLowerCase()));
+      throw new Exception(value + " isn't supported.");
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
     //TODO
-	
     return true;
-  }  
-  
+  }
   //#endregion
 }

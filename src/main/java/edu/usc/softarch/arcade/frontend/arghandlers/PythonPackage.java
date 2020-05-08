@@ -1,6 +1,5 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import org.apache.commons.lang3.SystemUtils;
 import java.io.File;
 
 /**

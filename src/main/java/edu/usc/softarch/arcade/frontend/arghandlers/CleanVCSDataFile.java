@@ -16,11 +16,11 @@ public class CleanVCSDataFile
   //#endregion
 
   //#region CONSTRUCTORS
-  private CleanVCSFile()
+  private CleanVCSDataFile()
   {
     String name = "cleanVCSDataFile";
     String description = "Clean VCS Data File";
-    String instruction = "This is the path to a Version Control System (VCS) ");
+    String instruction = "This is the path to a Version Control System (VCS) ";
     instruction += "data file that has been cleaned for use in architectural ";
     instruction += "analysis.";
 

@@ -1,8 +1,6 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Argument Handler for the path to a directory containing _smells.ser files.
@@ -23,8 +21,8 @@ public class SmellsDir
   {
     String name = "smellsDir";
     String description = "Smells SER Directory";
-    String instruction = "Smells SER Directory: This is a directory containing";
-    instruction += " one or more files of the form *_smells.ser.";
+    String instruction = "This is a directory containing one or more files ";
+    instruction += "of the form *_smells.ser.";
 
     initialize(name, description, instruction);
   }
@@ -41,41 +39,20 @@ public class SmellsDir
   public boolean validateAsInput(String value)
     throws Exception
   {
-    //TODO
 	  File smellDirectory = new File(value);
-	    if (!smellDirectory.exists())
-	      throw new Exception("Smells SER directory doesn't exist.");
-	    else
-	    {    	
-	    	File[] files = smellDirectory.listFiles();
-	        int dirLength = smellDirectory.list().length;
-	        boolean smellFileContain = false;
-	        String filename;
-	    	for (int i =0; i<dirLength; i++)
-	    	{
-	    		filename = files[i].getName();
-	    		if ((filename.length() >= 4) && (filename.substring(filename.length()-4).equals(".ser")))
-				{
-					smellFileContain = true;
-					break;
-				}				 
-	    	}
-	    	if(!smellFileContain)
-	    	      throw new IOException("smells SER directory doesn't have .ser file.");    		
-	    }
+    if (!smellDirectory.exists())
+      throw new Exception("Smells SER directory doesn't exist.");
     return true;
   }
-  
+
   @Override
   public boolean validateAsOutput(String value)
     throws Exception
   {
-    //TODO
 	  File smellDirectory = new File(value);
-	    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
-	      throw new Exception("Failed to create Smells SER directory.");
+    if(!smellDirectory.exists() && !smellDirectory.mkdirs())
+      throw new Exception("Failed to create Smells SER directory.");
     return true;
   }
-  
   //#endregion
 }

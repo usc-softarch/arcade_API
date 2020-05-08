@@ -1,17 +1,12 @@
 package edu.usc.softarch.arcade.frontend.arghandlers;
 
-import org.apache.commons.lang3.SystemUtils;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
- * Argument Handler for the path to file that will serve as target for the
- * StdOut stream.
+ * Argument Handler for the path to redirect StdOut stream to.
  *
  * @author Khoi
  */
-
 public class StdOutRedirect
   extends ArgHandler
 {
@@ -24,8 +19,7 @@ public class StdOutRedirect
   {
     String name = "stdOutRedirect";
     String description = "Standard Output Redirection File";
-    String instruction = "Standard Output Redirection File: This is the file ";
-    instruction += "path to which the standard output of a tool will be ";
+    String instruction = "This is a path to which the StdOut stream will be ";
     instruction += "redirected.";
 
     initialize(name, description, instruction);
@@ -43,10 +37,7 @@ public class StdOutRedirect
   public boolean validateAsInput(String value)
     throws Exception
   {
-	  File stdOutFile = new File(value);
-    if(!stdOutFile.exists())
-      throw new IOException("StdOutRedirect file does not exist.");
-
+	  //TODO
     return true;
   }
 
@@ -55,12 +46,11 @@ public class StdOutRedirect
     throws Exception
   {
     File stdOutFile = new File(value);
-	    if(!stdOutFile.getParentFile().exists()
-        && !stdOutFile.getParentFile().mkdirs())
-	       throw new IOException("Failed to create StdOut file.");
+    if(!stdOutFile.getParentFile().exists()
+      && !stdOutFile.getParentFile().mkdirs())
+       throw new Exception("Failed to create StdOut file: " + value);
 
     return true;
   }
-
   //#endregion
 }

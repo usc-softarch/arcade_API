@@ -13,6 +13,5 @@ DistOpt=1
 StdOutRedirect=target\test-results\cvg.out
 ProjectName=Struts2
 ProjectVersion=2.5.10.1
-WorkingDir=src\main\resources
 PythonPackage=python.cvg.simevolanalyzer
 ClusterDir=C:\Users\Marcelo_Laser\Desktop\Projects\arcade_console\target\test-results\acdc

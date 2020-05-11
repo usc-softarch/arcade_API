@@ -43,6 +43,16 @@
       <artifactId>commons-io</artifactId>
       <version>2.6</version>
     </dependency>
+    <dependency>
+      <groupId>laser</groupId>
+      <artifactId>util</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>edu.usc.softarch</groupId>
+      <artifactId>rsfutil</artifactId>
+      <version>1.0.1</version>
+    </dependency>
     <!-- THESE DEPENDENCIES TO FIX ECLIPSE STUPIDITY, REMOVE AFTER REFACTOR -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -89,22 +99,22 @@
       <artifactId>xstream</artifactId>
       <version>1.4.6</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.jgrapht</groupId>
       <artifactId>jgrapht-core</artifactId>
       <version>1.4.0</version>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>com.jeantessier</groupId>
       <artifactId>dependencyfinder</artifactId>
       <version>local</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.jgrapht</groupId>
       <artifactId>jgrapht</artifactId>
       <version>1.4.0</version>
       <type>pom</type>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-math3</artifactId>
@@ -251,6 +261,38 @@
               <groupId>org.jgrapht</groupId>
               <artifactId>jgrapht-jdk1.6</artifactId>
               <version>local</version>
+              <packaging>jar</packaging>
+              <generatePom>true</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>hack-binary3</id>
+            <phase>clean</phase>
+            <configuration>
+              <file>${basedir}/lib/laser-util-1.0.2.jar</file>
+              <repositoryLayout>default</repositoryLayout>
+              <groupId>laser</groupId>
+              <artifactId>util</artifactId>
+              <version>1.0.2</version>
+              <packaging>jar</packaging>
+              <generatePom>true</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>hack-binary4</id>
+            <phase>clean</phase>
+            <configuration>
+              <file>${basedir}/lib/rsfutil-1.0.1.jar</file>
+              <repositoryLayout>default</repositoryLayout>
+              <groupId>edu.usc.softarch</groupId>
+              <artifactId>rsfutil</artifactId>
+              <version>1.0.1</version>
               <packaging>jar</packaging>
               <generatePom>true</generatePom>
             </configuration>

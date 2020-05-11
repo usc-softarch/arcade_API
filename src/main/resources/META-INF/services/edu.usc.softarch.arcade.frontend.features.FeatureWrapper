@@ -18,3 +18,4 @@ edu.usc.softarch.arcade.frontend.features.metrics.BatchSystemEvoWrapper
 edu.usc.softarch.arcade.frontend.features.metrics.BatchDecayMetricsAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellEvolutionAnalyzerWrapper
 edu.usc.softarch.arcade.frontend.features.smellanalysis.SmellDensityAnalyzerWrapper
+edu.usc.softarch.arcade.frontend.features.visualization.EvaJsonGenerator

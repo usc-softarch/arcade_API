@@ -45,7 +45,7 @@ public class ConsoleUI
     String instructions = getName() + " requires ";
     instructions += "the following arguments:" + cr;
     for(ArgHandler argHandler : wrappedFeature.getRequiredArgumentHandlers())
-      instructions += argHandler.getInstruction() + cr;
+      instructions += argHandler.getDescription() + ": " + argHandler.getInstruction() + cr;
 
     return instructions;
   }
@@ -56,6 +56,7 @@ public class ConsoleUI
    */
   public void loadArgumentsWizard()
   {
+    System.out.println(getInstructions());
     for(ArgHandler argHandler : wrappedFeature.getRequiredArgumentHandlers())
       loadArgument(argHandler);
   }
@@ -76,7 +77,7 @@ public class ConsoleUI
   {
     try
     {
-      String toPrint = "Argument " + argHandler.getId() + " found in ";	  
+      String toPrint = "Argument " + argHandler.getId() + " found in ";
       toPrint += "configuration. Use existing configuration? (y/n)";
       System.out.println(toPrint);
       String choice = Console.in.nextLine();

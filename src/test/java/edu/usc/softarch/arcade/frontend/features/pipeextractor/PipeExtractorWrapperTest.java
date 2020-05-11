@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArcBaseDir;
@@ -38,14 +39,12 @@ public class PipeExtractorWrapperTest
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "Struts2" + fs + "arc"
-          + fs + "base"
+        "target" + fs + "test-results" + fs + "PipeExtractor" + fs + "Struts2"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "httpd" + fs + "src" + fs,
-        "target" + fs + "test-results" + fs + "httpd" + fs + "arc"
-          + fs + "base"
+        "target" + fs + "test-results" + fs + "PipeExtractor" + fs + "httpd"
       }
     });
   }

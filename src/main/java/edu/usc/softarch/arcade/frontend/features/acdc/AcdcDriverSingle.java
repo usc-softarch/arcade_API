@@ -45,7 +45,7 @@ public class AcdcDriverSingle
     // Setting up Arguments
     String fs = File.separator;
     String outputDirPath = OutputDir.getInstance().getValue() + fs;
-    String srcLanguage = SrcLanguage.getInstance().getValue().toLowerCase();
+    String srcLanguage = SrcLanguage.getInstance().getValue();
     String fileName = ProjectName.getInstance().getValue() + "-";
     fileName += ProjectVersion.getInstance().getValue();
     FeatureWrapper acdc = new AcdcWrapper();

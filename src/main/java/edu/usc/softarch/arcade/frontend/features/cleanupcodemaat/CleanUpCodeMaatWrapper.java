@@ -1,12 +1,13 @@
 package edu.usc.softarch.arcade.frontend.features.cleanupcodemaat;
 
-import java.io.IOException;
 import logical_coupling.cleanUpCodeMaat;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
-import edu.usc.softarch.arcade.frontend.arghandlers.CodemaatDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.VCSDataDir;
 
+//TODO Code Maat clean-up component is hard-coded in ARCADE to output to the
+//     same directory it got the input from.
 public class CleanUpCodeMaatWrapper
   extends FeatureWrapper
 {
@@ -14,10 +15,10 @@ public class CleanUpCodeMaatWrapper
   public CleanUpCodeMaatWrapper()
   {
     String id = "cleanUpCodeMaat";
-    String name = "CleanUpCodeMaat: Clean Up for Code-Maat generated csv files (not neccessary in C/C++).";
+    String name = "VCS File Cleaner";
     ArgHandler[] requiredArguments =
     {
-    	CodemaatDir.getInstance()     
+    	VCSDataDir.getInstance()
     };
 
     initialize(id, name, requiredArguments);
@@ -27,10 +28,10 @@ public class CleanUpCodeMaatWrapper
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String[] parsedArgs = new String[1];
-    parsedArgs[0] = CodemaatDir.getInstance().getValue();    
+    parsedArgs[0] = VCSDataDir.getInstance().getValue();
     cleanUpCodeMaat.main(parsedArgs);
   }
   //#endregion
@@ -40,7 +41,7 @@ public class CleanUpCodeMaatWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean codemaatDirValid = CodemaatDir.getInstance().validateAsInput();    
+    boolean codemaatDirValid = VCSDataDir.getInstance().validateAsInput();
     return (codemaatDirValid);
   }
   //#endregion

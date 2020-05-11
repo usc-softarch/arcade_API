@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
@@ -95,8 +96,7 @@ public class ArchSmellDetectorWrapperTest
             + "struts-2.3.32_deps_pkgs.rsf",
           "target" + fs + "test-results" + fs + "SmellDetector" + fs + "smells"
             + fs + "struts-2.3.32_smells.ser"
-        }, 
-        
+        },
         {
             "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
               + "httpd" + fs + "acdc" + fs + "dep" + fs

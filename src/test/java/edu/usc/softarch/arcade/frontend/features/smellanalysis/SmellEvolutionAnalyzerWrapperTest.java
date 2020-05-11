@@ -6,21 +6,22 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
 
 @RunWith(Parameterized.class)
 public class SmellEvolutionAnalyzerWrapperTest
 {
-  //#region ATTRIBUTES  
+  //#region ATTRIBUTES
   String smellsDirectory;
   //#endregion
 
   //#region CONSTRUCTOR
   public SmellEvolutionAnalyzerWrapperTest(String smellsDirectory)
   {
-    super();    
-    this.smellsDirectory = smellsDirectory; 
+    super();
+    this.smellsDirectory = smellsDirectory;
   }
   //#endregion
 
@@ -31,39 +32,33 @@ public class SmellEvolutionAnalyzerWrapperTest
     String fs = File.separator;
     return Arrays.asList(new Object[][]
     {
-      {        
-    	    "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "Struts2" + fs + "acdc" + fs + "ser"
-      },
-      
       {
-    	    "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "Struts2" + fs + "arc" + fs + "ser"
-      },   
-      
-      {          
-            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "Struts2" + fs + "pkg" + fs + "ser"               
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "Struts2" + fs + "acdc" + fs + "ser"
       },
-    
-      {         
-            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "ser"
-      },
-        
       {
-          	"src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "arc" + fs + "ser"
-      },   
-        
-      {            
-            "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "pkg" + fs + "ser"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "Struts2" + fs + "arc"
+      },
+      {
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "Struts2" + fs + "pkg" + fs + "ser"
+      },
+      {
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "ser"
+      },
+      {
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "arc"
+      },
+      {
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "pkg" + fs + "ser"
       }
     });
   }
   //#endregion
-
 
   //#region TESTS
   /**
@@ -76,7 +71,7 @@ public class SmellEvolutionAnalyzerWrapperTest
   {
     FeatureWrapper smellEvolutionAnalyzer = new SmellEvolutionAnalyzerWrapper();
     SmellsDir.getInstance().setValue(smellsDirectory);
-    
+
     try
     {
     	smellEvolutionAnalyzer.checkArguments(false);
@@ -86,18 +81,16 @@ public class SmellEvolutionAnalyzerWrapperTest
     {
       e.printStackTrace();
     }
-    
   }
-  //#endregion
-  
-  /**
-   * Negative test for Semll Evolution Analyzer. Takes in random, non-rsf input. Expected output
-   * unknown.
-   */
-  @Test
-  public void randomFilesTestAcdc()
-  {
-    //TODO
-  }
+
+  // /**
+  //  * Negative test for Semll Evolution Analyzer. Takes in random, non-rsf input. Expected output
+  //  * unknown.
+  //  */
+  // @Test
+  // public void randomFilesTestAcdc()
+  // {
+  //   //TODO
+  // }
   //#endregion
 }

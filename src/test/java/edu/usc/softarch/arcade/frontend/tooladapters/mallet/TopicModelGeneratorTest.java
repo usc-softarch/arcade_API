@@ -8,6 +8,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.SourceDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.Topicmodel;
@@ -53,7 +54,7 @@ public class TopicModelGeneratorTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems"
           + fs + "Struts2" + fs + "src",
         "target" + fs + "test-results" + fs + "Struts2" + fs + "arc" + fs
-          + "base" + fs + "topicmodel.data",          
+          + "base" + fs + "topicmodel.data",
         System.getProperty("user.dir") + fs + "src" + fs
           + "test" + fs + "resources" + fs + "tools" + fs + "mallet-2.0.7" + fs
       }
@@ -80,15 +81,15 @@ public class TopicModelGeneratorTest
     else
       throw new UnsupportedOperationException("OS unknown.");
 
-    SourceDir.getInstance().setValue(sourceDirectory);    
-    Topicmodel.getInstance().setValue(topicmodelFile);    
+    SourceDir.getInstance().setValue(sourceDirectory);
+    Topicmodel.getInstance().setValue(topicmodelFile);
     MalletHome.getInstance().setValue(malletHomeString);
     MalletPath.getInstance().setValue(malletPathString);
 
-    try 
-    { 
-    	tmgAdapter.checkArguments(false); 
-    	tmgAdapter.execute(); 
+    try
+    {
+    	tmgAdapter.checkArguments(false);
+    	tmgAdapter.execute();
     }
     catch(Exception e)
     {

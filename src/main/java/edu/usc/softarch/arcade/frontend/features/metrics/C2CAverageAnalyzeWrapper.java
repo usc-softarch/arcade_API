@@ -1,28 +1,26 @@
-package edu.usc.softarch.arcade.frontend.features.smellanalysis;
+package edu.usc.softarch.arcade.frontend.features.metrics;
 
 import java.io.PrintStream;
 import java.io.File;
 
-import edu.usc.softarch.arcade.antipattern.detection.SmellDensityAnalyzer;
+import edu.usc.softarch.arcade.util.statistic.C2CAverageAnalyze;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
-import edu.usc.softarch.arcade.frontend.arghandlers.SmellsDir;
-import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.CVGResultsFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.StdOutRedirect;
 
-public class SmellDensityAnalyzerWrapper
+public class C2CAverageAnalyzeWrapper
   extends FeatureWrapper
 {
   //#region CONSTRUCTORS
-  public SmellDensityAnalyzerWrapper()
+  public C2CAverageAnalyzeWrapper()
   {
-    String id = "densitySmellAnalysis";
-    String name = "Smell Analysis: Density";
+    String id = "c2cAverageAnalyze";
+    String name = "CVG: C2C Averages Analyze";
     ArgHandler[] requiredArguments =
     {
-      SmellsDir.getInstance(),
-      ClusterDir.getInstance(),
+      CVGResultsFile.getInstance(),
       StdOutRedirect.getInstance()
     };
 
@@ -35,15 +33,17 @@ public class SmellDensityAnalyzerWrapper
   public void execute()
     throws Exception
   {
-    String[] parsedArgs = new String[2];
-    parsedArgs[0] = SmellsDir.getInstance().getValue();
-    parsedArgs[1] = ClusterDir.getInstance().getValue();
+    //TODO This sometimes throws an NPE due to what I'm sure is a bug
+    //     in ARCADE itself. Can't be fixed until I'm working through
+    //     the ARCADE source.
+    String[] parsedArgs = new String[1];
+    parsedArgs[0] = CVGResultsFile.getInstance().getValue();
 
     PrintStream out = System.out;
     System.setOut(new PrintStream(new File(
       StdOutRedirect.getInstance().getValue())));
 
-    SmellDensityAnalyzer.main(parsedArgs);
+    C2CAverageAnalyze.main(parsedArgs);
 
     System.setOut(out);
   }
@@ -54,10 +54,10 @@ public class SmellDensityAnalyzerWrapper
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
-    boolean smellsDirValid = SmellsDir.getInstance().validateAsInput();
+    boolean cvgResultsFileValid =
+      CVGResultsFile.getInstance().validateAsInput();
     boolean stdOutValid = StdOutRedirect.getInstance().validateAsOutput();
-    return (clusterDirValid && smellsDirValid && stdOutValid);
+    return (cvgResultsFileValid && stdOutValid);
   }
   //#endregion
 }

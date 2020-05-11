@@ -1,6 +1,5 @@
-package edu.usc.softarch.arcade.frontend.features.decaymetrics;
+package edu.usc.softarch.arcade.frontend.features.metrics;
 
-import java.io.IOException;
 import edu.usc.softarch.arcade.decay.BatchDecayMetricsAnalyzer;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -15,7 +14,7 @@ public class BatchDecayMetricsAnalyzerWrapper
   public BatchDecayMetricsAnalyzerWrapper()
   {
     String id = "decayMetrics";
-    String name = "Metrics: Decay";
+    String name = "Decay Metrics Analyzer";
     ArgHandler[] requiredArguments =
     {
       ClusterDir.getInstance(),
@@ -29,8 +28,9 @@ public class BatchDecayMetricsAnalyzerWrapper
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
+    //TODO Currently hard-coded to write output to root.log.
     String[] parsedArgs = new String[2];
     parsedArgs[0] = ClusterDir.getInstance().getValue();
     parsedArgs[1] = DepsDir.getInstance().getValue();

@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.OutputDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
@@ -81,35 +82,35 @@ public class AcdcDriverSingleTest
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-          + "httpd" + fs + "src" + fs + "httpd-2.3.8" + fs + "lib_struts",
+          + "httpd" + fs + "src" + fs + "httpd-2.3.8" + fs,
         "target" + fs + "test-results" + fs + "AcdcDriverSingle"
           + fs + "httpd",
         "c", "httpd", "2.3.8"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-          + "httpd" + fs + "src" + fs + "httpd-2.4.7" + fs + "lib_struts",
+          + "httpd" + fs + "src" + fs + "httpd-2.4.7" + fs,
         "target" + fs + "test-results" + fs + "AcdcDriverSingle"
           + fs + "httpd",
         "c", "httpd", "2.4.7"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-          + "httpd" + fs + "src" + fs + "httpd-2.4.10" + fs + "lib_struts",
+          + "httpd" + fs + "src" + fs + "httpd-2.4.10" + fs,
         "target" + fs + "test-results" + fs + "AcdcDriverSingle"
           + fs + "httpd",
         "c", "httpd", "2.4.10"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-          + "httpd" + fs + "src" + fs + "httpd-2.4.16" + fs + "lib_struts",
+          + "httpd" + fs + "src" + fs + "httpd-2.4.16" + fs,
         "target" + fs + "test-results" + fs + "AcdcDriverSingle"
           + fs + "httpd",
         "c", "httpd", "2.4.16"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-          + "httpd" + fs + "src" + fs + "httpd-2.4.26" + fs + "lib_struts",
+          + "httpd" + fs + "src" + fs + "httpd-2.4.26" + fs,
         "target" + fs + "test-results" + fs + "AcdcDriverSingle"
           + fs + "httpd",
         "c", "httpd", "2.4.26"
@@ -118,12 +119,13 @@ public class AcdcDriverSingleTest
   }
   //#endregion
 
-
   //#region TESTS
   /**
    * Basic positive test for AcdcDriverSingle. Takes the input from five
    * versions of Struts2 and five versions of httpd from the arcade repository
    * and generates all outputs from the phases of the Acdc workflow.
+   *
+   * @author Marcelo Schmitt Laser
    */
   @Test
   public void testAcdcDriverSingle()

@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterFile;
@@ -38,73 +39,72 @@ public class AcdcWrapperTest
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "dep" + fs
           + "struts-2.3.30_deps.rsf",
-        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "struts" + fs
           + "struts-2.3.30_acdc_clustered.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "dep" + fs
           + "struts-2.3.32_deps.rsf",
-        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "struts" + fs
           + "struts-2.3.32_acdc_clustered.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "dep" + fs
           + "struts-2.5.2_deps.rsf",
-        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "struts" + fs
           + "struts-2.5.2_acdc_clustered.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "dep" + fs
           + "struts-2.5.8_deps.rsf",
-        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "struts" + fs
           + "struts-2.5.8_acdc_clustered.rsf"
       },
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "acdc" + fs + "dep" + fs
           + "struts-2.5.10.1_deps.rsf",
-        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "struts" + fs
           + "struts-2.5.10.1_acdc_clustered.rsf"
       },
-      
       {
-          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "dep" + fs
-            + "httpd-2.3.8_deps.rsf",
-          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
-            + "httpd-2.3.8_acdc_clustered.rsf"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "dep" + fs
+          + "httpd-2.3.8_deps.rsf",
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "httpd" + fs
+          + "httpd-2.3.8_acdc_clustered.rsf"
       },
       {
-          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "dep" + fs
-            + "httpd-2.4.7_deps.rsf",
-          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
-            + "httpd-2.4.7_acdc_clustered.rsf"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "dep" + fs
+          + "httpd-2.4.7_deps.rsf",
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "httpd" + fs
+          + "httpd-2.4.7_acdc_clustered.rsf"
       },
       {
-          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "dep" + fs
-            + "httpd-2.4.10_deps.rsf",
-          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
-            + "httpd-2.4.10_acdc_clustered.rsf"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "dep" + fs
+          + "httpd-2.4.10_deps.rsf",
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "httpd" + fs
+          + "httpd-2.4.10_acdc_clustered.rsf"
       },
       {
-          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "dep" + fs
-            + "httpd-2.4.16_deps.rsf",
-          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
-            + "httpd-2.4.16_acdc_clustered.rsf"
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "dep" + fs
+          + "httpd-2.4.16_deps.rsf",
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "httpd" + fs
+          + "httpd-2.4.16_acdc_clustered.rsf"
       },
       {
-          "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
-            + "httpd" + fs + "acdc" + fs + "dep" + fs
-            + "httpd-2.4.26_deps.rsf",
-          "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "acdc" + fs
-            + "httpd-2.4.26_acdc_clustered.rsf"
-      }      
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "httpd" + fs + "acdc" + fs + "dep" + fs
+          + "httpd-2.4.26_deps.rsf",
+        "target" + fs + "test-results" + fs + "AcdcWrapper" + fs + "httpd" + fs
+          + "httpd-2.4.26_acdc_clustered.rsf"
+      }
     });
   }
   //#endregion
@@ -137,14 +137,14 @@ public class AcdcWrapperTest
     assert output.exists();
   }
 
-  /**
-   * Negative test for ACDC. Takes in random, non-rsf input. Expected output
-   * unknown.
-   */
-  @Test
-  public void randomFilesTestAcdc()
-  {
-    //TODO
-  }
+  // /**
+  //  * Negative test for ACDC. Takes in random, non-rsf input. Expected output
+  //  * unknown.
+  //  */
+  // @Test
+  // public void randomFilesTestAcdc()
+  // {
+  //   //TODO
+  // }
   //#endregion
 }

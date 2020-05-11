@@ -34,13 +34,21 @@ public class SrcLanguage
   }
   //#endregion
 
+  //#region ACCESSORS
+  @Override
+  public String setValue(String value)
+  {
+    return super.setValue(value.toLowerCase());
+  }
+  //#endregion
+
   //#region VALIDATION
   @Override
   public boolean validateAsInput(String value)
     throws Exception
   {
     List<String> supportedLanguages = Arrays.asList("c","java");
-	  if(supportedLanguages.contains(value.toLowerCase()));
+	  if(!supportedLanguages.contains(value))
       throw new Exception(value + " isn't supported.");
     return true;
   }

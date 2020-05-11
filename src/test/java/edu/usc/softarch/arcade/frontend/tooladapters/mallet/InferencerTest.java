@@ -8,6 +8,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.Topicmodel;
 import edu.usc.softarch.arcade.frontend.arghandlers.InferenceFile;
@@ -85,10 +86,10 @@ public class InferencerTest
     MalletHome.getInstance().setValue(malletHomeString);
     MalletPath.getInstance().setValue(malletPathString);
 
-    try 
-    { 
+    try
+    {
     	inferencer.checkArguments(false);
-    	inferencer.execute(); 
+    	inferencer.execute();
     }
     catch(Exception e)
     {

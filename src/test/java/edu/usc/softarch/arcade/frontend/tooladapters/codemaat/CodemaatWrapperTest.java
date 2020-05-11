@@ -7,18 +7,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.Collection;
 import java.util.Arrays;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.File;
-import edu.usc.softarch.arcade.frontend.tooladapters.ToolAdapter;
 
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.StdOutRedirect;
-import edu.usc.softarch.arcade.frontend.arghandlers.ProjectLogFile;
-import edu.usc.softarch.arcade.frontend.arghandlers.JarFilePath;
+import edu.usc.softarch.arcade.frontend.arghandlers.GitProjectLog;
+import edu.usc.softarch.arcade.frontend.arghandlers.CodeMaatPath;
 
 @RunWith(Parameterized.class)
 public class CodemaatWrapperTest
@@ -26,7 +24,7 @@ public class CodemaatWrapperTest
   //#region ATTRIBUTES
   String stdOutRedirect;
   String jarFilePath;
-  String projectLogFile;  
+  String projectLogFile;
   //#endregion
 
   //#region CONSTRUCTOR
@@ -35,7 +33,7 @@ public class CodemaatWrapperTest
     super();
     this.stdOutRedirect = stdOutRedirect;
     this.jarFilePath = jarFilePath;
-    this.projectLogFile = projectLogFile;   
+    this.projectLogFile = projectLogFile;
   }
   //#endregion
 
@@ -47,15 +45,18 @@ public class CodemaatWrapperTest
     return Arrays.asList(new Object[][]
     {
       {
-    	"src" + fs + "test" + fs + "resources" + fs + "git_repo_logs" + fs + "Struts2" + fs + "struts2.csv",
-    	"src" + fs + "test" + fs + "resources" + fs + "tools" + fs + "code-maat" + fs + "code-maat-1.0-SNAPSHOT-standalone.jar",
-    	"src" + fs + "test" + fs + "resources" + fs + "git_repo_logs" + fs + "Struts2" + fs + "struts2.log" 	    
-      },    
-      
+        "target" + fs + "test-results" + fs + "CodeMaat" + fs + "struts2.csv",
+        "src" + fs + "test" + fs + "resources" + fs + "tools" + fs + "code-maat"
+          + fs + "code-maat-1.0-SNAPSHOT-standalone.jar",
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "git_repo_logs" + fs + "struts2.log"
+      },
       {
-    	"src" + fs + "test" + fs + "resources" + fs + "git_repo_logs" + fs + "httpd" + fs + "httpd.csv",      	
-      	"src" + fs + "test" + fs + "resources" + fs + "tools" + fs + "code-maat" + fs + "code-maat-1.0-SNAPSHOT-standalone.jar",
-      	"src" + fs + "test" + fs + "resources" + fs + "git_repo_logs" + fs + "httpd" + fs + "httpd.log"
+        "target" + fs + "test-results" + fs + "CodeMaat" + fs + "httpd.csv",
+        "src" + fs + "test" + fs + "resources" + fs + "tools" + fs + "code-maat"
+          + fs + "code-maat-1.0-SNAPSHOT-standalone.jar",
+        "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
+          + "git_repo_logs" + fs + "httpd.log"
       }
     });
   }
@@ -64,23 +65,22 @@ public class CodemaatWrapperTest
   //#region TESTS
   @Test
   public void testCodemaatWrapper()
-  {    
-    FeatureWrapper testcodemaat = new CodemaatWrapper();    
+  {
+    FeatureWrapper testcodemaat = new CodemaatWrapper();
 
     StdOutRedirect.getInstance().setValue(stdOutRedirect);
-    ProjectLogFile.getInstance().setValue(projectLogFile);
-    JarFilePath.getInstance().setValue(jarFilePath);
+    GitProjectLog.getInstance().setValue(projectLogFile);
+    CodeMaatPath.getInstance().setValue(jarFilePath);
 
-    try 
-    { 
+    try
+    {
     	testcodemaat.checkArguments(false);
-    	testcodemaat.execute(); 
+    	testcodemaat.execute();
     }
     catch(Exception e)
     {
         e.printStackTrace();
     }
-    
   }
   //#endregion
 }

@@ -1,4 +1,7 @@
-  package edu.usc.softarch.arcade.frontend.features.a2a;
+package edu.usc.softarch.arcade.frontend.features.metrics;
+
+import java.io.PrintStream;
+import java.io.File;
 
 import edu.usc.softarch.arcade.metrics.BatchSystemEvo;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
@@ -6,6 +9,7 @@ import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.DistOpt;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.A2AResult;
 
 public class BatchSystemEvoWrapper
   extends FeatureWrapper
@@ -14,11 +18,12 @@ public class BatchSystemEvoWrapper
   public BatchSystemEvoWrapper()
   {
     String id = "a2a";
-    String name = "Architecture to Architecture Pairwise Compute";
+    String name = "Architecture to Architecture: Pairwise";
     ArgHandler[] requiredArguments =
     {
       ClusterDir.getInstance(),
-      DistOpt.getInstance()
+      A2AResult.getInstance(),
+      DistOpt.getInstance() //TODO Make this optional
     };
 
     initialize(id, name, requiredArguments);
@@ -31,10 +36,17 @@ public class BatchSystemEvoWrapper
     throws Exception
   {
     String[] parsedArgs = new String[3];
-    parsedArgs[1] = "-distopt";
-    parsedArgs[2] = DistOpt.getInstance().getValue();
-    parsedArgs[0] = ClusterDir.getInstance().getValue();        
+    parsedArgs[0] = "-distopt";
+    parsedArgs[1] = DistOpt.getInstance().getValue();
+    parsedArgs[2] = ClusterDir.getInstance().getValue();
+
+    PrintStream out = System.out;
+    System.setOut(new PrintStream(
+      new File(A2AResult.getInstance().getValue())));
+
     BatchSystemEvo.main(parsedArgs);
+
+    System.setOut(out);
   }
   //#endregion
 
@@ -45,7 +57,8 @@ public class BatchSystemEvoWrapper
   {
     boolean distOptValid = DistOpt.getInstance().validateAsInput();
     boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
-    return (distOptValid && clusterDirValid);
+    boolean a2aResultValid = A2AResult.getInstance().validateAsOutput();
+    return (distOptValid && clusterDirValid && a2aResultValid);
   }
   //#endregion
 }

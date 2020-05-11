@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
@@ -62,7 +63,7 @@ public class JavaSourceToDepsBuilderWrapperTest
       {
         "src" + fs + "test" + fs + "resources" + fs + "subject_systems" + fs
           + "Struts2" + fs + "src" + fs + "struts-2.5.10.1" + fs + "lib_struts",
-        "target" + fs + "test-results" + fs + "JavaDepsBuilder" 
+        "target" + fs + "test-results" + fs + "JavaDepsBuilder"
           + fs + "Struts2" + fs + "commonRes" + fs + "struts-2.5.10.1_deps.rsf"
       },
     });
@@ -97,24 +98,24 @@ public class JavaSourceToDepsBuilderWrapperTest
     assert output.exists();
   }
 
-  /**
-   * Negative test for Java depsbuilder. Takes in input from languages other
-   * than Java. Expected output unknown.
-   */
-  @Test
-  public void wrongLanguageTestJavaDepsBuilder()
-  {
-    //TODO
-  }
-
-  /**
-   * Negative test for Java depsbuilder. Takes in random input. Expected
-   * output unknown.
-   */
-  @Test
-  public void randomFilesTestJavaDepsBuilder()
-  {
-   //TODO
-  }
+  // /**
+  //  * Negative test for Java depsbuilder. Takes in input from languages other
+  //  * than Java. Expected output unknown.
+  //  */
+  // @Test
+  // public void wrongLanguageTestJavaDepsBuilder()
+  // {
+  //   //TODO
+  // }
+  //
+  // /**
+  //  * Negative test for Java depsbuilder. Takes in random input. Expected
+  //  * output unknown.
+  //  */
+  // @Test
+  // public void randomFilesTestJavaDepsBuilder()
+  // {
+  //  //TODO
+  // }
   //#endregion
 }

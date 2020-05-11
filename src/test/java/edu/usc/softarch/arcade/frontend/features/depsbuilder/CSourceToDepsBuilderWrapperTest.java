@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.util.Collection;
 import java.util.Arrays;
+
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 import edu.usc.softarch.arcade.frontend.arghandlers.BinDirPath;
 import edu.usc.softarch.arcade.frontend.arghandlers.DepsRsfFile;
@@ -97,24 +98,24 @@ public class CSourceToDepsBuilderWrapperTest
     assert output.exists();
   }
 
-  /**
-   * Negative test for C depsbuilder. Takes in input from languages other
-   * than C. Expected output unknown.
-   */
-  @Test
-  public void wrongLanguageTestCDepsBuilder()
-  {
-    //TODO
-  }
+  // /**
+  //  * Negative test for C depsbuilder. Takes in input from languages other
+  //  * than C. Expected output unknown.
+  //  */
+  // @Test
+  // public void wrongLanguageTestCDepsBuilder()
+  // {
+  //   //TODO
+  // }
 
-  /**
-   * Negative test for C depsbuilder. Takes in random input. Expected
-   * output unknown.
-   */
-  @Test
-  public void randomFilesTestCDepsBuilder()
-  {
-   //TODO
-  }
+  // /**
+  //  * Negative test for C depsbuilder. Takes in random input. Expected
+  //  * output unknown.
+  //  */
+  // @Test
+  // public void randomFilesTestCDepsBuilder()
+  // {
+  //  //TODO
+  // }
   //#endregion
 }

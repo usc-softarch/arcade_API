@@ -1,18 +1,18 @@
-package edu.usc.softarch.arcade.frontend.features.cvg;
+package edu.usc.softarch.arcade.frontend.features.metrics;
 
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
-import edu.usc.softarch.arcade.frontend.tooladapters.cvg.SimEvolAnalyzerWrapper;
+import edu.usc.softarch.arcade.frontend.tooladapters.parcade.SimEvolAnalyzerWrapper;
 
 import edu.usc.softarch.arcade.frontend.arghandlers.ArgHandler;
 import edu.usc.softarch.arcade.frontend.arghandlers.PythonPackage;
-import edu.usc.softarch.arcade.frontend.arghandlers.StdOutRedirect;
-import edu.usc.softarch.arcade.frontend.arghandlers.WorkingDir;
+import edu.usc.softarch.arcade.frontend.arghandlers.CVGResultsFile;
+import edu.usc.softarch.arcade.frontend.arghandlers.PythonWorkingDir;
 import edu.usc.softarch.arcade.frontend.arghandlers.ClusterDir;
 
 /**
  * Workflow wrapper for CVG metrics.
  *
- * @author Marcelo Schmitt Laser
+ * @author Khoi
  */
 public class C2C
   extends FeatureWrapper
@@ -21,11 +21,11 @@ public class C2C
   public C2C()
   {
     String id = "c2c";
-    String name = "CVG: Full Workflow";
+    String name = "CVG Driver";
     ArgHandler[] requiredArguments =
     {
-      WorkingDir.getInstance(),
-      StdOutRedirect.getInstance(),
+      PythonWorkingDir.getInstance(),
+      CVGResultsFile.getInstance(),
       PythonPackage.getInstance(),
       ClusterDir.getInstance()
     };
@@ -52,13 +52,13 @@ public class C2C
   public boolean checkArguments(boolean checkOptional)
     throws Exception
   {
-    boolean workingDirValid = WorkingDir.getInstance().validateAsInput();
+    boolean workingDirValid = PythonWorkingDir.getInstance().validateAsInput();
     boolean pythonPackageValid = PythonPackage.getInstance().validateAsInput();
     boolean clusterDirValid = ClusterDir.getInstance().validateAsInput();
-    boolean stdOutRedirectValid =
-      StdOutRedirect.getInstance().validateAsOutput();
+    boolean cvgResultsFileValid =
+      CVGResultsFile.getInstance().validateAsOutput();
     return (clusterDirValid && workingDirValid
-      && pythonPackageValid && stdOutRedirectValid);
+      && pythonPackageValid && cvgResultsFileValid);
   }
   //#endregion
 }

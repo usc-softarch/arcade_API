@@ -21,6 +21,7 @@ public class DistOpt
     String instruction = "This is the maximum version distance between ";
     instruction += "compared versions. Default value is 1, possible ";
     instruction += "values are 1, 2 or 3.";
+    setValue("1"); // DistOpt has a default value of 1
 
     initialize(name, description, instruction);
   }
@@ -39,7 +40,7 @@ public class DistOpt
   {
     Integer intValue = Integer.parseInt(value);
   	if (intValue < 1 || intValue > 3)
-      throw new IOException("Invalid comparison distance, must be 1, 2, or 3.");
+      throw new Exception("Invalid comparison distance, must be 1, 2, or 3.");
     return true;
   }
 

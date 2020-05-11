@@ -1,7 +1,6 @@
 package edu.usc.softarch.arcade.frontend.features.arc;
 
 import java.io.File;
-import java.io.IOException;
 import edu.usc.softarch.arcade.clustering.BatchClusteringEngine;
 import edu.usc.softarch.arcade.frontend.features.FeatureWrapper;
 
@@ -37,18 +36,14 @@ public class ArcWrapper
   //#region EXECUTION
   @Override
   public void execute()
-    throws Exception, IOException, IllegalArgumentException
+    throws Exception
   {
     String fs = File.separator;
-    String[] parsedArgs = new String[3];
-    if(SrcLanguage.getInstance().getValue().equals("c"))
-    {
-      parsedArgs = new String[4];
-      parsedArgs[3] = SrcLanguage.getInstance().getValue();
-    }
+    String[] parsedArgs = new String[4];
     parsedArgs[0] = SourceDir.getInstance().getValue();
     parsedArgs[1] = OutputDir.getInstance().getValue() + fs + "arc";
     parsedArgs[2] = BinDir.getInstance().getValue();
+    parsedArgs[3] = SrcLanguage.getInstance().getValue();
     BatchClusteringEngine.main(parsedArgs);
   }
   //#endregion

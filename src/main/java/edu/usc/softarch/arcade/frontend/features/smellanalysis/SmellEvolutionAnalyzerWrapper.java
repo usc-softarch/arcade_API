@@ -28,6 +28,7 @@ public class SmellEvolutionAnalyzerWrapper
   public void execute()
     throws Exception
   {
+    //TODO Another one that is hard-coded to root.log.
     String[] parsedArgs = new String[1];
     parsedArgs[0] = SmellsDir.getInstance().getValue();
     SmellEvolutionAnalyzer.main(parsedArgs);
